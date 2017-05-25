@@ -1,0 +1,160 @@
+/* some ui styling */
+/*knob*/
+.knob path {
+  stroke: none;
+  fill: #CBE86B;
+  stroke-weight: .1;
+}
+.pan + .knob path {
+  fill: #333;
+}
+.knob path:first-child {
+  fill: #333;
+}
+.knob rect {
+  fill: transparent;
+}
+.pan + .knob rect {
+  fill: #CBE86B;
+}
+/* switch */
+.checkbox {
+  position: relative;
+  display: block;
+  width: 50px !important;
+  height: 50px !important;
+  margin:0!important;
+  padding-top: 6px;
+}
+.checkbox .switch {
+  display: block;
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  border: 4px solid #333;
+  background: rgba(0,0,0,.1);
+  margin: 0 auto;
+  cursor: pointer;
+}
+.checkbox .switch.on {
+  background: rgba(0,255,102,.8); /*#00FF66;*/
+}
+
+.checkbox label {
+  text-align: center;
+  font-size: .6rem;
+  opacity:.7;
+  /*background: rgba(0,0,0,.2);*/
+}
+/* mixer styles */
+.params {
+  position: relative;
+  display: none;
+  width: 100%;
+  height: 100%;
+  align-items: center;
+  justify-content:flex-start;
+
+  .name {
+    position: relative;
+    /*display: block;*/
+    width: auto;
+    height: auto;
+    margin-right:15px;
+    width: 80px;
+    text-transform: uppercase;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    -o-text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+
+  .param {
+    position: relative;
+    /*display: block;*/
+    width: auto;
+    height: auto;
+    margin-right:15px;
+
+    &:last-child {
+      margin-right: 0;
+    }
+
+    &.param-knob {
+      width: 60px;
+      text-align: center !important;
+
+      > div:first-child {
+        margin: 0 auto;
+      }
+
+      label {
+        font-size: .6rem;
+        margin: -6px auto;
+        opacity:.7;
+        z-index:-1;
+      }
+
+      .meter {
+        position: absolute;
+        z-index:-1;
+        top: 17px;
+        width: 100%;
+        font-size: .8rem;
+        /*background: rgba(0,0,0,.2);*/
+      }
+    }
+
+    &.param-fader {
+      display: flex;
+      align-items: center;
+      justify-content:flex-start;
+      margin-right: 0;
+
+      input {
+        width: 200px;
+      }
+
+      .meter {
+        position: relative;
+        width: 20px;
+        /*background: rgba(0,0,0,.4);*/
+      }
+    }
+  }
+  /* mute btn styles */
+  .mute {
+    display: block;
+    background: red;
+    color: #CBE86B;
+    text-align: center;
+    font-size: .9rem;
+    line-height: 20px;
+
+    &.clip {
+      background: #ff9900;
+    }
+
+    &.on {
+      background: rgba(0,0,0,.1);
+    }
+
+    &.on:before {
+      content: "x";
+    }
+  }
+}
+
+#mySequencer.expand-mixer .params {
+  display: flex;
+}
+
+#mixer .checkbox {
+  padding-top: 10px;
+}
+
+.controls * :focus + .meter,
+.track * :focus + .meter,
+.track * :focus + label ~ .meter {
+  color:#CBE86B;
+}
