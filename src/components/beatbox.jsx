@@ -12,7 +12,7 @@ class BeatBox extends Component {
   }
   render(){
     return (
-      <div class="beat-box">
+      <div className="beat-box">
         <Controls />
         <Tracks />
         <Effects />

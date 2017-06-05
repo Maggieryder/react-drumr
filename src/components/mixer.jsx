@@ -19,37 +19,37 @@ class Tracks extends Component {
   render(){
     let options = this.props
     return (
-      <div class="mixer">
-        <div class="track" id="wetmix">
-          <div class="name">WET MIX</div>
-          <div class="params">
-            <div class="param param-fader">
-              <input class="input-fader" name="wet" type="range" min="0" max="100" value="70" />
-              <div id="wetMeter" class="meter">7</div>
+      <div className="mixer">
+        <div className="track" id="wetmix">
+          <div className="name">WET MIX</div>
+          <div className="params">
+            <div className="param param-fader">
+              <input className="input-fader" name="wet" type="range" min="0" max="100" value="70" />
+              <div id="wetMeter" className="meter">7</div>
             </div>
-            <div class="checkbox">
-              <div class="switch mute"></div><label>MUTE</label>
+            <div className="checkbox">
+              <div className="switch mute"></div><label>MUTE</label>
             </div>
           </div>
         </div>
-        <div class="track" id="drymix">
-          <div class="name">DRY MIX</div>
-          <div class="params">
+        <div className="track" id="drymix">
+          <div className="name">DRY MIX</div>
+          <div className="params">
 
-            <div class="param param-fader">
-              <input class="input-fader" name="dry" type="range" min="0" max="100" value="70" />
-              <div id="dryMeter" class="meter">7</div>
+            <div className="param param-fader">
+              <input className="input-fader" name="dry" type="range" min="0" max="100" value="70" />
+              <div id="dryMeter" className="meter">7</div>
             </div>
-            <div class="checkbox">
-              <div class="switch mute"></div><label>MUTE</label>
+            <div className="checkbox">
+              <div className="switch mute"></div><label>MUTE</label>
             </div>
           </div>
         </div>
-        <div class="track" id="global">
-          <div class="name">MASTER</div>
-          <div class="params">
-            <div class="param param-fader">
-              <input id="master" class="input-fader" name="volume" type="range" min="0" max="100" value="70" step="1" list="volsettings"/>
+        <div className="track" id="global">
+          <div className="name">MASTER</div>
+          <div className="params">
+            <div className="param param-fader">
+              <input id="master" className="input-fader" name="volume" type="range" min="0" max="100" value="70" step="1" list="volsettings"/>
 
               <datalist id="volsettings">
               	<option>0</option>
@@ -59,7 +59,7 @@ class Tracks extends Component {
               	<option>80</option>
               	<option>100</option>
               </datalist>
-              <div id="volumeMeter" class="meter">7</div>
+              <div id="volumeMeter" className="meter">7</div>
             </div>
           </div>
         </div>

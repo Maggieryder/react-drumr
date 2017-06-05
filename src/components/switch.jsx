@@ -10,8 +10,8 @@ class Switch extends Component {
   render(){
     let {label, function} = this.props
     return (
-      <div class="checkbox">
-        <div class={`switch ${label}`} onClick={function}></div>
+      <div className="checkbox">
+        <div className={`switch ${label}`} onClick={function}></div>
         <label>{label}</label>
       </div>
     )

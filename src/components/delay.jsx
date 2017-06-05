@@ -16,9 +16,9 @@ class Delay extends Component {
   }
   render(){
     return (
-      <div class="reverb">
-        <div class="name">{name}</div>
-        <div class="params">
+      <div className="reverb">
+        <div className="name">{name}</div>
+        <div className="params">
           {renderParams()}
         </div>
         <Switch name="mute"/>

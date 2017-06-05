@@ -8,12 +8,12 @@ class Fader extends Component {
   }
 
   render(){
-    let {label, class, name, args} = this.props
+    let {label, name, args} = this.props
     return (
-      <div class="param param-fader">
+      <div className="param param-fader">
         <label>{label}</label>
-        <input class="input-slider" name={name} type="range" min={args.min} max={args.max} value={args.default} />
-        <div id={`${name}Meter`} class="meter">{`${args.default} ${args.units}`}</div>
+        <input className="input-slider" name={name} type="range" min={args.min} max={args.max} value={args.default} />
+        <div id={`${name}Meter`} className="meter">{`${args.default} ${args.units}`}</div>
       </div>
     )
   }

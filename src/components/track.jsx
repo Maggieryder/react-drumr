@@ -16,12 +16,12 @@ class Track extends Component {
   }
   render(){
     return (
-      <div class="track">
-        <div class="name">{name}</div>
-        <div class="params">
+      <div className="track">
+        <div className="name">{name}</div>
+        <div className="params">
           {renderParams()}
         </div>
-        <div class="sequence">
+        <div className="sequence">
           {renderSequence()}
         </div>
       </div>

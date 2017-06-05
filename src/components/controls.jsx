@@ -14,30 +14,38 @@ class Controls extends Component {
     super(props);
     //console.log('>>> beat PROPS', this.props)
   }
+  togglePlay(){
+    console.log('toggle PLAY')
+  }
+  toggleMixer(){
+    console.log('toggle MIXER')
+  }
+  onKitChange(){
+
+  }
 
   render(){
-    let options = this.props
+    let { tempo, swing, playing, options, onKitChange } = this.props
     return (
-      <div class="controls">
+      <div className="controls">
         <div>
-          <a class="toggle-mixer" href="#">
+          <a className="toggle-mixer" href="#" onClick={this.toggleMixer}>
             <MixerIcon />
           </a>
         </div>
         <div>
-          <a id="playBtn" href="#">
-            <PlayIcon/>
-            <PauseIcon/>
+          <a id="playBtn" href="#" onClick={this.togglePlay}>
+            {playing ? <PauseIcon/> : <PlayIcon/>}
           </a>
         </div>
-        <Fader name="Tempo" label="TEMPO" args={{min:30, max:160, default:120, units:'bpm'}}/>
-        <Fader name="Swing" label="SWING" args={{min:0, max:100, default:0, units:'%'}}/>
-        <Options id="kits" options={options}/>
+        <Fader name="tempo" label="TEMPO" args={{min:30, max:160, default:120, units:'bpm'}} onChange={this.onTempoChange}/>
+        <Fader name="swing" label="SWING" args={{min:0, max:100, default:0, units:'%'}} onChange={this.onSwingChange}/>
+        <Options id="kits" options={options} onChange={this.onKitChange}/>
         <div>
-          <a class="toggle-bar" href="#">
+          <a className="toggle-bar" href="#">
             <BarIcon id="bar1"/>
           </a>
-          <a class="toggle-bar" href="#">
+          <a className="toggle-bar" href="#">
             <BarIcon id="bar2"/>
           </a>
         </div>

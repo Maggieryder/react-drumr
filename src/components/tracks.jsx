@@ -18,7 +18,7 @@ class Tracks extends Component {
   render(){
     let options = this.props
     return (
-      <div class="tracks">
+      <div className="tracks">
         {this.renderTracks()}
       </div>
     )

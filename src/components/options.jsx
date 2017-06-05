@@ -9,15 +9,15 @@ class Options extends Component {
 
   renderOptions(options){
     options.map((i, opt)=>{
-      return <option key={i} value={opt.value} selected>{opt.label}</option>
+      return <option key={i} value={opt.value} selected={opt.selected}>{opt.label}</option>
     })
   }
 
   render(){
-    let {id, options} = this.props
+    let {id, options, onChange} = this.props
     return (
       <div class="param param-option">
-        <select id={id}>
+        <select id={id} onChange={onChange}>
           {this.renderOptions(options)}
         </select>
       </div>
