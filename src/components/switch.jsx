@@ -4,14 +4,14 @@ import styles from '../css/params.scss'
 class Switch extends Component {
   constructor(props) {
     super(props);
-    //console.log('>>> bar PROPS', this.props)
+    //console.log('>>> Switch PROPS', this.props)
   }
 
   render(){
-    let {label, function} = this.props
+    let {label, cname, function} = this.props
     return (
       <div className="checkbox">
-        <div className={`switch ${label}`} onClick={function}></div>
+        <div className={`switch ${cname}`} onClick={function}></div>
         <label>{label}</label>
       </div>
     )

@@ -8,8 +8,9 @@ class Options extends Component {
   }
 
   renderOptions(options){
+    let {isSelected} = this.props
     options.map((i, opt)=>{
-      return <option key={i} value={opt.value} selected={opt.selected}>{opt.label}</option>
+      return <option key={i} value={opt.value} selected={i===isSelected}>{opt.label}</option>
     })
   }
 

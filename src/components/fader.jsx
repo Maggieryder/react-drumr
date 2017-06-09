@@ -4,16 +4,22 @@ import styles from '../css/params.scss'
 class Fader extends Component {
   constructor(props) {
     super(props);
-    //console.log('>>> bar PROPS', this.props)
+    console.log('>>> Fader PROPS', this.props)
   }
 
   render(){
-    let {label, name, args} = this.props
+    let {label, min, max, value, step, units, onChange} = this.props
     return (
-      <div className="param param-fader">
+      <div className='param param-fader'>
         <label>{label}</label>
-        <input className="input-slider" name={name} type="range" min={args.min} max={args.max} value={args.default} />
-        <div id={`${name}Meter`} className="meter">{`${args.default} ${args.units}`}</div>
+        <input className='input-slider'
+            type='range'
+            min={min}
+            max={max}
+            value={value}
+            step={step}
+            onChange={onChange}/>
+        <div className='meter'>{`${value} ${units}`}</div>
       </div>
     )
   }

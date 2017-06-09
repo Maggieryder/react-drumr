@@ -4,16 +4,32 @@ import styles from '../css/params.scss'
 class Knob extends Component {
   constructor(props) {
     super(props);
-    //console.log('>>> bar PROPS', this.props)
+    console.log('>>> Knob PROPS', this.props)
   }
 
   render(){
-    let {label, name, args} = this.props
+    let display = {
+      size: 50,
+      angleOffset: 220,
+      angleRange: 280
+    }
+
+    let { label, min, max, value, step, onChange } = this.props
     return (
-      <div className={`param param-knob`}>
-        <input className={`input-knob ${name}`} type="range" min={args.min} max={args.max} value={args.default}  data-width={args.size} data-height={args.size} data-angleOffset={args.angleOffset} data-angleRange={args.angleRange} />
+      <div className='param param-knob'}>
+        <input className='input-knob'
+            type='range'
+            min={min}
+            max={max}
+            value={value}
+            step={step}
+            data-width={display.size}
+            data-height={display.size}
+            data-angleOffset={display.angleOffset}
+            data-angleRange={display.angleRange}
+            onChange={onChange} />
         <label>{label}</label>
-        <div className={`meter ${name}meter`}>0</div>
+        <div className='meter'>{value}</div>
       </div>
     )
   }

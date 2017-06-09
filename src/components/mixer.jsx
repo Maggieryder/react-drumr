@@ -2,65 +2,37 @@ import React, {PropTypes, Component} from 'react'
 import styles from '../css/beat-box.scss'
 import Fader from './fader'
 import Switch from './switch'
+import { connect } from 'react-redux'
+import { updateWetMix, muteWetMix, updateDryMix, muteDryMix, updateMasterVolume } from '../actions/index'
 
-class Tracks extends Component {
+class Mixer extends Component {
   constructor(props) {
     super(props);
-    //console.log('>>> beat PROPS', this.props)
-  }
-
-  renderTracks(){
-    let {tracks} = this.props;
-    tracks.map((track)=> {
-      return <Track name={track.name} sequence={track.sequence} params={track.params} />
-    })
+    console.log('>>> Mixer PROPS', this.props)
   }
 
   render(){
-    let options = this.props
+    let { wetMix, wetMute, dryMix, dryMute, masterGain } = this.props,mixer
     return (
-      <div className="mixer">
-        <div className="track" id="wetmix">
-          <div className="name">WET MIX</div>
-          <div className="params">
-            <div className="param param-fader">
-              <input className="input-fader" name="wet" type="range" min="0" max="100" value="70" />
-              <div id="wetMeter" className="meter">7</div>
-            </div>
-            <div className="checkbox">
-              <div className="switch mute"></div><label>MUTE</label>
-            </div>
+      <div className='mixer'>
+        <div className='track' id='wetmix'>
+          <div className='name'>wet mix</div>
+          <div className='params'>
+            <Fader label='' min='0' max='10' value={wetMix} step='.5' onChange={updateWetMix}/>
+            <Switch label='mute' cname={wetMute ? 'on' : null} function={muteWetMix}/>
           </div>
         </div>
-        <div className="track" id="drymix">
-          <div className="name">DRY MIX</div>
-          <div className="params">
-
-            <div className="param param-fader">
-              <input className="input-fader" name="dry" type="range" min="0" max="100" value="70" />
-              <div id="dryMeter" className="meter">7</div>
-            </div>
-            <div className="checkbox">
-              <div className="switch mute"></div><label>MUTE</label>
-            </div>
+        <div className='track' id='drymix'>
+          <div className='name'>dry mix</div>
+          <div className='params'>
+            <Fader label='' min='0' max='10' value={dryMix} step='.5' onChange={updateDryMix}/>
+            <Switch label='mute' cname={dryMute ? 'on' : null} function={muteDryMix}/>
           </div>
         </div>
-        <div className="track" id="global">
-          <div className="name">MASTER</div>
-          <div className="params">
-            <div className="param param-fader">
-              <input id="master" className="input-fader" name="volume" type="range" min="0" max="100" value="70" step="1" list="volsettings"/>
-
-              <datalist id="volsettings">
-              	<option>0</option>
-              	<option>20</option>
-              	<option>40</option>
-              	<option>60</option>
-              	<option>80</option>
-              	<option>100</option>
-              </datalist>
-              <div id="volumeMeter" className="meter">7</div>
-            </div>
+        <div className='track' id='global'>
+          <div className='name'>master</div>
+          <div className='params'>
+            <Fader label='' min='0' max='10' value={masterGain} step='.5' onChange={updateMasterVolume}/>
           </div>
         </div>
       </div>
@@ -68,4 +40,8 @@ class Tracks extends Component {
   }
 }
 
-export default Tracks
+function mapStateToProps({ mixer }){
+  return { mixer }
+}
+
+export default connect(mapStateToProps, { updateWetMix, muteWetMix, updateDryMix, muteDryMix, updateMasterVolume })(Mixer)
