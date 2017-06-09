@@ -1,6 +1,7 @@
 import React, { PropTypes, Component } from 'react'
 import styles from '../scss/params.scss'
 import Knob from './knob'
+import Switch from './switch'
 import { connect } from 'react-redux'
 import { updateDelayTime, updateDelayFeedback, updateDelayFrequency, toggleDelay } from '../actions/index'
 
@@ -16,10 +17,10 @@ class Delay extends Component {
       <div className='delay'>
         <div className='name'>delay</div>
         <div className='params'>
-          <Knob label='time' min='0' max='1' value={time} step='.01' onChange={updateDelayTime}/>
-          <Knob label='feedback' min='0' max='.95' value={feedback} step='.01' onChange={updateDelayFeedback}/>
-          <Knob label='frequency' min='0' max='4000' value={frequency} step='40' onChange={updateDelayFrequency}/>
-          <Switch label='on/off' cname={active ? 'on' : null} function={toggleDelay}/>
+          <Knob label='time' min={0} max={1} value={time} step={.01} onChange={updateDelayTime}/>
+          <Knob label='feedback' min={0} max={.95}value={feedback} step={.01} onChange={updateDelayFeedback}/>
+          <Knob label='frequency' min={0} max={4000} value={frequency} step={40} onChange={updateDelayFrequency}/>
+          <Switch label='on/off' cname={active ? 'on' : null} onClick={toggleDelay}/>
         </div>
       </div>
     )

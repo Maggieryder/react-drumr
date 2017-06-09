@@ -16,6 +16,7 @@ const INITIAL_STATE = {
     sequence: [1,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0],
     volume: 7,
     pan: 0,
+    clip: false,
     mute: false,
     solo: false,
     reverbSend: 0,
@@ -59,6 +60,10 @@ export default function(state = INITIAL_STATE, action) {
       console.log('action recieved for UPDATE DELAY SEND', action.value)
       if (state.id !== action.id) { return state }
       return {...state, delaySend: action.value }
+    case CLIP_TRACK:
+      console.log('action recieved for CLIP TRACK', action.clip)
+      if (state.id !== action.id) { return state }
+      return {...state, clip: action.clip }
     case MUTE_TRACK:
       console.log('action recieved for MUTE TRACK', !state.mute)
       if (state.id !== action.id) { return state }

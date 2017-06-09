@@ -1,28 +1,34 @@
 import React, {PropTypes, Component} from 'react'
-import styles from '../css/notation.scss'
+import styles from '../scss/notation.scss'
 import Beat from './beat'
-
+import { connect } from 'react-redux'
 
 class Bar extends Component {
   constructor(props) {
     super(props);
-    //console.log('>>> bar PROPS', this.props)
+    //console.log('>>> Bar PROPS', this.props)
   }
   renderBeats(){
-    let { bar, sig } = this.props;
-    let numBeats = sig[0] === 3 ? 3 : 4;
+    let { barId, signature } = this.props.controller;
+    let numBeats = signature[0];
     for (let i=0;i<numBeats;i++){
       //console.log('>>> beat ID', 'beat_'+(bar*numBeats)+i)
-      return <Beat key = {'beat_'+(bar*numBeats)+i} />
+      return <Beat key={'beat_'+(barId*numBeats)+i} beatId={(barId*numBeats)+i} />
     }
   }
   render(){
     return (
-      <ul className='beat'>
-        {renderBeats()}
-      </ul>
+      <li>
+        <ul className='bar'>
+          {renderBeats()}
+        </ul>
+      </li>
     )
   }
 }
 
-export default Bar
+function mapStateToProps({ controller }){
+  return { controller }
+}
+
+export default connect(mapStateToProps)(Bar)

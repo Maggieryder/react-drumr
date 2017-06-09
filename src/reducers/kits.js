@@ -7,7 +7,7 @@ const INITIAL_STATE = {
       name:'Loading...',
       smpl:''
     }
-  ]
+  ],
   kitId: 0
 }
 

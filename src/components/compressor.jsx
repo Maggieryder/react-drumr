@@ -16,12 +16,12 @@ class Compressor extends Component {
       <div className='delay'>
         <div className='name'>delay</div>
         <div className='params'>
-          <Knob label='threshold' min='-100' max='0' value={threshold} step='1' onChange={updateThreshold}/>
-          <Knob label='knee' min='0' max='40' value={knee} step='1' onChange={updateKnee}/>
-          <Knob label='ratio' min='1' max='20' value={ratio} step='1' onChange={updateRatio}/>
-          <Knob label='attack' min='0' max='1' value={attack} step='.01' onChange={updateAttack}/>
-          <Knob label='release' min='0' max='1' value={release} step='.01' onChange={updateRelease}/>
-          <Switch label='on/off' cname={active ? 'on' : null} function={toggleCompressor}/>
+          <Knob label='threshold' min={-100} max={0} value={threshold} step={1} onChange={updateThreshold}/>
+          <Knob label='knee' min={0} max={40} value={knee} step={1} onChange={updateKnee}/>
+          <Knob label='ratio' min={1} max={20} value={ratio} step={1} onChange={updateRatio}/>
+          <Knob label='attack' min={0} max={1} value={attack} step={.01} onChange={updateAttack}/>
+          <Knob label='release' min={0} max={1} value={release} step={.01} onChange={updateRelease}/>
+          <Switch label='on/off' cname={active ? 'on' : null} onClick={toggleCompressor}/>
         </div>
       </div>
     )

@@ -1,5 +1,5 @@
 import React, {PropTypes, Component} from 'react'
-import styles from '../css/params.scss'
+import styles from '../scss/params.scss'
 
 class Switch extends Component {
   constructor(props) {
@@ -8,10 +8,10 @@ class Switch extends Component {
   }
 
   render(){
-    let {label, cname, function} = this.props
+    let {label, cname, onClick} = this.props
     return (
       <div className="checkbox">
-        <div className={`switch ${cname}`} onClick={function}></div>
+        <div className={`switch ${cname}`} onClick={onClick}></div>
         <label>{label}</label>
       </div>
     )

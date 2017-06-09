@@ -1,5 +1,5 @@
 import React, {PropTypes, Component} from 'react'
-import styles from '../css/params.scss'
+import styles from '../scss/params.scss'
 
 class Knob extends Component {
   constructor(props) {
@@ -16,7 +16,7 @@ class Knob extends Component {
 
     let { label, min, max, value, step, onChange } = this.props
     return (
-      <div className='param param-knob'}>
+      <div className='param param-knob'>
         <input className='input-knob'
             type='range'
             min={min}

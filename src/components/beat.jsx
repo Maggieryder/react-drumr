@@ -1,6 +1,7 @@
 import React, {PropTypes, Component} from 'react'
-import styles from '../css/notation.scss'
+import styles from '../scss/notation.scss'
 import Note from './note'
+import { connect } from 'react-redux'
 
 
 class Beat extends Component {
@@ -9,11 +10,12 @@ class Beat extends Component {
     //console.log('>>> beat PROPS', this.props)
   }
   renderNotes(){
-    let { beat, resolution } = this.props;
+    let { resolution } = this.props.controller;
+    let beat = this.props.beatId
     let numNotes = resolution === 16 ? 4 : 3;
     for (let i=0;i<numNotes;i++){
       //console.log('>>> note ID', beat*numNotes+i)
-      return <Note key = {beat*numNotes+i} />
+      return <Note key={beat*numNotes+i} id={beat*numNotes+i}/>
     }
   }
   render(){
@@ -27,4 +29,8 @@ class Beat extends Component {
   }
 }
 
-export default Beat
+function mapStateToProps({ controller }){
+  return { controller }
+}
+
+export default connect(mapStateToProps)(Beat)

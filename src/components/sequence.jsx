@@ -1,27 +1,32 @@
 import React, {PropTypes, Component} from 'react'
-import styles from '../css/notation.scss'
+import styles from '../scss/notation.scss'
 import Bar from './bar'
+import { connect } from 'react-redux'
 
 
 class Sequence extends Component {
   constructor(props) {
     super(props);
-    //console.log('>>> beat PROPS', this.props)
+    console.log('>>> Sequence PROPS', this.props)
   }
   renderBars(){
-    let { bars } = this.props;
+    let { bars } = this.props.controller;
     for (let i=0;i<bars;i++){
       //console.log('>>> bar ID', 'bar_'+i)
-      return <Bar key = {'bar_'+i} />
+      return <Bar key = {'bar_'+i} id= {'bar_'+i} />
     }
   }
   render(){
     return (
-      <ul className='bar'>
+      <ul className='sequence'>
         {renderBars()}
       </ul>
     )
   }
 }
 
-export default Sequence
+function mapStateToProps({ controller }){
+  return { controller }
+}
+
+export default connect(mapStateToProps)(Sequence)

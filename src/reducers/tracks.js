@@ -9,7 +9,7 @@ import { ADD_TRACK,
       UPDATE_DELAY_SEND,
       MUTE_TRACK,
       SOLO_TRACK } from '../actions/index'
-      
+
 import track from './track'
 
 const INITIAL_STATE = []
@@ -18,10 +18,11 @@ export default function(state = INITIAL_STATE, action) {
   switch(action.type){
     case ADD_TRACK:
       console.log('action recieved for ADD TRACK', action.id)
-      return [...state, track(undefined, action)]]
+      return [...state, track(undefined, action)]
     case REMOVE_TRACK:
-      console.log('action recieved for REMOVE TRACK', action.index)
-      return [ ...state.slice(0, action.index), ...state.slice(action.index + 1)]
+      console.log('action recieved for REMOVE TRACK', action.id)
+      //return [ ...state.slice(0, action.index), ...state.slice(action.index + 1)]
+      return state.filter((t) => t.id !== action.id)
     case ASSIGN_NAME:
     case ASSIGN_BUFFER:
     case UPDATE_SEQUENCE:

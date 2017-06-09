@@ -8,7 +8,7 @@ const INITIAL_STATE = {
       name:'Loading...',
       smpl:''
     }
-  ]
+  ],
   reverbId: 0,
   active: false
 }

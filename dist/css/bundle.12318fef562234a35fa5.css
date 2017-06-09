@@ -1,0 +1,288 @@
+/*! Copyright Maggie Ryder 2017. */
+/* some ui styling */
+
+/*knob*/
+
+.knob path {
+  stroke: none;
+  fill: #CBE86B;
+  stroke-weight: .1;
+}
+
+.pan + .knob path {
+  fill: #333;
+}
+
+.knob path:first-child {
+  fill: #333;
+}
+
+.knob rect {
+  fill: transparent;
+}
+
+.pan + .knob rect {
+  fill: #CBE86B;
+}
+
+/* switch */
+
+.checkbox {
+  position: relative;
+  display: block;
+  width: 50px !important;
+  height: 50px !important;
+  margin: 0 !important;
+  padding-top: 6px;
+}
+
+.checkbox .switch {
+  display: block;
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  border: 4px solid #333;
+  background: rgba(0, 0, 0, 0.1);
+  margin: 0 auto;
+  cursor: pointer;
+}
+
+.checkbox .switch.on {
+  background: rgba(0, 255, 102, 0.8);
+  /*#00FF66;*/
+}
+
+.checkbox label {
+  text-align: center;
+  font-size: .6rem;
+  opacity: .7;
+  /*background: rgba(0,0,0,.2);*/
+}
+
+/* mixer styles */
+
+.params {
+  position: relative;
+  display: none;
+  width: 100%;
+  height: 100%;
+  -webkit-box-align: center;
+  -webkit-align-items: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-pack: start;
+  -webkit-justify-content: flex-start;
+      -ms-flex-pack: start;
+          justify-content: flex-start;
+  /* mute btn styles */
+}
+
+.params .name {
+  position: relative;
+  /*display: block;*/
+  width: auto;
+  height: auto;
+  margin-right: 15px;
+  width: 80px;
+  text-transform: uppercase;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  -o-text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.params .param {
+  position: relative;
+  /*display: block;*/
+  width: auto;
+  height: auto;
+  margin-right: 15px;
+}
+
+.params .param:last-child {
+  margin-right: 0;
+}
+
+.params .param.param-knob {
+  width: 60px;
+  text-align: center !important;
+}
+
+.params .param.param-knob > div:first-child {
+  margin: 0 auto;
+}
+
+.params .param.param-knob label {
+  font-size: .6rem;
+  margin: -6px auto;
+  opacity: .7;
+  z-index: -1;
+}
+
+.params .param.param-knob .meter {
+  position: absolute;
+  z-index: -1;
+  top: 17px;
+  width: 100%;
+  font-size: .8rem;
+  /*background: rgba(0,0,0,.2);*/
+}
+
+.params .param.param-fader {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+  -webkit-align-items: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-pack: start;
+  -webkit-justify-content: flex-start;
+      -ms-flex-pack: start;
+          justify-content: flex-start;
+  margin-right: 0;
+}
+
+.params .param.param-fader input {
+  width: 200px;
+}
+
+.params .param.param-fader .meter {
+  position: relative;
+  width: 20px;
+  /*background: rgba(0,0,0,.4);*/
+}
+
+.params .mute {
+  display: block;
+  background: red;
+  color: #CBE86B;
+  text-align: center;
+  font-size: .9rem;
+  line-height: 20px;
+}
+
+.params .mute.clip {
+  background: #ff9900;
+}
+
+.params .mute.on {
+  background: rgba(0, 0, 0, 0.1);
+}
+
+.params .mute.on:before {
+  content: "x";
+}
+
+#mySequencer.expand-mixer .params {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+}
+
+#mixer .checkbox {
+  padding-top: 10px;
+}
+
+.controls * :focus + .meter,
+.track * :focus + .meter,
+.track * :focus + label ~ .meter {
+  color: #CBE86B;
+}
+
+/* sequencer styles */
+
+.track {
+  position: relative;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  width: 100%;
+  height: 70px;
+  margin-bottom: 5px;
+  /*background: rgba(0,0,0,.2);*/
+  font-size: .9rem;
+  -webkit-box-align: center;
+  -webkit-align-items: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-pack: start;
+  -webkit-justify-content: flex-start;
+      -ms-flex-pack: start;
+          justify-content: flex-start;
+  color: #333;
+}
+
+.track .bar {
+  -webkit-box-flex: 1;
+  -webkit-flex-grow: 1;
+      -ms-flex-positive: 1;
+          flex-grow: 1;
+  height: 100%;
+}
+
+.track .bar li {
+  position: relative;
+  float: left;
+  width: 25%;
+  height: 100%;
+}
+
+.track .bar li .beat {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  /*padding: 1px;*/
+}
+
+.track .bar li .beat .note {
+  position: relative;
+  float: left;
+  width: 25%;
+  height: 100%;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+  -webkit-align-items: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-pack: center;
+  -webkit-justify-content: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  /*border: 1px solid white;*/
+}
+
+.track .bar li .beat .note .status {
+  position: relative;
+  width: 60%;
+  height: 60%;
+  border-radius: 10px;
+  background: rgba(0, 0, 0, 0.2);
+}
+
+.track .bar li .beat .note:first-child .status {
+  width: 80%;
+  height: 80%;
+  background: rgba(0, 0, 0, 0.3);
+}
+
+.track .bar li .beat .note:hover .status {
+  background: rgba(0, 0, 0, 0.4);
+  cursor: pointer;
+}
+
+.track .bar li .beat .note.on .status {
+  background: rgba(255, 0, 0, 0.7);
+}
+
+.track .bar li .beat .note.now .status {
+  background: #ff9900;
+  /*rgba(204,255,102,.5); /*#CBE86B*/
+}
+

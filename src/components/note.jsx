@@ -1,20 +1,25 @@
 import React, {PropTypes, Component} from 'react'
-import styles from '../css/notation.scss'
-//import {updateSequence} from ../actions/sequencer.js
-
+import styles from '../scss/notation.scss'
+import { connect } from 'react-redux'
+import { updateTrackSequence } from '../actions/index'
 
 class Note extends Component {
   constructor(props) {
     super(props);
-    //console.log('>>> note PROPS', this.props)
+    //this.state = {id: this.props.id, on: false}
+    //console.log('>>> Note PROPS', this.props)
   }
-  updateSequence(){
+  toggleMe(){
+    //setState({on: !this.state.on})
+    updateTrackSequence(this.state.id);
+  }
 
-  }
   render(){
-    let { on, now } = this.props;
+
+    let { id, sequence, controller } = this.props;
+
     return (
-      <li className={now ? 'note now' : on ? 'note on' : 'note'} onClick={this.updateSequence}>
+      <li id={id} className={controller.beatId===id ? 'note now' : sequence[id] === 1 ? 'note on' : 'note'} onClick={()=>{toggleMe}}>
         <div className='status'>
         </div>
       </li>
@@ -22,4 +27,8 @@ class Note extends Component {
   }
 }
 
-export default Note
+function mapStateToProps({ controller, sequence }){
+  return { controller, sequence }
+}
+
+export default connect(mapStateToProps, { updateTrackSequence })(Note)

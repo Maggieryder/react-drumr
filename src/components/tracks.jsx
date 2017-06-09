@@ -1,5 +1,5 @@
 import React, {PropTypes, Component} from 'react'
-import styles from '../css/beat-box.scss'
+import styles from '../scss/main.scss'
 import Track from './track'
 import { connect } from 'react-redux'
 import { addTrack, removeTrack } from '../actions/index'

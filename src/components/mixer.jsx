@@ -1,5 +1,5 @@
 import React, {PropTypes, Component} from 'react'
-import styles from '../css/beat-box.scss'
+import styles from '../scss/main.scss'
 import Fader from './fader'
 import Switch from './switch'
 import { connect } from 'react-redux'
@@ -18,21 +18,21 @@ class Mixer extends Component {
         <div className='track' id='wetmix'>
           <div className='name'>wet mix</div>
           <div className='params'>
-            <Fader label='' min='0' max='10' value={wetMix} step='.5' onChange={updateWetMix}/>
-            <Switch label='mute' cname={wetMute ? 'on' : null} function={muteWetMix}/>
+            <Fader label='' min={0} max={10}  value={wetMix} step={.5} onChange={updateWetMix}/>
+            <Switch label='mute' cname={wetMute ? 'on' : null} onClick={muteWetMix}/>
           </div>
         </div>
         <div className='track' id='drymix'>
           <div className='name'>dry mix</div>
           <div className='params'>
-            <Fader label='' min='0' max='10' value={dryMix} step='.5' onChange={updateDryMix}/>
-            <Switch label='mute' cname={dryMute ? 'on' : null} function={muteDryMix}/>
+            <Fader label='' min={0} max={10} value={dryMix} step={.5} onChange={updateDryMix}/>
+            <Switch label='mute' cname={dryMute ? 'on' : null} onClick={muteDryMix}/>
           </div>
         </div>
         <div className='track' id='global'>
           <div className='name'>master</div>
           <div className='params'>
-            <Fader label='' min='0' max='10' value={masterGain} step='.5' onChange={updateMasterVolume}/>
+            <Fader label='' min={0} max={10} value={masterGain} step={.5} onChange={updateMasterVolume}/>
           </div>
         </div>
       </div>

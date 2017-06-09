@@ -1,9 +1,14 @@
 // Kit types
 export const ASSIGN_KIT_OPTIONS = 'ASSIGN_KIT_OPTIONS'
 export const ASSIGN_KIT_ID = 'ASSIGN_KIT_ID'
-// Sequencer types
+// Controller types
 export const UPDATE_TEMPO = 'UPDATE_TEMPO'
 export const UPDATE_SWING = 'UPDATE_SWING'
+export const UPDATE_BEAT_ID = 'UPDATE_BEAT_ID'
+export const UPDATE_BARS = 'UPDATE_BARS'
+export const UPDATE_RESOLTION = 'UPDATE_RESOLTION'
+export const UPDATE_SIGNATURE = 'UPDATE_SIGNATURE'
+export const TOGGLE_BAR ='TOGGLE_BAR'
 export const TOGGLE_PLAY = 'TOGGLE_PLAY'
 // Tracks types
 export const ADD_TRACK = 'ADD_TRACK'
@@ -18,6 +23,7 @@ export const UPDATE_VOLUME = 'UPDATE_VOLUME'
 export const UPDATE_PAN = 'UPDATE_PAN'
 export const UPDATE_REVERB_SEND = 'UPDATE_REVERB_SEND'
 export const UPDATE_DELAY_SEND = 'UPDATE_DELAY_SEND'
+export const CLIP_TRACK ='CLIP_TRACK'
 export const MUTE_TRACK = 'MUTE_TRACK'
 export const SOLO_TRACK = 'SOLO_TRACK'
 // Mixer types

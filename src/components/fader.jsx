@@ -1,5 +1,5 @@
 import React, {PropTypes, Component} from 'react'
-import styles from '../css/params.scss'
+import styles from '../scss/params.scss'
 
 class Fader extends Component {
   constructor(props) {

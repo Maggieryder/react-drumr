@@ -31,7 +31,7 @@ class Reverb extends Component {
         <div className='params'>
           <Options id='verbs' options={reverbOptions} isSelected={reverbId} onChange={(e) => {onChange}}/>
         </div>
-        <Switch label='on/off' cname={active ? 'on' : null} function={toggleReverb}/>
+        <Switch label='on/off' cname={active ? 'on' : null} onClick={toggleReverb}/>
       </div>
     )
   }
