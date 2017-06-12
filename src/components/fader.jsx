@@ -1,4 +1,5 @@
-import React, {PropTypes, Component} from 'react'
+import React, { Component } from 'react'
+import PropTypes  from 'prop-types'
 import styles from '../scss/params.scss'
 
 class Fader extends Component {
@@ -9,6 +10,7 @@ class Fader extends Component {
 
   render(){
     let {label, min, max, value, step, units, onChange} = this.props
+    //console.log('onChange', onChange)
     return (
       <div className='param param-fader'>
         <label>{label}</label>
@@ -19,7 +21,7 @@ class Fader extends Component {
             value={value}
             step={step}
             onChange={onChange}/>
-        <div className='meter'>{`${value} ${units}`}</div>
+        <div className='meter'>{`${value}${units}`}</div>
       </div>
     )
   }

@@ -4,8 +4,9 @@ import { ASSIGN_KIT_ID,
 const INITIAL_STATE = {
   kitOptions: [
     {
-      name:'Loading...',
-      smpl:''
+      label:'Loading...',
+      path:'',
+      voices: []
     }
   ],
   kitId: 0

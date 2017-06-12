@@ -1,4 +1,5 @@
-import React, {PropTypes, Component} from 'react'
+import React, {Component} from 'react'
+import PropTypes  from 'prop-types'
 import styles from '../scss/notation.scss'
 import Beat from './beat'
 import { connect } from 'react-redux'

@@ -49,3 +49,4 @@ export const UPDATE_RATIO = 'UPDATE_RATIO'
 export const UPDATE_ATTACK = 'UPDATE_ATTACK'
 export const UPDATE_RELEASE = 'UPDATE_RELEASE'
 // Vizualizer types
+export const TOGGLE_MIXER = 'TOGGLE_MIXER'

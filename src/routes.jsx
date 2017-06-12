@@ -1,7 +1,8 @@
 import React from 'react'
-import {Router, Route, IndexRoute, useRouterHistory} from 'react-router'
-import { createHashHistory } from 'history'
-const appHistory = useRouterHistory(createHashHistory)({ queryKey: false })
+import { HashRouter as Router, Switch, Route } from 'react-router-dom'
+//import { createHashHistory } from 'history'
+//const appHistory = useRouterHistory(createHashHistory)({ queryKey: false })
+// const history =
 
 import Shell from './views/shell.jsx'
 import BeatBox from './views/beatbox.jsx'
@@ -10,14 +11,14 @@ import User from './views/user.jsx'
 import NoMatch from './views/404.jsx'
 
 const Routes = (
-  <Router history={appHistory}>
-    <Route name="Home" path="/" component={Shell} >
-      <IndexRoute name="Home" component={BeatBox} />
-      <Route name="Users" path="users" component={Users}>
-        <Route name="User" path=":id" component={User} />
-      </Route>
-      <Route name="Not Found" path="/*" component={NoMatch} />
-    </Route>
+  <Router hashType='noslash'>
+    <Shell>
+      <Switch>
+        <Route exact path='/' component={BeatBox} />
+        <Route name='Users' path='/users' component={Users} />
+        <Route name='Not Found' path='/*' component={NoMatch} />
+      </Switch>
+    </Shell>
   </Router>
 )
 

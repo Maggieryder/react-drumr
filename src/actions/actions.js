@@ -49,7 +49,9 @@ import {
   UPDATE_KNEE,
   UPDATE_RATIO,
   UPDATE_ATTACK,
-  UPDATE_RELEASE
+  UPDATE_RELEASE,
+  // Visuals
+  TOGGLE_MIXER
 } from './types';
 
 // Kit types
@@ -61,6 +63,7 @@ export const assignKitOptions = (options) => {
 }
 
 export const assignKitId = (id) => {
+  console.log('ASSIGN KIT ID!!', id)
   return {
     type: ASSIGN_KIT_ID,
     id// ES6 syntax - is same as id: id
@@ -69,6 +72,7 @@ export const assignKitId = (id) => {
 
 // Controller actions
 export const updateTempo = (value) => {
+  console.log('UPDATE TEMPO!!', value)
   return {
     type: UPDATE_TEMPO,
     value // ES6 syntax - is same as tempo: tempo
@@ -76,6 +80,7 @@ export const updateTempo = (value) => {
 }
 
 export const updateSwing = (value) => {
+  console.log('UPDATE SWING!!', value)
   return {
     type: UPDATE_SWING,
     value // ES6 syntax - is same as swing: swing
@@ -110,6 +115,7 @@ export const updateBars = (value) => {
 }
 
 export const toggleBar = (id) => {
+  console.log('TOGGLE BAR!! id =', id)
   return {
     type: TOGGLE_BAR,
     id
@@ -117,6 +123,7 @@ export const toggleBar = (id) => {
 }
 
 export const togglePlay = () => {
+  console.log('TOGGLE PLAY!!')
   return {
     type: TOGGLE_PLAY
   }
@@ -333,5 +340,12 @@ export const updateRelease = (value) => {
   return {
     type: UPDATE_RELEASE,
     value// ES6 syntax - is same as value: value
+  }
+}
+// Visuals
+export const toggleMixer = () => {
+  console.log('TOGGLE MIXER!!')
+  return {
+    type: TOGGLE_MIXER
   }
 }

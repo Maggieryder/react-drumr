@@ -1,21 +1,34 @@
-import React, { Component, PropTypes } from 'react'
+import React from 'react'
+import PropTypes  from 'prop-types'
+import { Route, Link } from 'react-router-dom'
+import User from './user'
 
-class Users extends Component {
-  constructor(props) {
-    super(props)
-  }
-  render(){
-    return (
-      <div>
-        <h2>Users page</h2>
-        {this.props.children}
-      </div>
-    )
-  }
-}
+const Users = ({ match }) => (
+  <div>
+    <h2>Users</h2>
+    <ul>
+      <li>
+        <Link to={`${match.url}/rendering`}>
+          Rendering with React
+        </Link>
+      </li>
+      <li>
+        <Link to={`${match.url}/components`}>
+          Components
+        </Link>
+      </li>
+      <li>
+        <Link to={`${match.url}/props-v-state`}>
+          Props v. State
+        </Link>
+      </li>
+    </ul>
 
-Users.propTypes = {
-  children: PropTypes.node
-}
+    <Route path={`${match.url}/:id`} component={User}/>
+    <Route exact path={match.url} render={() => (
+      <h3>Please select a user.</h3>
+    )}/>
+  </div>
+)
 
 export default Users

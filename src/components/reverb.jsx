@@ -1,4 +1,5 @@
-import React, {PropTypes, Component} from 'react'
+import React, { Component } from 'react'
+import PropTypes  from 'prop-types'
 import styles from '../scss/params.scss'
 import Options from './options'
 import Knob from './knob'

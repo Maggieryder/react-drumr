@@ -1,4 +1,5 @@
-import React, {PropTypes, Component} from 'react'
+import React, { Component } from 'react'
+import PropTypes  from 'prop-types'
 import styles from '../scss/notation.scss'
 import Bar from './bar'
 import { connect } from 'react-redux'
@@ -29,4 +30,4 @@ function mapStateToProps({ controller }){
   return { controller }
 }
 
-export default connect(mapStateToProps)(Sequence)
+export default connect(mapStateToProps)( Sequence )

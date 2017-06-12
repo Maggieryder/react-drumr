@@ -1,8 +1,9 @@
-import React, { PropTypes } from 'react'
+import React from 'react'
+import PropTypes  from 'prop-types'
 
-let User = (props) => {
+let User = ({ match }) => {
   return (
-    <h2>{props.params.id} view</h2>
+    <h2>User {match.params.id} view</h2>
   )
 }
 

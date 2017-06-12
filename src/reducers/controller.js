@@ -9,9 +9,9 @@ import {
         TOGGLE_PLAY } from '../actions/index'
 
 const INITIAL_STATE = {
-  tempo: 120,
+  tempo: 96,
   swing: 0,
-  bars: 1,
+  bars: 4,
   barId: 0,
   beatId: 0,
   resolution: 16,

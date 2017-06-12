@@ -1,4 +1,5 @@
-import React, {PropTypes, Component} from 'react'
+import React, { Component } from 'react'
+import PropTypes  from 'prop-types'
 import styles from '../scss/params.scss'
 import Sequence from './sequence'
 import Knob from './knob'
@@ -54,4 +55,4 @@ export default connect(mapStateToProps,
     updateTrackDelaySend,
     clipTrack,
     muteTrack,
-    soloTrack })(Tracks)
+    soloTrack })(Track)
