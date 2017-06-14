@@ -3,7 +3,7 @@ import {
         UPDATE_DRYMIX,
         MUTE_WETMIX,
         MUTE_DRYMIX,
-        UPDATE_MASTER_GAIN } from '../actions/index'
+        UPDATE_MASTER_GAIN } from '../actions'
 
 //import tracks from './tracks'
 

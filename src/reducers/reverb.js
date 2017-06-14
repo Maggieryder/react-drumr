@@ -1,6 +1,6 @@
 import { ASSIGN_REVERB_ID,
         ASSIGN_REVERB_OPTIONS,
-        TOGGLE_REVERB } from '../actions/index'
+        TOGGLE_REVERB } from '../actions'
 
 const INITIAL_STATE = {
   reverbOptions: [

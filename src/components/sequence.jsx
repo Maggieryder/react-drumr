@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import PropTypes  from 'prop-types'
-import styles from '../scss/notation.scss'
+//import styles from '../scss/notation.scss'
 import Bar from './bar'
 import { connect } from 'react-redux'
 

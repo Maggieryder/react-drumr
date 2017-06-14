@@ -17,39 +17,12 @@
 .pan + .knob rect {
   fill: #CBE86B;
 }
-/* switch */
-.checkbox {
-  position: relative;
-  display: block;
-  width: 50px !important;
-  height: 50px !important;
-  margin:0!important;
-  padding-top: 6px;
-}
-.checkbox .switch {
-  display: block;
-  width: 30px;
-  height: 30px;
-  border-radius: 50%;
-  border: 4px solid #333;
-  background: rgba(0,0,0,.1);
-  margin: 0 auto;
-  cursor: pointer;
-}
-.checkbox .switch.on {
-  background: rgba(0,255,102,.8); /*#00FF66;*/
-}
 
-.checkbox label {
-  text-align: center;
-  font-size: .6rem;
-  opacity:.7;
-  /*background: rgba(0,0,0,.2);*/
-}
+
 /* mixer styles */
 .params {
   position: relative;
-  display: none;
+  //display: none;
   width: 100%;
   height: 100%;
   align-items: center;
@@ -122,27 +95,61 @@
       }
     }
   }
-  /* mute btn styles */
-  .mute {
+  /* switch */
+  .checkbox {
+    position: relative;
     display: block;
-    background: red;
-    color: #CBE86B;
-    text-align: center;
-    font-size: .9rem;
-    line-height: 20px;
+    width: 50px !important;
+    height: 50px !important;
+    margin:0!important;
+    padding-top: 6px;
 
-    &.clip {
-      background: #ff9900;
-    }
-
-    &.on {
+    .switch {
+      display: block;
+      width: 30px;
+      height: 30px;
+      border-radius: 50%;
+      border: 4px solid #333;
       background: rgba(0,0,0,.1);
+      margin: 0 auto;
+      cursor: pointer;
+
+      &.on {
+        background: rgba(0,255,102,.8); /*#00FF66;*/
+      }
     }
 
-    &.on:before {
-      content: "x";
+    label {
+      text-align: center;
+      font-size: .6rem;
+      opacity:.7;
+      /*background: rgba(0,0,0,.2);*/
+    }
+
+    /* mute btn styles */
+    &.mute {
+      display: block;
+      background: red;
+      color: #CBE86B;
+      text-align: center;
+      font-size: .9rem;
+      line-height: 20px;
+
+      &.clip {
+        background: #ff9900;
+      }
+
+      &.on {
+        background: rgba(0,0,0,.1);
+      }
+
+      &.on:before {
+        content: "x";
+      }
     }
   }
+
+
 }
 
 #mySequencer.expand-mixer .params {

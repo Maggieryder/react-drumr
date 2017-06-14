@@ -1,7 +1,7 @@
 import { UPDATE_DELAY_TIME,
         UPDATE_DELAY_FEEDBACK,
         UPDATE_DELAY_FREQUENCY,
-        TOGGLE_DELAY } from '../actions/index'
+        TOGGLE_DELAY } from '../actions'
 
 const INITIAL_STATE = {
   time: .5,

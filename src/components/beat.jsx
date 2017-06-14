@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import PropTypes  from 'prop-types'
-import styles from '../scss/notation.scss'
+//import styles from '../scss/notation.scss'
 import Note from './note'
 import { connect } from 'react-redux'
 

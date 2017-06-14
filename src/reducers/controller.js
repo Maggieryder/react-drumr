@@ -6,7 +6,7 @@ import {
         UPDATE_RESOLTION,
         UPDATE_SIGNATURE,
         TOGGLE_BAR,
-        TOGGLE_PLAY } from '../actions/index'
+        TOGGLE_PLAY } from '../actions'
 
 const INITIAL_STATE = {
   tempo: 96,

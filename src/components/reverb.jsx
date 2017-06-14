@@ -1,12 +1,12 @@
 import React, { Component } from 'react'
 import PropTypes  from 'prop-types'
-import styles from '../scss/params.scss'
+//import styles from '../scss/params.scss'
 import Options from './options'
 import Knob from './knob'
 import Switch from './switch'
 import { loadImpulse } from '../api/reverb'
 import { connect } from 'react-redux'
-import { assignReverbId, toggleReverb } from '../actions/index'
+import { assignReverbId, toggleReverb } from '../actions'
 
 
 class Reverb extends Component {
@@ -19,20 +19,22 @@ class Reverb extends Component {
     //console.log('componentWillReceiveProps', props)
   }
   onChange(e) {
-    let { reverbOptions } = this.props.reverb
+    let { reverb, assignReverbId } = this.props
+    let { reverbOptions } = reverb
     console.log('Reverb onChange value',e.target.value)
     loadImpulse('assets/'+reverbOptions[e.target.value].smpl)
     assignReverbId(e.target.value);
   }
   render(){
-    let { active, reverbOptions, reverbId } = this.props.reverb
+    let { reverb, toggleReverb } = this.props
+    let { active, reverbOptions, reverbId } = reverb
     return (
-      <div className='reverb'>
+      <div className='track' id='reverb'>
         <div className='name'>reverb</div>
         <div className='params'>
-          <Options id='verbs' options={reverbOptions} isSelected={reverbId} onChange={(e) => {onChange}}/>
+          <Options id='verbs' options={reverbOptions} value={reverbId} onChange={(e) => {onChange()}}/>
+          <Switch label='on/off' cname={active ? 'on' : null} onClick={toggleReverb}/>
         </div>
-        <Switch label='on/off' cname={active ? 'on' : null} onClick={toggleReverb}/>
       </div>
     )
   }

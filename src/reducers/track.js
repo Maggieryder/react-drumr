@@ -7,7 +7,7 @@ import { ADD_TRACK,
         UPDATE_REVERB_SEND,
         UPDATE_DELAY_SEND,
         MUTE_TRACK,
-        SOLO_TRACK } from '../actions/index'
+        SOLO_TRACK } from '../actions'
 
 const INITIAL_STATE = {
     id: 0,

@@ -3,7 +3,7 @@ import { UPDATE_THRESHOLD,
         UPDATE_RATIO,
         UPDATE_ATTACK,
         UPDATE_RELEASE,
-        TOGGLE_COMPRESSOR } from '../actions/index'
+        TOGGLE_COMPRESSOR } from '../actions'
 
 const INITIAL_STATE = {
   threshold: -24,

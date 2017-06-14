@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import PropTypes  from 'prop-types'
-import styles from '../scss/main.scss'
+//import styles from '../scss/main.scss'
 import Fader from './fader'
 import Options from './options'
 //import BarIcon from 'react-svg-loader!../../assets/images/icons/icon-bar.svg'
@@ -17,7 +17,7 @@ import { updateTempo,
       assignKitId,
       togglePlay,
       toggleMixer,
-      toggleBar} from '../actions/actions'
+      toggleBar } from '../actions'
 
 const kitLib = {
   kitOptions:[
@@ -51,25 +51,24 @@ class Controller extends Component {
     console.log('>>> Controller PROPS', this.props)
   }
   renderBars(bars){
-    //bars.map((bar) => { <BarIcon />
-    console.log('bars', bars)
-    for (let i=0; i<5; i++){
-      return (
+    //let { bars } = controller
+    let { toggleBar } = this.props
+    let barlist = []
+    for (let i=0; i<bars; i++){
+      barlist.push(
         <a key={`bar${i}`} className='toggle-bar' href='#' id={`bar${i}`} onClick={()=>{toggleBar(i)}}>
           {<Icon type='bar'/> }
         </a>
       )
-    }//)
+    }
+    return barlist;
   }
 
-  onKitChange(e){
-    console.log('KIT CHANGE', e.target.value)
-    assignKitId(e.target.value)
-  }
+  componentDIdMount(){}
 
   render(){
 
-    let { controller } = this.props //kitLibwhen json load implemented
+    let { controller, toggleMixer, togglePlay, updateTempo, updateSwing, assignKitId } = this.props //kitLib when json load implemented
     let { kitOptions, kitId } = kitLib
     let { tempo, swing, isPlaying, bars, barId, resolution } = controller
 
@@ -85,9 +84,9 @@ class Controller extends Component {
             {isPlaying ? <Icon type='pause'/> : <Icon type='play'/> }
           </a>
         </div>
-        <Fader label='tempo' min={30} max={160} value={tempo} step={1} units=' bpm' onChange={(e)=>{updateTempo(e.target.value)}}/>
-        <Fader label='swing' min={0} max={100} value={swing} step={1} units='%' onChange={(e)=>{updateSwing(e.target.value)}}/>
-        <Options id='kits' options={kitOptions} value={kitId} isSelected={kitId} onChange={this.onKitChange}/>
+        <Fader label='tempo' min={30} max={160} value={tempo} step={1} units=' bpm' onChange={(e)=>{updateTempo(Number(e.target.value))}}/>
+        <Fader label='swing' min={0} max={100} value={swing} step={1} units='%' onChange={(e)=>{updateSwing(Number(e.target.value))}}/>
+        <Options id='kits' options={kitOptions} value={kitId} onChange={(e)=>{assignKitId(parseInt(e.target.value))}}/>
         <div>
           {this.renderBars(bars)}
         </div>

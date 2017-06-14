@@ -1,9 +1,9 @@
 import React, { Component } from 'react'
 import PropTypes  from 'prop-types'
-import styles from '../scss/main.scss'
+//import styles from '../scss/main.scss'
 import Track from './track'
 import { connect } from 'react-redux'
-import { addTrack, removeTrack } from '../actions/index'
+import { addTrack, removeTrack } from '../actions'
 
 class Tracks extends Component {
   constructor(props) {
@@ -13,8 +13,10 @@ class Tracks extends Component {
 
   renderTracks(){
     let { tracks } = this.props;
-    tracks.map((track)=> {
-      return <Track name={track.name} sequence={track.sequence} params={track.params} />
+    return tracks.map((track, i) => {
+      console.log('### TRACK', track)
+      //return <Track key={i} id={track.id} name={track.name} t={track} />
+
     })
   }
 

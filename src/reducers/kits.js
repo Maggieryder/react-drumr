@@ -1,5 +1,5 @@
 import { ASSIGN_KIT_ID,
-        ASSIGN_KIT_OPTIONS } from '../actions/index'
+        ASSIGN_KIT_OPTIONS } from '../actions'
 
 const INITIAL_STATE = {
   kitOptions: [

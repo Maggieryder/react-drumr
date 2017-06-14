@@ -8,11 +8,27 @@ import { ADD_TRACK,
       UPDATE_REVERB_SEND,
       UPDATE_DELAY_SEND,
       MUTE_TRACK,
-      SOLO_TRACK } from '../actions/index'
+      SOLO_TRACK } from '../actions'
 
 import track from './track'
 
-const INITIAL_STATE = []
+const INITIAL_STATE = [
+  {
+    id:0,
+    name:'kick',
+    buffer: {}
+  },
+  {
+    id:1,
+    name:'snare',
+    buffer: {}
+  },
+  {
+    id:2,
+    name:'hi hat',
+    buffer: {}
+  }
+]
 
 export default function(state = INITIAL_STATE, action) {
   switch(action.type){

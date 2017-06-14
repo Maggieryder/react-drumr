@@ -1,8 +1,8 @@
 import React, { Component } from 'react'
 import PropTypes  from 'prop-types'
-import styles from '../scss/notation.scss'
+//import styles from '../scss/notation.scss'
 import { connect } from 'react-redux'
-import { updateTrackSequence } from '../actions/index'
+import { updateTrackSequence } from '../actions'
 
 class Note extends Component {
   constructor(props) {
@@ -10,17 +10,13 @@ class Note extends Component {
     //this.state = {id: this.props.id, on: false}
     //console.log('>>> Note PROPS', this.props)
   }
-  toggleMe(){
-    //setState({on: !this.state.on})
-    updateTrackSequence(this.state.id);
-  }
 
   render(){
 
-    let { id, sequence, controller } = this.props;
+    let { id, sequence, controller, updateTrackSequence } = this.props;
 
     return (
-      <li id={id} className={controller.beatId===id ? 'note now' : sequence[id] === 1 ? 'note on' : 'note'} onClick={()=>{toggleMe}}>
+      <li id={id} className={controller.beatId===id ? 'note now' : sequence[id] === 1 ? 'note on' : 'note'} onClick={()=>{updateTrackSequence(id)}}>
         <div className='status'>
         </div>
       </li>

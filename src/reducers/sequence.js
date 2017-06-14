@@ -1,4 +1,4 @@
-import { UPDATE_SEQUENCE } from '../actions/index'
+import { UPDATE_SEQUENCE } from '../actions'
 
 const INITIAL_STATE = [ 1,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0 ]
 
