@@ -13,7 +13,7 @@ import Mixer from '../components/mixer'
 class BeatBox extends Component {
   constructor(props) {
     super(props);
-    console.log('>>> BeatBox PROPS', this.props)
+    // console.log('>>> BeatBox PROPS', this.props)
   }
   render(){
     return (

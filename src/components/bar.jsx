@@ -21,7 +21,7 @@ class Bar extends Component {
     return (
       <li>
         <ul className='bar'>
-          {renderBeats()}
+          {this.renderBeats()}
         </ul>
       </li>
     )

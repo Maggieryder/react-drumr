@@ -10,7 +10,7 @@ import { updateThreshold, updateKnee, updateRatio, updateAttack, updateRelease, 
 class Compressor extends Component {
   constructor(props) {
     super(props);
-    console.log('>>> Compressor PROPS', this.props)
+      // console.log('>>> Compressor PROPS', this.props)
   }
   render(){
     let { compressor, updateThreshold, updateKnee, updateRatio, updateAttack, updateRelease, toggleCompressor } = this.props
@@ -24,7 +24,7 @@ class Compressor extends Component {
           <Knob label='ratio' min={1} max={20} value={ratio} step={1} onChange={(e)=>{updateRatio(Number(e.target.value))}}/>
           <Knob label='attack' min={0} max={1} value={attack} step={.01} onChange={(e)=>{updateAttack(Number(e.target.value))}}/>
           <Knob label='release' min={0} max={1} value={release} step={.01} onChange={(e)=>{updateRelease(Number(e.target.value))}}/>
-          <Switch label='on/off' cname={active ? 'on' : null} onClick={toggleCompressor}/>
+          <Switch label='on/off' cname={active ? 'on' : ''} onClick={toggleCompressor}/>
         </div>
       </div>
     )

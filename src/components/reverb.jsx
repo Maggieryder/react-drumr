@@ -12,7 +12,7 @@ import { assignReverbId, toggleReverb } from '../actions'
 class Reverb extends Component {
   constructor(props) {
     super(props);
-    console.log('>>> Reverb PROPS', this.props)
+    // console.log('>>> Reverb PROPS', this.props)
   }
   componentWillReceiveProps(props){
     let { reverbOptions, active, reverbId } = props.reverb
@@ -26,14 +26,14 @@ class Reverb extends Component {
     assignReverbId(e.target.value);
   }
   render(){
-    let { reverb, toggleReverb } = this.props
+    let { reverb, toggleReverb, assignReverbId } = this.props
     let { active, reverbOptions, reverbId } = reverb
     return (
       <div className='track' id='reverb'>
         <div className='name'>reverb</div>
         <div className='params'>
-          <Options id='verbs' options={reverbOptions} value={reverbId} onChange={(e) => {onChange()}}/>
-          <Switch label='on/off' cname={active ? 'on' : null} onClick={toggleReverb}/>
+          <Options id='verbs' options={reverbOptions} value={reverbId} onChange={(e)=>{assignReverbId(parseInt(e.target.value))}}/>
+          <Switch label='on/off' cname={active ? 'on' : ''} onClick={toggleReverb}/>
         </div>
       </div>
     )

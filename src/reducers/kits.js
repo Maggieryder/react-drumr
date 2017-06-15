@@ -4,9 +4,24 @@ import { ASSIGN_KIT_ID,
 const INITIAL_STATE = {
   kitOptions: [
     {
-      label:'Loading...',
-      path:'',
-      voices: []
+      label:'Feelin Kit',
+      path:'triton/FeelinKit/',
+      voices: [
+          {'name':'kick', 'smple':'FK_BD_08.wav'},
+          {'name':'snare', 'smple':'FK_SNR_03.wav'},
+          {'name':'hihat', 'smple':'FK_HH_05.wav'},
+          {'name':'open hihat', 'smple':'FK_CYM_03.wav'}
+      ]
+    },
+    {
+      label:'Wild Soul Kit',
+      path:'triton/WildSoulKit/',
+      voices: [
+        {'name':'kick', 'smple':'WSK_BD_03.wav'},
+        {'name':'snare', 'smple':'WSK_SNR_08.wav'},
+        {'name':'tambourine', 'smple':'WSK_HH_03.wav'},
+        {'name':'open hihat', 'smple':'WSK_HH_12.wav'}
+      ]
     }
   ],
   kitId: 0
@@ -15,10 +30,10 @@ const INITIAL_STATE = {
 export default function(state = INITIAL_STATE, action) {
   switch(action.type){
     case ASSIGN_KIT_OPTIONS:
-      console.log('action recieved for ASSIGN KIT OPTIONS', action.options)
+      console.log('action received', action)
       return {...state, kitOptions: action.options}
     case ASSIGN_KIT_ID:
-      console.log('action recieved for ASSIGN KIT ID', action.id)
+      console.log('action received', action)
       return {...state, kitId: action.id}
     default:
       return state

@@ -23,7 +23,7 @@ export const UPDATE_VOLUME = 'UPDATE_VOLUME'
 export const UPDATE_PAN = 'UPDATE_PAN'
 export const UPDATE_REVERB_SEND = 'UPDATE_REVERB_SEND'
 export const UPDATE_DELAY_SEND = 'UPDATE_DELAY_SEND'
-export const CLIP_TRACK ='CLIP_TRACK'
+export const CLIP_TRACK = 'CLIP_TRACK'
 export const MUTE_TRACK = 'MUTE_TRACK'
 export const SOLO_TRACK = 'SOLO_TRACK'
 // Mixer types

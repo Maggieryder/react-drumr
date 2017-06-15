@@ -9,7 +9,7 @@ import { updateWetMix, muteWetMix, updateDryMix, muteDryMix, updateMasterVolume 
 class Mixer extends Component {
   constructor(props) {
     super(props);
-    console.log('>>> Mixer PROPS', this.props)
+    // console.log('>>> Mixer PROPS', this.props)
   }
 
   render(){
@@ -21,14 +21,14 @@ class Mixer extends Component {
           <div className='name'>wet mix</div>
           <div className='params'>
             <Fader label='' min={0} max={10}  value={wetMix} step={.5} onChange={(e)=>{updateWetMix(Number(e.target.value))}}/>
-            <Switch label='mute' cname={wetMute ? 'on' : null} onClick={muteWetMix}/>
+            <Switch label='mute' cname={wetMute ? 'mute on' : 'mute'} onClick={muteWetMix}/>
           </div>
         </div>
         <div className='track' id='drymix'>
           <div className='name'>dry mix</div>
           <div className='params'>
             <Fader label='' min={0} max={10} value={dryMix} step={.5} onChange={(e)=>{updateDryMix(Number(e.target.value))}}/>
-            <Switch label='mute' cname={dryMute ? ' on' : ''} onClick={muteDryMix}/>
+            <Switch label='mute' cname={dryMute ? 'mute on' : 'mute'} onClick={muteDryMix}/>
           </div>
         </div>
         <div className='track' id='global'>

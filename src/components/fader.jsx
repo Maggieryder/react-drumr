@@ -3,7 +3,7 @@ import PropTypes  from 'prop-types'
 //import styles from '../scss/params.scss'
 
 const Fader = (props) => {
-  console.log('>>> Fader props', props)
+  // console.log('>>> Fader props', props)
   let { label, min, max, value, step, units, onChange } = props
   return (
     <div className='param param-fader'>

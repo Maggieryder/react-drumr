@@ -12,7 +12,7 @@ import { assignTrackName,
       updateTrackPan,
       updateTrackReverbSend,
       updateTrackDelaySend,
-      clipTrack,
+      //clipTrack,
       muteTrack,
       soloTrack } from '../actions'
 
@@ -23,14 +23,14 @@ class Track extends Component {
   }
 
   render(){
-    let { track,
+    let { id, track,
       updateTrackVolume,
       updateTrackPan,
       updateTrackReverbSend,
       updateTrackDelaySend,
       muteTrack,
       soloTrack  } = this.props
-    let{ id, name, buffer, sequence, volume, pan, clip, mute, solo, reverbSend, delaySend } = track
+    let{ name, buffer, sequence, volume, pan, clip, mute, solo, reverbSend, delaySend } = track
 
     //let{ mute, solo } = track
     //let{ id, name, buffer } = this.props.t
@@ -38,12 +38,12 @@ class Track extends Component {
       <div className="track" id={id}>
         <div className="name">{name}</div>
         <div className="params">
-          <Knob label='gain' min={0} max={10} value={volume} step={.5} onChange={(e)=>{updateTrackVolume(e.target.value)}}/>
-          <Knob label='pan' min={-5} max={5} value={pan} step={1} onChange={(e)=>{updateTrackPan(e.target.value)}}/>
-          <Knob label='reverb' min={0} max={10} value={reverbSend} step={1} onChange={(e)=>{updateTrackReverbSend(e.target.value)}}/>
-          <Knob label='delay' min={0} max={10} value={delaySend} step={1} onChange={(e)=>{updateTrackDelaySend(e.target.value)}}/>
-          <Switch label='mute' cname={mute ? 'on' : clip ? 'clip' : null} onClick={() => { muteTrack(id) }}/>
-          <Switch label='solo' cname={solo ? 'on' : null} onClick={() => { soloTrack(id) }}/>
+          <Knob label='gain' min={0} max={10} value={volume} step={.5} onChange={(e)=>{updateTrackVolume({id:id, value: Number(e.target.value)})}}/>
+          <Knob label='pan' min={-5} max={5} value={pan} step={1} onChange={(e)=>{updateTrackPan({id:id, value: Number(e.target.value)})}}/>
+          <Knob label='reverb' min={0} max={10} value={reverbSend} step={1} onChange={(e)=>{updateTrackReverbSend({id:id, value: Number(e.target.value)})}}/>
+          <Knob label='delay' min={0} max={10} value={delaySend} step={1} onChange={(e)=>{updateTrackDelaySend({id:id, value: Number(e.target.value)})}}/>
+          <Switch label='mute' cname={mute ? 'mute on' : clip ? 'mute clip' : 'mute'} onClick={() => { muteTrack(id) }}/>
+          <Switch label='solo' cname={solo ? 'on' : ''} onClick={() => { soloTrack(id) }}/>
         </div>
         <Sequence id={`seq_${id}`}/>
       </div>
@@ -63,6 +63,6 @@ export default connect(mapStateToProps,
     updateTrackPan,
     updateTrackReverbSend,
     updateTrackDelaySend,
-    clipTrack,
+    //clipTrack,
     muteTrack,
     soloTrack })(Track)

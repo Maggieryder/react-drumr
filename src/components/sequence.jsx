@@ -20,7 +20,7 @@ class Sequence extends Component {
   render(){
     return (
       <ul className='sequence'>
-        {renderBars()}
+        {this.renderBars()}
       </ul>
     )
   }

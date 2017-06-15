@@ -23,7 +23,7 @@ class Beat extends Component {
     return (
       <li>
         <ul className='beat'>
-          {renderNotes()}
+          {this.renderNotes()}
         </ul>
       </li>
     )

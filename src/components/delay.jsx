@@ -10,7 +10,7 @@ import { updateDelayTime, updateDelayFeedback, updateDelayFrequency, toggleDelay
 class Delay extends Component {
   constructor(props) {
     super(props);
-    console.log('>>> Delay PROPS', this.props)
+    // console.log('>>> Delay PROPS', this.props)
   }
   render(){
     let { delay, updateDelayTime, updateDelayFeedback, updateDelayFrequency, toggleDelay } = this.props
@@ -22,7 +22,7 @@ class Delay extends Component {
           <Knob label='time' min={0} max={1} value={time} step={.01} onChange={(e)=>{updateDelayTime(Number(e.target.value))}}/>
           <Knob label='feedback' min={0} max={.95} value={feedback} step={.01} onChange={(e)=>{updateDelayFeedback(Number(e.target.value))}}/>
           <Knob label='frequency' min={0} max={4000} value={frequency} step={40} onChange={(e)=>{updateDelayFrequency(Number(e.target.value))}}/>
-          <Switch label='on/off' cname={active ? 'on' : null} onClick={toggleDelay}/>
+          <Switch label='on/off' cname={active ? 'on' : ''} onClick={toggleDelay}/>
         </div>
       </div>
     )

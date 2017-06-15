@@ -4,7 +4,7 @@ import '../vendor/knob'
 //import styles from '../scss/params.scss'
 
 const Knob = (props) => {
-  console.log('>>> Knob props', props)
+  // console.log('>>> Knob props', props)
   let display = {
     size: 50,
     angleOffset: 220,

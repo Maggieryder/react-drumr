@@ -5,6 +5,9 @@ import Track from './track'
 import { connect } from 'react-redux'
 import { addTrack, removeTrack } from '../actions'
 
+
+let nextTrackId = 0;
+
 class Tracks extends Component {
   constructor(props) {
     super(props);
@@ -15,15 +18,14 @@ class Tracks extends Component {
     let { tracks } = this.props;
     return tracks.map((track, i) => {
       console.log('### TRACK', track)
-      //return <Track key={i} id={track.id} name={track.name} t={track} />
-
+      return <Track key={i} id={i} name={track.name} />
     })
   }
 
   render(){
     return (
       <div className="tracks">
-        {this.renderTracks()}
+        {this.props.tracks.map( (track, i) => <Track key={i} id={i}/>)}
       </div>
     )
   }

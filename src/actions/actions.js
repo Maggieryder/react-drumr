@@ -118,35 +118,35 @@ export const updateTrackSequence = ({ id, sequence }) => {
   }
 }
 
-export const updateTrackVolume = ({ id, volume }) => {
-  console.log('UPDATE_VOLUME!!', { id, volume } )
+export const updateTrackVolume = ( { id, value } ) => {
+  //console.log('UPDATE_VOLUME!!', { id, value } )
   return {
     type: Types.UPDATE_VOLUME,
-    track: { id, volume }
+    track: { id, value }
   }
 }
 
-export const updateTrackPan = ({ id, pan }) => {
-  console.log('UPDATE_PAN!!', { id, pan } )
+export const updateTrackPan = ({ id, value }) => {
+  //console.log('UPDATE_PAN!!', { id, value } )
   return {
     type: Types.UPDATE_PAN,
-    track: { id, pan }
+    track: { id, value }
   }
 }
 
-export const updateTrackReverbSend = ({ id, send }) => {
-  console.log('UPDATE_REVERB_SEND!!', { id, send } )
+export const updateTrackReverbSend = ({ id, value }) => {
+  //console.log('UPDATE_REVERB_SEND!!', { id, value } )
   return {
     type: Types.UPDATE_REVERB_SEND,
-    track: { id, send }
+    track: { id, value }
   }
 }
 
-export const updateTrackDelaySend = ({ id, send }) => {
-  console.log('UPDATE_DELAY_SEND!!', { id, send } )
+export const updateTrackDelaySend = ({ id, value }) => {
+  //console.log('UPDATE_DELAY_SEND!!', { id, value } )
   return {
     type: Types.UPDATE_DELAY_SEND,
-    track: { id, send }
+    track: { id, value }
   }
 }
 
@@ -159,7 +159,7 @@ export const clipTrack = ({ id, clip }) => {
 }
 
 export const muteTrack = (id) => {
-  console.log('MUTE_TRACK!!', id)
+  //console.log('MUTE_TRACK!!', id)
   return {
     type: Types.MUTE_TRACK,
     id
@@ -167,7 +167,7 @@ export const muteTrack = (id) => {
 }
 
 export const soloTrack = (id) => {
-  console.log('SOLO_TRACK!!', id)
+  //console.log('SOLO_TRACK!!', id)
   return {
     type: Types.SOLO_TRACK,
     id

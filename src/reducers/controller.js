@@ -22,28 +22,28 @@ const INITIAL_STATE = {
 export default function(state = INITIAL_STATE, action) {
   switch(action.type){
     case UPDATE_TEMPO:
-      console.log('action recieved for UPDATE TEMPO', action.value)
+      console.log('action received', action)
       return {...state, tempo: action.value }
     case UPDATE_SWING:
-      console.log('action recieved for UPDATE SWING', action.value)
+      console.log('action received', action)
       return {...state, swing: action.value }
     case UPDATE_BEAT_ID:
-      console.log('action recieved for UPDATE BEAT ID', action.value )
+      console.log('action received', action)
       return {...state, beatId: action.value }
     case UPDATE_BARS:
-      console.log('action recieved for UPDATE BARS', action.value )
+      console.log('action received', action)
       return {...state, bars: action.value }
     case UPDATE_RESOLTION:
-      console.log('action recieved for UPDATE RESOLTION', action.value )
+      console.log('action received', action)
       return {...state, resolution: action.value }
     case UPDATE_SIGNATURE:
-      console.log('action recieved for UPDATE RESOLTION', action.value )
+      console.log('action received', action)
       return {...state, signature: action.value }
     case TOGGLE_BAR:
-      console.log('action recieved for TOGGLE BAR', action.id )
+      console.log('action received for TOGGLE BAR', action.id )
       return {...state, barId: action.id }
     case TOGGLE_PLAY:
-      console.log('action recieved for TOGGLE PLAY', !state.isPlaying )
+      console.log('action received for TOGGLE PLAY', !state.isPlaying )
       return {...state, isPlaying: !state.isPlaying }
     default:
       return state

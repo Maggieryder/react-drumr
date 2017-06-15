@@ -17,22 +17,22 @@ const INITIAL_STATE = {
 export default function(state = INITIAL_STATE, action) {
   switch(action.type){
     case UPDATE_THRESHOLD:
-      console.log('action recieved for UPDATE THRESHOLD', action.value)
+      console.log('action received', action)
       return {...state, threshold: action.value }
     case UPDATE_KNEE:
-      console.log('action recieved for UPDATE KNEE', action.value)
+      console.log('action received', action)
       return {...state, knee: action.value }
     case UPDATE_RATIO:
-      console.log('action recieved for UPDATE RATIO', action.value)
+      console.log('action received', action)
       return {...state, ratio: action.value }
     case UPDATE_ATTACK:
-      console.log('action recieved for UPDATE ATTACK', action.value)
+      console.log('action received', action)
       return {...state, attack: action.value }
     case UPDATE_RELEASE:
-      console.log('action recieved for UPDATE RELEASE', action.value)
+      console.log('action received', action)
       return {...state, release: action.value }
     case TOGGLE_COMPRESSOR:
-      console.log('action recieved for TOGGLE COMPRESSOR', !state.active)
+      console.log('action received for TOGGLE COMPRESSOR', !state.active)
       return {...state, active: !state.active }
     default:
       return state

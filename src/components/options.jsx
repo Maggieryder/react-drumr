@@ -3,7 +3,7 @@ import PropTypes  from 'prop-types'
 //import styles from '../scss/params.scss'
 
 const Options = (props) => {
-  console.log('>>> Options props', props)
+  // console.log('>>> Options props', props)
   let {id, value, onChange, options } = props
   return (
     <div className='param param-option'>
