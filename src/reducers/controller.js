@@ -11,8 +11,8 @@ import {
 const INITIAL_STATE = {
   tempo: 96,
   swing: 0,
-  bars: 4,
-  barId: 0,
+  numBars: 2,
+  barId: 1,
   beatId: 0,
   resolution: 16,
   signature: [4,4],
@@ -32,7 +32,7 @@ export default function(state = INITIAL_STATE, action) {
       return {...state, beatId: action.value }
     case UPDATE_BARS:
       console.log('action received', action)
-      return {...state, bars: action.value }
+      return {...state, numBars: action.value }
     case UPDATE_RESOLTION:
       console.log('action received', action)
       return {...state, resolution: action.value }

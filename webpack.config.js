@@ -6,7 +6,7 @@ const ExtractTextPlugin = require('extract-text-webpack-plugin');
 const autoprefixer = require('autoprefixer');
 
 const VENDOR_LIBS = [
-  'react', 'react-dom'
+  'prop-types', 'react', 'react-dom', 'react-redux','react-router', 'react-router-dom', 'redux', 'redux-promise', 'axios', 'body-parser'
 ]
 
 const CSSModuleLoaders = [

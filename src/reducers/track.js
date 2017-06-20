@@ -10,11 +10,13 @@ import { ADD_TRACK,
         MUTE_TRACK,
         SOLO_TRACK } from '../actions'
 
+import sequence from './sequence'
+
 const INITIAL_STATE = {
     id: 0,
     name: 'unassigned',
     buffer: {},
-    sequence: [1,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0],
+    sequence: [[0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],[0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0]],
     volume: 7,
     pan: 0,
     clip: false,
@@ -27,11 +29,11 @@ const INITIAL_STATE = {
 export default function(state = INITIAL_STATE, action) {
   switch(action.type){
     case ADD_TRACK:
-      console.log('action received for ADD_TRACK', action.id)
+      console.log('action received for ADD_TRACK', action.track.id)
       return {...state,
-        id: action.id,
-        name: action.name,
-        buffer: action.buffer
+        id: action.track.id,
+        name: action.track.name || 'unassigned',
+        buffer: action.track.buffer || {}
       }
     case ASSIGN_NAME:
       console.log('action received for ASSIGN NAME', action.id)
@@ -42,9 +44,10 @@ export default function(state = INITIAL_STATE, action) {
       if (state.id !== action.id) { return state }
       return {...state, buffer: action.buffer }
     case UPDATE_SEQUENCE:
-      console.log('action received', action)
-      if (state.id !== action.id) { return state }
-      return {...state, sequence: action.sequence }
+      console.log('action received', action.track)
+      if (state.id !== action.track.id) { return state }
+      //return [...state, sequence(undefined, action)]
+      return {...state, sequence: state.sequence.map((arr, b) => b === action.track.barId ? arr.map((value, i) => i === action.track.seqId ? value === 0 ? 1 : 0 : value) : arr )}
     case UPDATE_VOLUME:
       console.log('action received', action)
       if (state.id !== action.track.id) { return state }

@@ -7,26 +7,52 @@ import { addTrack, removeTrack } from '../actions'
 
 
 let nextTrackId = 0;
+let self;
+
+let tArray = [
+  {
+    name:'kick',
+    buffer: {}
+  },
+  {
+    name:'snare',
+    buffer: {}
+  },
+  {
+    name:'hi hat',
+    buffer: {}
+  }
+]
 
 class Tracks extends Component {
   constructor(props) {
     super(props);
-    console.log('>>> Tracks PROPS', this.props)
+    //console.log('>>> Tracks PROPS', this.props.tracks)
+    self = this;
   }
 
-  renderTracks(){
-    let { tracks } = this.props;
-    return tracks.map((track, i) => {
-      console.log('### TRACK', track)
-      return <Track key={i} id={i} name={track.name} />
-    })
+  componentDidMount(){
+    let { addTrack } = self.props
+    for (let i=0; i <tArray.length; i++){
+      addTrack({
+        id: nextTrackId++,
+        name: tArray[i].name,
+        buffer: tArray[i].buffer
+      })
+    }
+  }
+
+  componentWillReceiveProps(props){
+    //console.log('>>> Tracks componentWillReceiveProps PROPS', props.tracks)
   }
 
   render(){
+    let { tracks, addTrack } = this.props
     return (
-      <div className="tracks">
-        {this.props.tracks.map( (track, i) => <Track key={i} id={i}/>)}
-      </div>
+      <ul className="tracks">
+        {this.props.tracks.map((track, i) => <Track key={i} track={track}/>)}
+        <li><button onClick={() => {addTrack({id: nextTrackId++})}}>+</button></li>
+      </ul>
     )
   }
 }

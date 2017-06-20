@@ -133,7 +133,7 @@ input[type=range]::-moz-range-thumb {
   height: 40px;
   width: 5px;
   border-radius: 0px;
-  background:rgba(0,0,0,0);/*#CBE86B;*/
+  background: #CBE86B;//rgba(0,0,0,0);/*#CBE86B;*/
   cursor: pointer;
 
 }
@@ -364,6 +364,12 @@ option {
           border-right: 3px solid #333;
           margin-right: 40px;
         }
+
+        &.active {
+          background-color: #333;
+          color: #CBE86B;
+          fill: #CBE86B;
+        }
       }
     }
 
@@ -371,15 +377,19 @@ option {
       position: relative;
       /*display: block;*/
       box-sizing: border-box;
-      display: flex;
+      /*display: flex;
       justify-content: center;
-      align-items: center;
+      align-items: center;*/
 
       &.param-option {
         margin-right: 40px;
       }
 
       &.param-fader {
+        display: flex;
+        align-items: center;
+        justify-content:flex-start;
+        margin-right: 20px;
 
         input {
           width: 80px;
@@ -398,7 +408,7 @@ option {
 
         .meter {
           position: relative;
-          width: 40px;
+          width: auto;
           /*background: rgba(0,0,0,.4);*/
         }
       }
@@ -425,6 +435,7 @@ option {
       height: auto;
       margin-right:15px;
       width: 80px;
+      width: 5%;
       text-transform: uppercase;
       overflow: hidden;
       text-overflow: ellipsis;
@@ -436,6 +447,7 @@ option {
       position: relative;
       display: flex;
       width: 100%;
+      width: 35%;
       height: 100%;
       align-items: center;
       justify-content:flex-start;
@@ -445,13 +457,13 @@ option {
         position: relative;
         /*display: block;*/
         //box-sizing: border-box;
-        display: flex;
+        /*display: flex;
         justify-content: center;
-        align-items: center;
+        align-items: center;*/
 
         width: auto;
-        height: auto;
-        height: 100%;
+        //height: auto;
+        //height: 100%;
         margin-right:15px;
         //float:left;
         //margin: 0 10px 0 0;
@@ -470,6 +482,21 @@ option {
             margin: 0 auto;
           }
 
+          input {
+            font-size: 12px!important;
+            color: #333!important;
+          }
+
+          &:hover input {
+              color: #CBE86B!important;
+          }
+
+          &.pan {
+            input {
+              display: none;
+            }
+          }
+
           label {
             font-size: .6rem;
             margin: -6px auto;
@@ -483,12 +510,13 @@ option {
             z-index:-1;
             top: 17px;
             width: 100%;
-            font-size: .8rem;
+            font-size: .8rem !important;
             /*background: rgba(0,0,0,.2);*/
           }
         }
 
         &.param-fader {
+          width: auto;
           display: flex;
           align-items: center;
           justify-content:flex-start;
@@ -568,7 +596,7 @@ option {
       height: 100%;
 
       li {
-        width: 50%;
+        width: 100%;
         height: 100%;
         flex-grow: 1;
 

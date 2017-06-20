@@ -62,7 +62,7 @@ export const updateBars = (value) => {
 }
 
 export const toggleBar = (id) => {
-  //console.log('TOGGLE BAR!! id =', id)
+  console.log('TOGGLE BAR!! id =', id)
   return {
     type: Types.TOGGLE_BAR,
     id
@@ -76,10 +76,11 @@ export const togglePlay = () => {
   }
 }
 // Tracks actions
-export const addTrack = ({ id, name, buffer }) => {
+export const addTrack = ( track ) => {
+  console.log('ADD TRACK!!', track )
   return {
     type: Types.ADD_TRACK,
-    track: { id, name, buffer }
+    track: track
   }
 }
 
@@ -89,12 +90,13 @@ export const removeTrack = (id) => {
     id// ES6 syntax - is same as id: id
   }
 }
-
+/*
 export const soloTracks = () => {
   return {
     type: Types.SOLO_TRACKS,
   }
 }
+*/
 // Track actions
 export const assignTrackName = ({ id, name }) => {
   return {
@@ -110,16 +112,16 @@ export const assignTrackBuffer = ({ id, buffer }) => {
   }
 }
 
-export const updateTrackSequence = ({ id, sequence }) => {
-  console.log('UPDATE_SEQUENCE!!', { id, sequence } )
+export const updateTrackSequence = ({ id, barId, seqId }) => {
+  //console.log('UPDATE_SEQUENCE!!', { id, barId, seqId } )
   return {
     type: Types.UPDATE_SEQUENCE,
-    track: { id, sequence }
+    track: { id, barId, seqId }
   }
 }
 
 export const updateTrackVolume = ( { id, value } ) => {
-  //console.log('UPDATE_VOLUME!!', { id, value } )
+  console.log('UPDATE_VOLUME!!', { id, value } )
   return {
     type: Types.UPDATE_VOLUME,
     track: { id, value }

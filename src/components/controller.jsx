@@ -22,13 +22,13 @@ class Controller extends Component {
     super(props);
     // console.log('>>> Controller PROPS', this.props)
   }
-  renderBars(bars){
+  renderBars(bars, id){
     //let { bars } = controller
     let { toggleBar } = this.props
     let barlist = []
     for (let i=0; i<bars; i++){
       barlist.push(
-        <a key={`bar${i}`} className='toggle-bar' href='#' id={`bar${i}`} onClick={()=>{toggleBar(i)}}>
+        <a key={`bar${i}`} className={`toggle-bar${i===id ? ' active':''}`} href='#' id={`bar${i}`} onClick={()=>{toggleBar(i)}}>
           {<Icon type='bar'/> }
         </a>
       )
@@ -42,7 +42,7 @@ class Controller extends Component {
 
     let { controller, toggleMixer, togglePlay, updateTempo, updateSwing, assignKitId, kitLib } = this.props //kitLib when json load implemented
     let { kitOptions, kitId } = kitLib
-    let { tempo, swing, isPlaying, bars, barId, resolution } = controller
+    let { tempo, swing, isPlaying, numBars, barId, resolution } = controller
 
     return (
       <div className='controls'>
@@ -60,7 +60,7 @@ class Controller extends Component {
         <Fader label='swing' min={0} max={100} value={swing} step={1} units='%' onChange={(e)=>{updateSwing(Number(e.target.value))}}/>
         <Options id='kits' options={kitOptions} value={kitId} onChange={(e)=>{assignKitId(parseInt(e.target.value))}}/>
         <div>
-          {this.renderBars(bars)}
+          {this.renderBars(numBars, barId)}
         </div>
       </div>
     )

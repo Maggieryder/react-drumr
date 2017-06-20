@@ -13,10 +13,12 @@ class Note extends Component {
 
   render(){
 
-    let { id, sequence, controller, updateTrackSequence } = this.props;
-
+    let { id, trackId, sequence, controller, updateTrackSequence } = this.props;
+    let { isPlaying, barId, beatId, resolution } = controller
     return (
-      <li id={id} className={controller.beatId===id ? 'note now' : sequence[id] === 1 ? 'note on' : 'note'} onClick={()=>{updateTrackSequence(id)}}>
+      <li id={id}
+        className={sequence[id%resolution] === 1 ? isPlaying && beatId===id ? 'note now' : 'note on' : 'note'}
+        onClick={()=>{updateTrackSequence({id:trackId, barId:barId, seqId:id%resolution })}}>
         <div className='status'>
         </div>
       </li>
@@ -24,8 +26,8 @@ class Note extends Component {
   }
 }
 
-function mapStateToProps({ controller, sequence }){
-  return { controller, sequence }
+function mapStateToProps({ controller }){
+  return { controller }
 }
 
 export default connect(mapStateToProps, { updateTrackSequence })(Note)

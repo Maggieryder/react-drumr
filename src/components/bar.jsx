@@ -7,19 +7,24 @@ import { connect } from 'react-redux'
 class Bar extends Component {
   constructor(props) {
     super(props);
-    //console.log('>>> Bar PROPS', this.props)
+    //console.log('>>> Bar PROPS', this.props.sequence)
   }
   renderBeats(){
-    let { barId, signature } = this.props.controller;
-    let numBeats = signature[0];
+    let { barId, signature } = this.props.controller
+    let { trackId } = this.props
+    let numBeats = signature[0]
+    let beats = []
     for (let i=0;i<numBeats;i++){
-      //console.log('>>> beat ID', 'beat_'+(bar*numBeats)+i)
-      return <Beat key={'beat_'+(barId*numBeats)+i} beatId={(barId*numBeats)+i} />
+      //console.log('>>> beat ID', 'beat_'+(barId*numBeats)+i)
+      beats.push(<Beat key={'beat_'+(barId*numBeats)+i} trackId={trackId} beatId={(barId*numBeats)+i} sequence={this.props.sequence}/>)
     }
+    return beats
   }
   render(){
+    let { barId, signature } = this.props.controller;
+    let numBeats = signature[0];
     return (
-      <li>
+      <li className={this.props.cname}>
         <ul className='bar'>
           {this.renderBeats()}
         </ul>

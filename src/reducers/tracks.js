@@ -12,28 +12,12 @@ import { ADD_TRACK,
 
 import track from './track'
 
-const INITIAL_STATE = [
-  {
-    id:0,
-    name:'kick',
-    buffer: {}
-  },
-  {
-    id:1,
-    name:'snare',
-    buffer: {}
-  },
-  {
-    id:2,
-    name:'hi hat',
-    buffer: {}
-  }
-]
+const INITIAL_STATE = []
 
 export default function(state = INITIAL_STATE, action) {
   switch(action.type){
     case ADD_TRACK:
-      console.log('action received for ADD TRACK', action.id)
+      console.log('action received for ADD TRACK', action)
       return [...state, track(undefined, action)]
     case REMOVE_TRACK:
       console.log('action received for REMOVE TRACK', action.id)
