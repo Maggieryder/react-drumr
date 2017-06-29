@@ -48,9 +48,13 @@ class Tracks extends Component {
 
   render(){
     let { tracks, addTrack } = this.props
+    let mutedTracks = tracks.filter(t => t.mute)
+    console.log('mutedTracks', mutedTracks)
+    let soloedTracks = tracks.filter(t => t.solo)
+    console.log('soloedTracks', soloedTracks)
     return (
       <ul className="tracks">
-        {this.props.tracks.map((track, i) => <Track key={i} track={track}/>)}
+        {tracks.map((track, i) => <Track key={i} track={track}/>)}
         <li><button onClick={() => {addTrack({id: nextTrackId++})}}>+</button></li>
       </ul>
     )

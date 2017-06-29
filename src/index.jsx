@@ -16,6 +16,18 @@ import ReduxPromise from 'redux-promise'
 import Routes from './routes.jsx'
 import reducers from './reducers'
 
+
+//import rootReducer from '../reducers/rootReducer';
+import thunk from 'redux-thunk';
+
+import {loadAssets} from './actions';
+/*
+export default function configureStore() {
+  return createStore(
+    reducers,
+    applyMiddleware(thunk)
+  );
+}*/
 // redux.compose(
   //window.devToolsExtension ? window.devToolsExtension() : f => f
 //)
@@ -25,9 +37,13 @@ import reducers from './reducers'
 //import '../vendor/bootstrap-theme.min.css'
 import './scss/main.scss'
 
-const createStoreWithMiddleware = applyMiddleware(ReduxPromise)(createStore)
+//const createStoreWithMiddleware = applyMiddleware(ReduxPromise)(createStore)
+const createStoreWithMiddleware = applyMiddleware(thunk)(createStore)
+const store = createStoreWithMiddleware(reducers)
+
+store.dispatch(loadAssets('./kits.json'));
 
 render(
-  <Provider store={createStoreWithMiddleware(reducers)}>
+  <Provider store={store}>
     {Routes}
   </Provider>, document.getElementById('root'))

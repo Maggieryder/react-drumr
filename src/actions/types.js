@@ -1,3 +1,5 @@
+// Async types
+export const LOAD_ASSET_SUCCESS = 'LOAD_ASSET_SUCCESS'
 // Kit types
 export const ASSIGN_KIT_OPTIONS = 'ASSIGN_KIT_OPTIONS'
 export const ASSIGN_KIT_ID = 'ASSIGN_KIT_ID'

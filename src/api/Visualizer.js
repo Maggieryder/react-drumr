@@ -1,6 +1,5 @@
-!(function(window){
-  'use strict';
-  function Visualizer(ctx){
+export default class Visualizer {
+  constuctor(ctx){
     this.analyser = ctx.createAnalyser();
     this.waveform;
     this.spectrum;
@@ -8,7 +7,7 @@
     this.analyser.fftSize = 1024;//2048 default
   }
 
-  Visualizer.prototype.init = function(masterGain){
+  init(masterGain){
     masterGain.connect(this.analyser);
     this.waveform = new Float32Array(this.analyser.frequencyBinCount);
     this.spectrum = new Uint8Array(this.analyser.frequencyBinCount);
@@ -19,14 +18,13 @@
     this.update();
   }
 
-  Visualizer.prototype.update = function(data){
+  update(data){
     this.analyser.getFloatTimeDomainData(this.waveform);
     this.analyser.getByteFrequencyData(this.spectrum);
     //this.analyser.getFloatFrequencyData(this.freqData);
     //this.analyser.getFloatTimeDomainData(this.timeData);
   }
-  Visualizer.prototype.renderData = function(){
-
+  renderData(){
+    //
   }
-  window.Visualizer = Visualizer;
-}(window));
+}

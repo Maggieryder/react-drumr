@@ -1,6 +1,23 @@
 import axios from 'axios'
 import * as Types from './types'
 
+import assetApi from '../api/assetApi'
+
+export const loadAssets = () => {
+  return function(dispatch) {
+    return assetApi.getAllAssets().then(assets => {
+      dispatch(loadAssetSuccess(assets));
+    }).catch(error => {
+      throw(error);
+    });
+  };
+}
+
+export function loadAssetSuccess(assets) {
+  console.log('ASSETS', assets)
+  //return {type: types.LOAD_ASSET_SUCCESS, assets};
+}
+
 // Kit types
 export const assignKitOptions = (options) => {
   return {
