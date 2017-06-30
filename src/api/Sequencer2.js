@@ -7,11 +7,10 @@ export default class Sequencer {
     this.lookahead = 25.0;
     this.scheduleAhead = 0.1;
     this.timeWorker;
-
     this.sequences = [];
     this.tracks = [];
-    this.tempo = 120; // options.tempo ||
-    this.noteResolution = 16; //options.noteResolution ||
+    this.tempo = 120;
+    this.noteResolution = 16;
     this.swingFactor = 0;
     //this.updateParams(options);
   }
@@ -27,19 +26,10 @@ export default class Sequencer {
     this.stepIndex = this.stepIndex === (this.noteResolution -1) ? 0 : ++this.stepIndex;
   }
   scheduleNote(step, time){
-    let bars = document.querySelectorAll('.bar');
-
-  // 	console.log(step)
+    // console.log(step)
     for (let i=0;i<this.sequences.length; i++){
-      let noteClear = bars[i].querySelectorAll('.now')[0];
-      //console.log('scheduleNote',noteClear);
-      if (noteClear) noteClear.classList.toggle('now');
-      let notes = bars[i].querySelectorAll('.note'),
-      note = notes[step];
       if (this.sequences[i].steps[step]===1){
         this.tracks[i].triggerSample(time);
-        note.classList.toggle('now');
-        //console.log('scheduleNote',bars[i], notes);
       }
     }
   }
@@ -67,16 +57,12 @@ export default class Sequencer {
     this.tracks.push(track);
   }
   clearTracks(){
-    /*let i = this.tracks.length;
-    while (i--){
-      this.tracks[i].pop();
-    }*/
     this.tracks = [];
   }
   // e.g. use sequencer.updateParams({sequences});
   updateParams(obj){
     for (let prop in obj){
-      //console.log( prop + ' :: ' + obj[prop]);
+      console.log( prop + ' :: ' + obj[prop]);
       this[prop]= obj[prop];
     }
   }

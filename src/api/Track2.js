@@ -23,16 +23,13 @@ export default class Track {
     this.panner.coneInnerAngle = 360;
     this.panner.coneOuterAngle = 0;
     this.panner.coneOuterGain = 0;*/
-
-    this.destination;
+    this.output;
     this.reverbNode;
     this.delayNode;
-    this.mute = false;
-    this.solo = false;
   }
-  init(destination, reverbNode, delayNode){
+  init(output, reverbNode, delayNode){
     let self = this;
-    this.destination = destination;
+    this.output = output;
     this.reverbNode = reverbNode;
     this.delayNode = delayNode;
     // connect it all up!
@@ -78,9 +75,6 @@ export default class Track {
     muteBtn.classList.toggle('clip', didRecentlyClip);
     requestAnimationFrame(function() { self.renderMeter() });
   }
-  assignId(id){
-    this.id = id;
-  }
   getId(){
     return this.id;
   }
@@ -92,51 +86,43 @@ export default class Track {
   }
   assignInstrumentName(index, str){
     this.instrumentName = str;
-    document.querySelectorAll('.name')[index].innerHTML = str;
   }
-  isMute(){
-    return this.mute;
-  }
-  toggleMute(){
-    //console.log('toggleMute', this.getId());
-    this.isMute() ? this.connect() : this.disconnect();
-    this.mute = !this.mute;
-  }
-  isSolo(){
-    return this.solo;
-  }
-  toggleSolo(){
-    this.solo = !this.solo;
+  toggleMute(mute){
+    mute ? this.connect() : this.disconnect();
   }
   auxSend(i){
     return this.sendGains[i];
   }
-  updateSendGain(index, val){
-    this.sendGains[index].gain.value = val;
+  updateSendGain(index, value){
+    this.sendGains[index].gain.value = value;
   }
-  updateVolume(val){
-    this.outputGain.gain.value = val;
+  updateVolume(value){
+    this.outputGain.gain.value = value;
   }
-  panX(val){
-    let xpos = val,
+  panX(value){
+    let xpos = value,
     zpos = 1 - Math.abs(xpos);
     this.panner.setPosition(xpos, 0, zpos);
-    //console.log('pan', this.panner.positionX.value, this.panner.positionZ.value);
   }
   connect(){
-    //console.log('track connect', this.getId());
     this.sendGains[0].connect(this.reverbNode);
     this.sendGains[1].connect(this.delayNode);
     this.outputGain.connect(this.meter);
-    this.meter.connect(this.destination);
-    this.outputGain.connect(this.destination);
+    this.meter.connect(this.output);
+    this.outputGain.connect(this.output);
   }
   disconnect(){
-    //console.log('track disconnect', this.getId());
     this.sendGains[0].disconnect(this.reverbNode);
     this.sendGains[1].disconnect(this.delayNode);
     this.outputGain.disconnect(this.meter);
-    this.meter.disconnect(this.destination);
-    this.outputGain.disconnect(this.destination);
+    this.meter.disconnect(this.output);
+    this.outputGain.disconnect(this.output);
   }
 }
+
+// assignId(id){
+//   this.id = id;
+// }
+// toggleSolo(){
+//   this.solo = !this.solo;
+// }

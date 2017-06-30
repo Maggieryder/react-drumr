@@ -2,6 +2,7 @@ import axios from 'axios'
 import * as Types from './types'
 
 import assetApi from '../api/assetApi'
+import drumr from '../api/drumr2'
 
 export const loadAssets = () => {
   return function(dispatch) {

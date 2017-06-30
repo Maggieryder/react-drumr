@@ -41,39 +41,31 @@ export default class Mixer {
     this.compressor = compressor;
     this.compressor.init(this.finalOutput, this.destination);
   }
-  updateGlobalVolume(val){
-    this.finalOutput.gain.value = val;
+  updateGlobalVolume(value){
+    this.finalOutput.gain.value = value;
   }
-  updateTrackPan(index,val){
-    this.tracks[index].panX(val);
+  updateTrackPan(index,value){
+    this.tracks[index].panX(value);
   }
-  updateTrackReverb(trackIndex, val){
-    this.tracks[trackIndex].updateSendGain(0,val);
+  updateTrackReverb(index, value){
+    this.tracks[index].updateSendGain(0,value);
   }
-  updateTrackDelay(trackIndex, val){
-    this.tracks[trackIndex].updateSendGain(1,val);
+  updateTrackDelay(index, value){
+    this.tracks[index].updateSendGain(1,value);
   }
-  updateDryVolume(val){
-    this.masterDry.gain.value = val;
+  updateDryVolume(value){
+    this.masterDry.gain.value = value;
   }
-  updateWetVolume(val){
-    this.masterWet.gain.value =  val;
+  updateWetVolume(value){
+    this.masterWet.gain.value =  value;
   }
   toggleWetMute(mute){
-    //console.log('toggleWetMute', e.target);
-    //e.target.classList.toggle('on');
-    //this.wetMute = !this.wetMute;
     mute ? this.masterWet.disconnect(this.finalOutput) : this.masterWet.connect(this.finalOutput);
   }
   toggleDryMute(mute){
-    //console.log('toggleDryMute', e.target);
-    //e.target.classList.toggle('on');
-    //this.dryMute = !this.dryMute;
     mute ? this.masterDry.disconnect(this.finalOutput) : this.masterDry.connect(this.finalOutput);
   }
   toggleTrackMute(index){
-    //console.log('toggleTrackMute', index);
-    //this.muteBtns[index].classList.toggle('on');
     this.tracks[index].toggleMute();
   }
   toggleTrackSolo(index){
@@ -153,7 +145,7 @@ export default class Mixer {
       this.tracks.pop();
     }
   }
-  updateTrackVolume(index, val){
-    this.tracks[index].updateVolume(val);
+  updateTrackVolume(index, value){
+    this.tracks[index].updateVolume(value);
   }
 }

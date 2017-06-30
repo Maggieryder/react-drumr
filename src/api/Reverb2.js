@@ -3,12 +3,10 @@ export default class Reverb {
     this.ctx = ctx;
     this.convolver = ctx.createConvolver();
     this.convolverGain = ctx.createGain();
-    this.mixNode;
-    //this.isOn = false;
+    this.output;
   }
-  init(mixNode){
-    //console.log('REVERB INIT beatsecs');
-    this.mixNode = mixNode;
+  init(output){
+    this.output = output;
     this.convolverGain.gain.value = 0;
     this.convolver.loop = true;
     this.convolver.normalize = true;
@@ -39,20 +37,13 @@ export default class Reverb {
   }
   connect(){
     this.convolverGain.connect(this.convolver);
-    this.convolver.connect(this.mixNode);
+    this.convolver.connect(this.output);
   }
   disconnect(){
     this.convolverGain.disconnect(this.convolver);
-    this.convolver.disconnect(this.mixNode);
+    this.convolver.disconnect(this.output);
   }
-  /*
-  Reverb.prototype.isConnected = function(){
-    return this.isOn;
-  }*/
   toggleReverb(on){
-    //console.log('toggleReverb', e.target);
-    //e.target.classList.toggle('on');
-    //this.isOn = !this.isOn;
     on ? this.connect() : this.disconnect();
   }
 }

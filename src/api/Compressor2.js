@@ -2,62 +2,60 @@ export default class Compressor {
   constructor(ctx){
     this.compressor = ctx.createDynamicsCompressor();
     this.source;
-    this.destination;
+    this.output;
   }
-  init(source, destination){
+  init(source, output, defaults = {
+      threshold: -24,
+      knee: 30,
+      ratio: 12,
+      attack: 0.003,
+      release: .25,
+    }){
     //console.log('COMPRESSOR INIT');
     this.source = source;
-    this.destination = destination;
+    this.output = output;
     // set to defaults
-    this.updateThreshold(-24);
-    this.updateKnee(30);
-    this.updateRatio(12);
+    this.updateThreshold(defaults.threshold);
+    this.updateKnee(defaults.knee);
+    this.updateRatio(defaults.ratio);
     // readonly attribute: this.updateReduction(-20.0);
-    this.updateAttack(0.003);
-    this.updateRelease(.25);
-    console.log('this.compressor.reduction',this.compressor.reduction)
+    this.updateAttack(defaults.attack;
+    this.updateRelease(defaults.release);
     //this.connect();
   }
-  updateThreshold(val){
-    //console.log('updateThreshold', val);
-    this.compressor.threshold.value = val;
+  updateThreshold(value){
+    this.compressor.threshold.value = value;
   }
-  updateKnee(val){
-    //console.log('updateKnee', val);
-    this.compressor.knee.value = val;
+  updateKnee(value){
+    this.compressor.knee.value = value;
   }
-  updateRatio(val){
-    //console.log('updateRatio', val);
-    this.compressor.ratio.value = val;
+  updateRatio(value){
+    this.compressor.ratio.value = value;
   }
-  updateReduction(val){
-    //console.log('updateReduction', val);
+  updateReduction(value){
     //if (typeof this.compressor.reduction === 'float') {
-      this.compressor.reduction = val;
+      // this.compressor.reduction = value;
     //} else {
-      //this.compressor.reduction.value = val;
+      //this.compressor.reduction.value = value;
     //}
   }
-  updateAttack(val){
-    //console.log('updateAttack', val);
-    this.compressor.attack.value = val;
+  updateAttack(value){
+    this.compressor.attack.value = value;
   }
-  updateRelease(val){
-    //console.log('updateRelease', val);
-    this.compressor.release.value = val;
+  updateRelease(value){
+    this.compressor.release.value = value;
   }
   connect(){
-    this.source.disconnect(this.destination);
+    this.source.disconnect(this.output);
     this.source.connect(this.compressor);
-    this.compressor.connect(this.destination);
+    this.compressor.connect(this.output);
   }
   disconnect(){
     this.source.disconnect(this.compressor);
-    this.compressor.disconnect(this.destination);
-    this.source.connect(this.destination);
+    this.compressor.disconnect(this.output);
+    this.source.connect(this.output);
   }
   toggleCompressor(on){
-    //console.log('compressed',on);
     on ? this.connect() : this.disconnect();
   }
   compressorNode(){
