@@ -7,24 +7,12 @@ import Delay from './Delay2'
 import Compressor from './Compressor2'
 import Visualizer from './Visualizer'
 
+import { initAudioCtx } from './context'
+
 const CTX = initAudioCtx();
-const initAudioCtx = () => {
-  try {
-    // Fix up for prefixing
-    window.AudioContext = window.AudioContext || window.webkitAudioContext;
-    const context = new AudioContext();
-    console.log('Web Audio API is WORKING!!!')
-    //console.log(context.sampleRate); // → 44100
-    //console.log(context.destination.channelCount); // → 2
-    //console.log(context.currentTime); // → 1182.5980952380953
-    return context;
-  }
-  catch(e) {
-    alert('Web Audio API is not supported in this browser');
-  }
-}
 
 export default class Drumr {
+
   constructor(){
     //const CTX = initAudioCtx();
     const SEQUENCER = new Sequencer(CTX);
@@ -34,7 +22,6 @@ export default class Drumr {
     const COMPRESSOR = new Compressor(CTX);
     const VISUALIZER = new Visualizer(CTX);
   }
-
 
   init({sequences}){
     SEQUENCER.updateParams(sequences);
@@ -46,13 +33,14 @@ export default class Drumr {
   }
 
   loadBuffers(kit, callback){
+    console.log('KITS', kit);
     let buffers = [],
     path = kit.path,
     voices = kit.voices;
-    samplesToLoad = voices.length -1;
+    let samplesToLoad = voices.length -1;
     for (let i = 0;i<voices.length;i++){
       buffers[i] = {name:voices[i].name,buffer:{}};
-      loadSample(CTX, 'assets/'+ path + voices[i].smple, function(buffer){
+      this.loadSample(CTX, '/assets/audio/'+ path + voices[i].smple, function(buffer){
         //console.log(buffer);
         buffers[i].buffer = buffer;
         //console.log('samplesToLoad', samplesToLoad);
@@ -60,7 +48,7 @@ export default class Drumr {
       });
     }
   }
-  function loadSample(context, url, callback) {
+  loadSample(context, url, callback) {
     const request = new XMLHttpRequest();
     //header('Access-Control-Allow-Origin: *');
     request.open('get', url, true);
@@ -75,16 +63,17 @@ export default class Drumr {
   }
 
   assignTracks(buffers){
-    MIXER.clearTracks();
-    SEQUENCER.clearTracks();
-    for (let i= 0; i<buffers.length;i++){
-      let track = new Track(CTX);
-      track.assignId(i);
-      track.assignSample(buffers[i].buffer);
-      track.assignInstrumentName(i, buffers[i].name);
-      MIXER.addTrack(track);
-      SEQUENCER.addTrack(track);
-    }
+    console.log('KIT BUFFERS LOADED');
+    // MIXER.clearTracks();
+    // SEQUENCER.clearTracks();
+    // for (let i= 0; i<buffers.length;i++){
+    //   let track = new Track(CTX);
+    //   track.assignId(i);
+    //   track.assignSample(buffers[i].buffer);
+    //   track.assignInstrumentName(i, buffers[i].name);
+    //   MIXER.addTrack(track);
+    //   SEQUENCER.addTrack(track);
+    // }
   }
 
   // SEQUENCER FUNCTIONS
@@ -104,7 +93,7 @@ export default class Drumr {
     DELAY.updateDelayTime(SEQUENCER.secondsPerBeat()*.5);
   }
   // MIXER FUNCTIONS
-  function updateGlobalVolume(value){
+  updateGlobalVolume(value){
     MIXER.updateGlobalVolume(value);
   }
   updateDryVolume(value){

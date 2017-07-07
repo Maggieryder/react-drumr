@@ -1,5 +1,7 @@
 // Async types
-export const LOAD_ASSET_SUCCESS = 'LOAD_ASSET_SUCCESS'
+export const LOAD_DATA_START = 'LOAD_DATA_START'
+export const LOAD_DATA_FAIL = 'LOAD_DATA_FAIL'
+export const LOAD_DATA_SUCCESS = 'LOAD_DATA_SUCCESS'
 // Kit types
 export const ASSIGN_KIT_OPTIONS = 'ASSIGN_KIT_OPTIONS'
 export const ASSIGN_KIT_ID = 'ASSIGN_KIT_ID'

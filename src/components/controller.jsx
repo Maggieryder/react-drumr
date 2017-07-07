@@ -10,6 +10,8 @@ import { updateTempo,
       updateSwing,
       updateResolution,
       updateBars,
+      loadAssets,
+      assignKitOptions,
       //updateKit,
       assignKitId,
       togglePlay,
@@ -20,7 +22,7 @@ import { updateTempo,
 class Controller extends Component {
   constructor(props) {
     super(props);
-    // console.log('>>> Controller PROPS', this.props)
+    //console.log('>>> Controller PROPS', this.props)
   }
   renderBars(bars, id){
     //let { bars } = controller
@@ -36,12 +38,16 @@ class Controller extends Component {
     return barlist;
   }
 
-  componentDIdMount(){}
+  componentDidMount(){
+    let { loadAssets, assignKitOptions } = this.props
+    loadAssets('/json/kits.json', assignKitOptions)
+  }
 
   render(){
 
-    let { controller, toggleMixer, togglePlay, updateTempo, updateSwing, assignKitId, kitLib } = this.props //kitLib when json load implemented
-    let { kitOptions, kitId } = kitLib
+    let { controller, toggleMixer, togglePlay, updateTempo, updateSwing, assignKitId, kitLib } = this.props
+    let { kitData, kitId } = kitLib
+    console.log('kitData', kitData)
     let { tempo, swing, isPlaying, numBars, barId, resolution } = controller
 
     return (
@@ -58,7 +64,7 @@ class Controller extends Component {
         </div>
         <Fader label='tempo' min={30} max={160} value={tempo} step={1} units=' bpm' onChange={(e)=>{updateTempo(Number(e.target.value))}}/>
         <Fader label='swing' min={0} max={100} value={swing} step={1} units='%' onChange={(e)=>{updateSwing(Number(e.target.value))}}/>
-        <Options id='kits' options={kitOptions} value={kitId} onChange={(e)=>{assignKitId(parseInt(e.target.value))}}/>
+        <Options id='kits' options={kitData} value={kitId} onChange={(e)=>{assignKitId(parseInt(e.target.value))}}/>
         <div>
           {this.renderBars(numBars, barId)}
         </div>
@@ -67,8 +73,8 @@ class Controller extends Component {
   }
 }
 
-function mapStateToProps({ controller, kitLib }){ //, kitLib
-  return { controller, kitLib } //, kitLib
+function mapStateToProps({ controller, kitLib }){
+  return { controller, kitLib }
 }
 
 export default connect(mapStateToProps,
@@ -76,6 +82,8 @@ export default connect(mapStateToProps,
       updateSwing,
       updateResolution,
       updateBars,
+      loadAssets,
+      assignKitOptions,
       //updateKit,
       assignKitId,
       togglePlay,

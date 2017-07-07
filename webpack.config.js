@@ -90,6 +90,15 @@ const IMGLoaders = [
   }
 ]
 
+const SoundLoaders = [
+  {
+    loader: 'file-loader?name=[path][name].[ext]&publicPath=assets/audio/&outputPath=dist/audio/'
+  },
+  {
+    loader:'resolve-url-loader'
+  }
+]
+
 module.exports = {
   context: __dirname,
   devtool: 'cheap-module-eval-source-map',
@@ -134,6 +143,10 @@ module.exports = {
       {
         test: /\.(jpe?g|png|gif|svg)$/i,
         use: IMGLoaders
+      },
+      {
+        test: /\.wav$|\.mp3$/,
+        use: SoundLoaders
       }
     ]
   },
@@ -150,8 +163,8 @@ module.exports = {
       names:['vendor','manifest']
     }),
     new CleanWebpackPlugin(['dist'],{
-      root: __dirname//,
-      //exclude: ['images']
+      root: __dirname,
+      exclude: ['assets', 'audio', 'json', 'images']
     }),
     new webpack.DefinePlugin({
       'process.env.NODE_ENV': JSON.stringify(process.env.NODE_ENV)

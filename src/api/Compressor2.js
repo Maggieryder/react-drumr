@@ -19,7 +19,7 @@ export default class Compressor {
     this.updateKnee(defaults.knee);
     this.updateRatio(defaults.ratio);
     // readonly attribute: this.updateReduction(-20.0);
-    this.updateAttack(defaults.attack;
+    this.updateAttack(defaults.attack);
     this.updateRelease(defaults.release);
     //this.connect();
   }

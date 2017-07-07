@@ -32,14 +32,14 @@ class Tracks extends Component {
   }
 
   componentDidMount(){
-    let { addTrack } = self.props
-    for (let i=0; i <tArray.length; i++){
-      addTrack({
-        id: nextTrackId++,
-        name: tArray[i].name,
-        buffer: tArray[i].buffer
-      })
-    }
+    // let { addTrack } = self.props
+    // for (let i=0; i <tArray.length; i++){
+    //   addTrack({
+    //     id: nextTrackId++,
+    //     name: tArray[i].name,
+    //     buffer: tArray[i].buffer
+    //   })
+    // }
   }
 
   componentWillReceiveProps(props){

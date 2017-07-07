@@ -1,29 +1,47 @@
 import axios from 'axios'
 import * as Types from './types'
 
-import assetApi from '../api/assetApi'
-import drumr from '../api/drumr2'
+//import Drumr from '../api/drumr2'
+//import kits from '../json/kits.json'
 
-export const loadAssets = () => {
+//import assetApi from '../api/assetApi'
+
+
+export const loadAssets = (url, callback) => {
   return function(dispatch) {
-    return assetApi.getAllAssets().then(assets => {
-      dispatch(loadAssetSuccess(assets));
+    dispatch(loadDataStart())
+    return axios.get(url).then(response => {
+      //dispatch(loadDataSuccess(response.data))
+      dispatch(callback(response.data))
     }).catch(error => {
-      throw(error);
+      //throw(error);
+      dispatch(loadDataFail(error))
     });
   };
+  // const myDrumr = new Drumr()
+  // myDrumr.loadBuffers(kits[0], myDrumr.assignTracks)
 }
 
-export function loadAssetSuccess(assets) {
-  console.log('ASSETS', assets)
-  //return {type: types.LOAD_ASSET_SUCCESS, assets};
+export const loadDataStart = () => {
+  //console.log('LOAD_DATA_START')
+  return {type: Types.LOAD_DATA_START};
+}
+
+export const loadDataFail = error => {
+  //console.log('LOAD_DATA_FAIL', error)
+  return {type: Types.LOAD_DATA_FAIL, error};
+}
+
+export const loadDataSuccess = data => {
+  //console.log('LOAD_DATA_SUCCESS', data.data )
+  return {type: Types.LOAD_DATA_SUCCESS, data };
 }
 
 // Kit types
-export const assignKitOptions = (options) => {
+export const assignKitOptions = data => {
   return {
     type: Types.ASSIGN_KIT_OPTIONS,
-    options// ES6 syntax - is same as options: options
+    data// ES6 syntax - is same as options: options
   }
 }
 

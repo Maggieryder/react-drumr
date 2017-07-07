@@ -11,16 +11,16 @@ import React from 'react'
 import {render} from 'react-dom'
 import { Provider } from 'react-redux'
 import { createStore, applyMiddleware } from 'redux'
-import ReduxPromise from 'redux-promise'
+//import ReduxPromise from 'redux-promise'
 
 import Routes from './routes.jsx'
 import reducers from './reducers'
 
 
-//import rootReducer from '../reducers/rootReducer';
+//import rootReducer from '../reducers/rootReducer'
 import thunk from 'redux-thunk';
 
-import {loadAssets} from './actions';
+
 /*
 export default function configureStore() {
   return createStore(
@@ -38,10 +38,12 @@ export default function configureStore() {
 import './scss/main.scss'
 
 //const createStoreWithMiddleware = applyMiddleware(ReduxPromise)(createStore)
-const createStoreWithMiddleware = applyMiddleware(thunk)(createStore)
-const store = createStoreWithMiddleware(reducers)
+//const createStoreWithMiddleware = applyMiddleware(thunk)(createStore)
+//const store = createStoreWithMiddleware(reducers)
+const store = createStore(reducers, applyMiddleware(thunk))
 
-store.dispatch(loadAssets('./kits.json'));
+//store.dispatch(loadAssets('json/kits.json', assignKitOptions))
+
 
 render(
   <Provider store={store}>
