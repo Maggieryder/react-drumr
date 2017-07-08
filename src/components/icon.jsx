@@ -7,7 +7,6 @@ import PlayIcon from '../icons/icon-play'
 import PauseIcon from '../icons/icon-pause'
 
 const Icon = (props) => {
-  //console.log('ICON props', props)
     switch(props.type){
       case 'bar':
       return <BarIcon />

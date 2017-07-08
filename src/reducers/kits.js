@@ -1,5 +1,5 @@
 import { ASSIGN_KIT_ID,
-        ASSIGN_KIT_OPTIONS } from '../actions'
+        ASSIGN_KIT_DATA } from '../actions'
 
 const INITIAL_STATE = {
   kitData: [],
@@ -8,7 +8,7 @@ const INITIAL_STATE = {
 
 export default function(state = INITIAL_STATE, action) {
   switch(action.type){
-    case ASSIGN_KIT_OPTIONS:
+    case ASSIGN_KIT_DATA:
       console.log('action received', action)
       return {...state, kitData: action.data}
     case ASSIGN_KIT_ID:

@@ -1,7 +1,7 @@
 import { combineReducers } from 'redux'
 import loader from './loader'
 import controller from './controller'
-import kitLib from './kits'
+import kits from './kits'
 import tracks from './tracks'
 // import track from './track'
 import mixer from './mixer'
@@ -12,7 +12,7 @@ import compressor from './compressor'
 const rootReducer = combineReducers({
   loader,
   controller,
-  kitLib,
+  kits,
   tracks,
   //track,
   mixer,

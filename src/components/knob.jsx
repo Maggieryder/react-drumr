@@ -1,13 +1,8 @@
 import React, { Component } from 'react'
 import PropTypes  from 'prop-types'
 import Knob from 'react-canvas-knob'
-//import styles from '../scss/params.scss'
-//<div className='meter'>{value}</div>
 
-const KnobFader = (props) => {
-  //type='range'
-
-  let { label, min, max, value, step, onChange  } = props
+const KnobFader = ({ label, min, max, value, step, onChange  }) => {
   let display = {
     size: 50,
     angleOffset: 220,

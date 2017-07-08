@@ -2,12 +2,8 @@ import axios from 'axios'
 import * as Types from './types'
 
 //import Drumr from '../api/drumr2'
-//import kits from '../json/kits.json'
 
-//import assetApi from '../api/assetApi'
-
-
-export const loadAssets = (url, callback) => {
+export const loadData = (url, callback) => {
   return function(dispatch) {
     dispatch(loadDataStart())
     return axios.get(url).then(response => {
@@ -18,8 +14,6 @@ export const loadAssets = (url, callback) => {
       dispatch(loadDataFail(error))
     });
   };
-  // const myDrumr = new Drumr()
-  // myDrumr.loadBuffers(kits[0], myDrumr.assignTracks)
 }
 
 export const loadDataStart = () => {
@@ -38,10 +32,10 @@ export const loadDataSuccess = data => {
 }
 
 // Kit types
-export const assignKitOptions = data => {
+export const assignKitData = data => {
   return {
-    type: Types.ASSIGN_KIT_OPTIONS,
-    data// ES6 syntax - is same as options: options
+    type: Types.ASSIGN_KIT_DATA,
+    data
   }
 }
 

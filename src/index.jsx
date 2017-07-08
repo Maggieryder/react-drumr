@@ -16,6 +16,8 @@ import { createStore, applyMiddleware } from 'redux'
 import Routes from './routes.jsx'
 import reducers from './reducers'
 
+import { loadData, assignKitData } from './actions'
+
 
 //import rootReducer from '../reducers/rootReducer'
 import thunk from 'redux-thunk';
@@ -40,9 +42,11 @@ import './scss/main.scss'
 //const createStoreWithMiddleware = applyMiddleware(ReduxPromise)(createStore)
 //const createStoreWithMiddleware = applyMiddleware(thunk)(createStore)
 //const store = createStoreWithMiddleware(reducers)
+
+
 const store = createStore(reducers, applyMiddleware(thunk))
 
-//store.dispatch(loadAssets('json/kits.json', assignKitOptions))
+store.dispatch(loadData('json/kits.json', assignKitData))
 
 
 render(

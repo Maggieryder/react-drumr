@@ -1,10 +1,7 @@
 import React, { Component } from 'react'
 import PropTypes  from 'prop-types'
-//import styles from '../scss/params.scss'
 
-const Options = (props) => {
-  // console.log('>>> Options props', props)
-  let {id, value, onChange, options } = props
+const Options = ({id, value, onChange, options }) => {
   return (
     <div className='param param-option'>
       <select id={id} value={value} onChange={onChange}>
