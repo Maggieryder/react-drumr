@@ -16,7 +16,7 @@ import { createStore, applyMiddleware } from 'redux'
 import Routes from './routes.jsx'
 import reducers from './reducers'
 
-import { loadData, assignKitData } from './actions'
+import { loadData, assignKitData, assignReverbData } from './actions'
 
 
 //import rootReducer from '../reducers/rootReducer'
@@ -47,6 +47,8 @@ import './scss/main.scss'
 const store = createStore(reducers, applyMiddleware(thunk))
 
 store.dispatch(loadData('json/kits.json', assignKitData))
+store.dispatch(loadData('json/verbs.json', assignReverbData))
+
 
 
 render(

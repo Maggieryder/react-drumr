@@ -1,5 +1,6 @@
 import { ADD_TRACK,
         ASSIGN_NAME,
+        ASSIGN_VOICE_ID,
         ASSIGN_BUFFER,
         UPDATE_SEQUENCE,
         UPDATE_VOLUME,
@@ -15,6 +16,7 @@ import sequence from './sequence'
 const INITIAL_STATE = {
     id: 0,
     name: 'unassigned',
+    voiceId: 0,
     buffer: {},
     sequence: [[0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],[0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0]],
     volume: 7,
@@ -39,6 +41,10 @@ export default function(state = INITIAL_STATE, action) {
       console.log('action received for ASSIGN NAME', action.id)
       if (state.id !== action.id) { return state }
       return {...state, name: action.name }
+    case ASSIGN_VOICE_ID:
+      console.log('action received for ASSIGN_VOICE_ID', action.track)
+      if (state.id !== action.track.id) { return state }
+      return {...state, voiceId: action.track.value }
     case ASSIGN_BUFFER:
       console.log('action received for ASSIGN BUFFER', action.buffer)
       if (state.id !== action.id) { return state }

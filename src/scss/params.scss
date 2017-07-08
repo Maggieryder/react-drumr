@@ -34,12 +34,14 @@
     width: auto;
     height: auto;
     margin-right:15px;
-    width: 80px;
-    text-transform: uppercase;
-    overflow: hidden;
-    text-overflow: ellipsis;
-    -o-text-overflow: ellipsis;
-    white-space: nowrap;
+    width: 200px;
+
+    // .param-option {
+    #voices {
+      width: 40px!important;
+    }
+
+    // }
   }
 
   .param {

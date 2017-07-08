@@ -1,13 +1,11 @@
 import React, {Component} from 'react'
 import PropTypes  from 'prop-types'
-//import styles from '../scss/notation.scss'
 import Beat from './beat'
 import { connect } from 'react-redux'
 
 class Bar extends Component {
   constructor(props) {
     super(props);
-    //console.log('>>> Bar PROPS', this.props.sequence)
   }
   renderBeats(){
     let { barId, signature } = this.props.controller
@@ -21,11 +19,9 @@ class Bar extends Component {
     return beats
   }
   render(){
-    let { barId, signature } = this.props.controller;
-    let numBeats = signature[0];
     return (
-      <li className={this.props.cname}>
-        <ul className='bar'>
+      <li className={`bar${this.props.cname}`}>
+        <ul>
           {this.renderBeats()}
         </ul>
       </li>

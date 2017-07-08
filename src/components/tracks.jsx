@@ -8,14 +8,18 @@ const Tracks = ({ tracks, kits, addTrack }) => {
 
   let { kitData, kitId } = kits
   console.log('kitData[kitId]', kitData[kitId])
+  //let { voices } = kitData[kitId].voices
   // let mutedTracks = tracks.filter(t => t.mute)
   // console.log('mutedTracks', mutedTracks)
   // let soloedTracks = tracks.filter(t => t.solo)
   // console.log('soloedTracks', soloedTracks)
   return (
     <ul className="tracks">
-      {tracks.map((track, i) => <Track key={i} track={track}/>)}
-      <li><button onClick={() => {addTrack({id: nextTrackId++})}}>+</button></li>
+      <li className="track">
+        <a className='addTrackBtn' href='#' onClick={ () => addTrack({id: nextTrackId++}) }>+</a> ADD TRACK
+      </li>
+      {tracks.map((track, i) => <Track key={i} track={track} voices={ kitData[kitId] ? kitData[kitId].voices : [] }/>)}
+
     </ul>
   )
 

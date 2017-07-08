@@ -1,6 +1,5 @@
 import React, { Component } from 'react'
 import PropTypes  from 'prop-types'
-//import styles from '../scss/notation.scss'
 import Note from './note'
 import { connect } from 'react-redux'
 
@@ -8,7 +7,6 @@ import { connect } from 'react-redux'
 class Beat extends Component {
   constructor(props) {
     super(props);
-    //console.log('>>> beat PROPS', this.props)
   }
   renderNotes(){
     let { resolution } = this.props.controller;

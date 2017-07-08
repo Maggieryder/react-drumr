@@ -1,21 +1,29 @@
 import Track from '../components/track'
 import { connect } from 'react-redux'
-import { updateTrackVolume,
+import {
+      removeTrack,
+      assignVoiceId,
+      updateTrackVolume,
       updateTrackPan,
       updateTrackReverbSend,
       updateTrackDelaySend,
       muteTrack,
-      soloTrack } from '../actions'
+      soloTrack
+    } from '../actions'
 
 /*
 function mapStateToProps({ track }){
   return { track }
 }
 */
+
 export default connect(null,
-  { updateTrackVolume,
+  { removeTrack,
+    assignVoiceId,
+    updateTrackVolume,
     updateTrackPan,
     updateTrackReverbSend,
     updateTrackDelaySend,
     muteTrack,
-    soloTrack })(Track)
+    soloTrack
+  })(Track)

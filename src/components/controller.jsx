@@ -31,7 +31,6 @@ const Controller = ({
   }
 
   let { kitData, kitId } = kits
-  console.log('kitData', kitData)
   let { tempo, swing, isPlaying, numBars, barId, resolution } = controller
 
   return (
@@ -46,9 +45,9 @@ const Controller = ({
           {isPlaying ? <Icon type='pause'/> : <Icon type='play'/> }
         </a>
       </div>
-      <Fader label='tempo' min={30} max={160} value={tempo} step={1} units=' bpm' onChange={(e)=>{updateTempo(Number(e.target.value))}}/>
-      <Fader label='swing' min={0} max={100} value={swing} step={1} units='%' onChange={(e)=>{updateSwing(Number(e.target.value))}}/>
-      <Options id='kits' options={kitData} value={kitId} onChange={(e)=>{assignKitId(parseInt(e.target.value))}}/>
+      <Fader label='tempo' min={30} max={160} value={tempo} step={1} units=' bpm' onChange={ e => updateTempo(Number(e.target.value)) }/>
+      <Fader label='swing' min={0} max={100} value={swing} step={1} units='%' onChange={ e => updateSwing(Number(e.target.value)) }/>
+      <Options id='kits' options={kitData} value={kitId} onChange={ e => assignKitId(parseInt(e.target.value)) }/>
       <div>
         {renderBars(numBars, barId)}
       </div>

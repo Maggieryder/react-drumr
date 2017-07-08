@@ -135,6 +135,14 @@ export const assignTrackName = ({ id, name }) => {
   }
 }
 
+export const assignVoiceId = ( { id, value } ) => {
+  //console.log('assignVoiceId trackId: ',id, 'voiceId: ', value )
+  return {
+    type: Types.ASSIGN_VOICE_ID,
+    track: { id, value }
+  }
+}
+
 export const assignTrackBuffer = ({ id, buffer }) => {
   return {
     type: Types.ASSIGN_BUFFER,
@@ -284,15 +292,15 @@ export const toggleReverb = () => {
   }
 }
 
-export const assignReverbOptions = (options) => {
+export const assignReverbData = (options) => {
   return {
-    type: Types.ASSIGN_REVERB_OPTIONS,
+    type: Types.ASSIGN_REVERB_DATA,
     options// ES6 syntax - is same as options: options
   }
 }
 
 export const assignReverbId = (id) => {
-  console.log('ASSIGN_REVERB_ID!!', id)
+  //console.log('ASSIGN_REVERB_ID!!', id)
   return {
     type: Types.ASSIGN_REVERB_ID,
     id// ES6 syntax - is same as id: id

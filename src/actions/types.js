@@ -20,6 +20,8 @@ export const REMOVE_TRACK = 'REMOVE_TRACK'
 export const MUTED_TRACKS = 'MUTED_TRACKS'
 export const SOLOED_TRACKS = 'SOLOED_TRACKS'
 // Track types
+export const ASSIGN_VOICE_DATA = "ASSIGN_VOICE_DATA"
+export const ASSIGN_VOICE_ID = "ASSIGN_VOICE_ID"
 export const ASSIGN_NAME = 'ASSIGN_NAME'
 export const ASSIGN_BUFFER = 'ASSIGN_BUFFER'
 export const UPDATE_SEQUENCE = 'UPDATE_SEQUENCE'
@@ -38,7 +40,7 @@ export const MUTE_WETMIX = 'MUTE_WETMIX'
 export const MUTE_DRYMIX = 'MUTE_DRYMIX'
 // Reverb types
 export const TOGGLE_REVERB = 'TOGGLE_REVERB'
-export const ASSIGN_REVERB_OPTIONS = 'ASSIGN_REVERB_OPTIONS'
+export const ASSIGN_REVERB_DATA = 'ASSIGN_REVERB_DATA'
 export const ASSIGN_REVERB_ID = 'ASSIGN_REVERB_ID'
 // Delay types
 export const TOGGLE_DELAY = 'TOGGLE_DELAY'

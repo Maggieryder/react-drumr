@@ -205,7 +205,7 @@ select {
   padding:0 20px 0 10px;
   /*line-height:1;font-size:20px;*/
   border-radius:0px;
-  border: 2px solid #333!important;
+  border: 2px solid #333;
   background-color: rgba(0, 0, 0, .1);
   font-size: .8rem;
   color:#333;
@@ -260,6 +260,13 @@ select *.blue {
     background-color:#06F;
     color:#FFF;
 }
+
+.controls * :focus + .meter,
+.track * :focus + .meter,
+.track * :focus + label ~ .meter {
+  color:#CBE86B;
+}
+
 /*
 datalist {
   /*display:none;
@@ -377,9 +384,6 @@ option {
       position: relative;
       /*display: block;*/
       box-sizing: border-box;
-      /*display: flex;
-      justify-content: center;
-      align-items: center;*/
 
       &.param-option {
         margin-right: 40px;
@@ -402,8 +406,7 @@ option {
           float: left;
           font-size: .8rem;
           text-transform: uppercase;
-          /*background: rgba(0,0,0,.4);
-          font-size: .9rem;*/
+          /*background: rgba(0,0,0,.4);*/
         }
 
         .meter {
@@ -414,6 +417,26 @@ option {
       }
 
     }
+  }
+
+  .removeTrackBtn,
+  .addTrackBtn {
+    width: 30px;
+    height: 30px;
+    box-sizing: border-box;
+    text-align: center;
+    border-radius: 50%;
+    padding-top: 6px;
+    text-decoration:none;
+    background-color: #333;
+    color: red;
+    cursor:pointer;
+    float:left;
+  }
+
+  .addTrackBtn {
+    margin-right:8px;
+    color: #CBE86B
   }
 
   .track {
@@ -431,16 +454,36 @@ option {
     .name {
       position: relative;
       /*display: block;*/
-      width: auto;
+      // width: auto;
       height: auto;
       margin-right:15px;
-      width: 80px;
-      width: 5%;
+      width: 130px;
+      // width: 8%;
       text-transform: uppercase;
-      overflow: hidden;
+      // overflow: hidden;
       text-overflow: ellipsis;
       -o-text-overflow: ellipsis;
       white-space: nowrap;
+
+      .param-option {
+        width: 100%;
+
+        .voices {
+          width: 100%;
+          font-size: .9rem;
+          background-position:100px;
+          background-color: rgba(0,0,0,0);
+          padding-left: 20px;
+          padding-right: 30px;
+          margin-left: -12px;
+          border: none;
+          border-radius: 0 15px 15px 0;
+
+          &:hover {
+            background-color:#333;
+          }
+        }
+      }
     }
 
     .params {
@@ -452,23 +495,10 @@ option {
       align-items: center;
       justify-content:flex-start;
 
-
       .param {
         position: relative;
-        /*display: block;*/
-        //box-sizing: border-box;
-        /*display: flex;
-        justify-content: center;
-        align-items: center;*/
-
         width: auto;
-        //height: auto;
-        //height: 100%;
         margin-right:15px;
-        //float:left;
-        //margin: 0 10px 0 0;
-        //font-size: .9rem;
-        //line-height: 1rem;
 
         &:last-child {
           margin-right: 0;
@@ -592,18 +622,27 @@ option {
     }
 
     .sequence {
+      position:relative;
       width: 60%;
       height: 100%;
+      overflow: hidden;
 
-      li {
+      .bar {
+        position:absolute;
+        display:block;
+        flex-grow: 1;
         width: 100%;
         height: 100%;
-        flex-grow: 1;
+        float: left;
+        transform: translateX(100%);
 
-        .bar {
-          flex-grow: 1;
+        &.active {
+          transform: translateX(0);
+        }
+
+        ul {
+          width: 100%;
           height: 100%;
-
 
           li {
             position: relative;
@@ -625,20 +664,36 @@ option {
                 display: flex;
                 align-items: center;
                 justify-content: center;
-                /*border: 1px solid white;*/
+                // border: 1px solid white;
 
                 .status {
-                  position: relative;
-                  width: 60%;
-                  height: 60%;
-                  border-radius: 10px;
+                  width: 40%;
+                  // border-radius: 50%;
                   background: rgba(0,0,0,.2);
+                  // transform: translateY(-12%) rotate(45deg);
+                  transform: translateY(-12%);
+
+                  &:before {
+                    content: "";
+	                  display: block;
+                    margin-top: 100%;
+                  }
+
+                  div {
+                    position:  absolute;
+                  	top: 0;
+                  	left: 0;
+                  	bottom: 0;
+                  	right: 0;
+                  }
                 }
 
                 &:first-child .status {
-                  width: 80%;
-                  height: 80%;
+                  width: 90%;
+                  border-radius: 50%;
+                  // height: 80%;
                   background: rgba(0,0,0,.3);
+                  transform: translateY(-6%);
                 }
 
                 &:hover .status{
@@ -661,12 +716,3 @@ option {
     }
   }
 }
-
-/*
-#beat-box.expand-mixer .params {
-  width: 414px;
-}
-
-#beat-box.hide-bars .bar {
-  display: none;
-}*/

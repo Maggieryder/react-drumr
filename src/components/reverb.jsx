@@ -11,18 +11,19 @@ const Reverb = ({
 }) => {
 
   const onChange = (e) => {
-    let { reverbOptions } = reverb
+    let { reverbData } = reverb
     console.log('Reverb onChange value',e.target.value)
-    loadImpulse('assets/'+reverbOptions[e.target.value].smpl)
+    loadImpulse('assets/'+reverbData[e.target.value].smpl)
     assignReverbId(e.target.value);
   }
 
-  let { active, reverbOptions, reverbId } = reverb
+  let { active, reverbData, reverbId } = reverb
+  console.log('reverbData[reverbId]',reverbData[reverbId])
   return (
     <div className='track' id='reverb'>
       <div className='name'>reverb</div>
       <div className='params'>
-        <Options id='verbs' options={reverbOptions} value={reverbId} onChange={(e)=>{assignReverbId(parseInt(e.target.value))}}/>
+        <Options id='verbs' options={reverbData} value={reverbId} onChange={ e => assignReverbId(parseInt(e.target.value)) }/>
         <Switch label='on/off' cname={active ? 'on' : ''} onClick={toggleReverb}/>
       </div>
     </div>
