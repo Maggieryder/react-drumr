@@ -3,20 +3,20 @@
     "label":"Feelin Kit",
     "path":"triton/FeelinKit/",
     "voices": [
-        {"label":"kick", "smple":"FK_BD_08.wav"},
-        {"label":"snare", "smple":"FK_SNR_03.wav"},
-        {"label":"hihat", "smple":"FK_HH_05.wav"},
-        {"label":"open hihat", "smple":"FK_CYM_03.wav"}
+        {"label":"kick", "smple":"FK_BD_08.wav", "buffer": {}},
+        {"label":"snare", "smple":"FK_SNR_03.wav", "buffer": {}},
+        {"label":"hihat", "smple":"FK_HH_05.wav", "buffer": {}},
+        {"label":"open hihat", "smple":"FK_CYM_03.wav", "buffer": {}}
     ]
   },
   {
     "label":"Wild Soul Kit",
     "path":"triton/WildSoulKit/",
     "voices": [
-      {"label":"kick", "smple":"WSK_BD_03.wav"},
-      {"label":"snare", "smple":"WSK_SNR_08.wav"},
-      {"label":"tambourine", "smple":"WSK_HH_03.wav"},
-      {"label":"open hihat", "smple":"WSK_HH_12.wav"}
+      {"label":"kick", "smple":"WSK_BD_03.wav", "buffer": {}},
+      {"label":"snare", "smple":"WSK_SNR_08.wav", "buffer": {}},
+      {"label":"tambourine", "smple":"WSK_HH_03.wav", "buffer": {}},
+      {"label":"open hihat", "smple":"WSK_HH_12.wav", "buffer": {}}
     ]
   }
 ]

@@ -1,7 +1,7 @@
 import { ADD_TRACK,
       REMOVE_TRACK,
       ASSIGN_NAME,
-      ASSIGN_VOICE_ID,
+      ASSIGN_BUFFER_ID,
       ASSIGN_BUFFER,
       UPDATE_SEQUENCE,
       UPDATE_VOLUME,
@@ -18,14 +18,14 @@ const INITIAL_STATE = []
 export default function(state = INITIAL_STATE, action) {
   switch(action.type){
     case ADD_TRACK:
-      console.log('action received for ADD TRACK', action)
+      // console.log('action received for ADD TRACK', action)
       return [...state, track(undefined, action)]
     case REMOVE_TRACK:
       console.log('action received for REMOVE TRACK', action.id)
       //return [ ...state.slice(0, action.index), ...state.slice(action.index + 1)]
-      return state.filter((t) => t.id !== action.id)
+      return state.filter(t => t.id !== action.id)
     case ASSIGN_NAME:
-    case ASSIGN_VOICE_ID:
+    case ASSIGN_BUFFER_ID:
     case ASSIGN_BUFFER:
     case UPDATE_SEQUENCE:
     case UPDATE_VOLUME:

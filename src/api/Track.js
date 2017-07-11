@@ -1,12 +1,14 @@
+import Sample from './Sample'
+// import Sequencer from './Sequencer'
 
-!(function(window){
-  'use strict';
-  function Track(ctx){
+export default class Track {
+  constructor(ctx, id){
     this.context = ctx;
-    this.id;
+    this.id = id;
     this.sample;
     this.sourceNode;
     this.instrumentName;
+    // this.sequencer = sequencer
 
     this.outputGain = ctx.createGain();
     this.sendGains = [];
@@ -25,16 +27,13 @@
     this.panner.coneInnerAngle = 360;
     this.panner.coneOuterAngle = 0;
     this.panner.coneOuterGain = 0;*/
-
-    this.destination;
+    this.output;
     this.reverbNode;
     this.delayNode;
-    this.mute = false;
-    this.solo = false;
   }
-  Track.prototype.init = function(destination, reverbNode, delayNode){
+  init(output, reverbNode, delayNode){
     let self = this;
-    this.destination = destination;
+    this.output = output;
     this.reverbNode = reverbNode;
     this.delayNode = delayNode;
     // connect it all up!
@@ -48,7 +47,7 @@
     this.renderMeter();
   }
 
-  Track.prototype.processAudio = function(e) {
+  processAudio(e) {
     //console.log('processAudio', e);
     let leftBuffer = e.inputBuffer.getChannelData(0);
     this.checkClipping(leftBuffer);
@@ -57,7 +56,7 @@
     this.checkClipping(rightBuffer);
     */
   }
-  Track.prototype.checkClipping = function(buffer) {
+  checkClipping(buffer) {
     let isClipping = false;
     // Iterate through buffer to check if any of the |values| exceeds 1.
     for (var i = 0; i < buffer.length; i++) {
@@ -72,74 +71,66 @@
       this.lastClipTime = new Date();
     }
   }
-  Track.prototype.renderMeter = function() {
-    let self = this;
-    let muteBtn = document.querySelectorAll('.mute')[this.id];
-    let now = new Date()
-    let didRecentlyClip = (now - this.lastClipTime) < 100;
-    muteBtn.classList.toggle('clip', didRecentlyClip);
-    requestAnimationFrame(function() { self.renderMeter() });
+  renderMeter() {
+    // let self = this;
+    // let muteBtn = document.querySelectorAll('.mute')[this.id];
+    // let now = new Date()
+    // let didRecentlyClip = (now - this.lastClipTime) < 100;
+    // muteBtn.classList.toggle('clip', didRecentlyClip);
+    // requestAnimationFrame(function() { self.renderMeter() });
   }
-  Track.prototype.assignId = function(id){
-    this.id = id;
-  }
-  Track.prototype.getId = function(){
+  getId(){
     return this.id;
   }
-  Track.prototype.assignSample = function(buffer){
+  assignSample(buffer){
     this.sample = new Sample(this.context, buffer, this.panner, this.outputGain,this.sendGains[0],this.sendGains[1]);
   }
-  Track.prototype.triggerSample = function(time){
+  triggerSample(time){
     this.sample.trigger(time);
   }
-  Track.prototype.assignInstrumentName = function(index, str){
+  assignInstrumentName(index, str){
     this.instrumentName = str;
-    document.querySelectorAll('.name')[index].innerHTML = str;
   }
-  Track.prototype.isMute = function(){
-    return this.mute;
+  toggleMute(mute){
+    mute ? this.connect() : this.disconnect();
   }
-  Track.prototype.toggleMute = function(){
-    //console.log('toggleMute', this.getId());
-    this.isMute() ? this.connect() : this.disconnect();
-    this.mute = !this.mute;
-  }
-  Track.prototype.isSolo = function(){
-    return this.solo;
-  }
-  Track.prototype.toggleSolo = function(){
-    this.solo = !this.solo;
-  }
-  Track.prototype.auxSend = function(i){
+  auxSend(i){
     return this.sendGains[i];
   }
-  Track.prototype.updateSendGain = function(index, val){
-    this.sendGains[index].gain.value = val;
+  updateSendGain(index, value){
+    this.sendGains[index].gain.value = value;
   }
-  Track.prototype.updateVolume = function(val){
-    this.outputGain.gain.value = val;
+  updateVolume(value){
+    this.outputGain.gain.value = value;
   }
-  Track.prototype.panX = function(val){
-    let xpos = val,
+  panX(value){
+    let xpos = value,
     zpos = 1 - Math.abs(xpos);
     this.panner.setPosition(xpos, 0, zpos);
-    //console.log('pan', this.panner.positionX.value, this.panner.positionZ.value);
   }
-  Track.prototype.connect = function(){
-    //console.log('track connect', this.getId());
+  // updateSequence(sequence){
+  //   console.log('updateSequence', sequence)
+  //   this.sequencer.updateSequence(this.id, sequence)
+  // }
+  connect(){
     this.sendGains[0].connect(this.reverbNode);
     this.sendGains[1].connect(this.delayNode);
     this.outputGain.connect(this.meter);
-    this.meter.connect(this.destination);
-    this.outputGain.connect(this.destination);
+    this.meter.connect(this.output);
+    this.outputGain.connect(this.output);
   }
-  Track.prototype.disconnect = function(){
-    //console.log('track disconnect', this.getId());
+  disconnect(){
     this.sendGains[0].disconnect(this.reverbNode);
     this.sendGains[1].disconnect(this.delayNode);
     this.outputGain.disconnect(this.meter);
-    this.meter.disconnect(this.destination);
-    this.outputGain.disconnect(this.destination);
+    this.meter.disconnect(this.output);
+    this.outputGain.disconnect(this.output);
   }
-  window.Track = Track;
-}(window));
+}
+
+// assignId(id){
+//   this.id = id;
+// }
+// toggleSolo(){
+//   this.solo = !this.solo;
+// }

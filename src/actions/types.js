@@ -5,6 +5,7 @@ export const LOAD_DATA_SUCCESS = 'LOAD_DATA_SUCCESS'
 // Kit types
 export const ASSIGN_KIT_DATA = 'ASSIGN_KIT_DATA'
 export const ASSIGN_KIT_ID = 'ASSIGN_KIT_ID'
+export const ASSIGN_BUFFERS = 'ASSIGN_BUFFERS'
 // Controller types
 export const UPDATE_TEMPO = 'UPDATE_TEMPO'
 export const UPDATE_SWING = 'UPDATE_SWING'
@@ -21,7 +22,7 @@ export const MUTED_TRACKS = 'MUTED_TRACKS'
 export const SOLOED_TRACKS = 'SOLOED_TRACKS'
 // Track types
 export const ASSIGN_VOICE_DATA = "ASSIGN_VOICE_DATA"
-export const ASSIGN_VOICE_ID = "ASSIGN_VOICE_ID"
+export const ASSIGN_BUFFER_ID = "ASSIGN_BUFFER_ID"
 export const ASSIGN_NAME = 'ASSIGN_NAME'
 export const ASSIGN_BUFFER = 'ASSIGN_BUFFER'
 export const UPDATE_SEQUENCE = 'UPDATE_SEQUENCE'

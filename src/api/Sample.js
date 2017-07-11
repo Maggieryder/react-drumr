@@ -1,6 +1,5 @@
-!(function(window){
-  'use strict';
-  function Sample(ctx, buffer, panner, output, reverb, delay){
+export default class Sample {
+  constructor(ctx, buffer, panner, output, reverb, delay){
     this.context = ctx;
     this.buffer = buffer;
     this.panner = panner;
@@ -8,19 +7,18 @@
     this.delay = delay;
     this.output = output;
   }
-
-  Sample.prototype.init = function(){
+  init(){
     this.source = this.context.createBufferSource();
     this.source.buffer = this.buffer;
     this.source.connect(this.panner);
     this.panner.connect(this.reverb);
     this.panner.connect(this.delay);
-    this.panner.connect(this.output);
+    this.source.connect(this.output);
   }
 
-  Sample.prototype.trigger = function(time){
+  trigger(time){
+    console.log('GOT TRIGGER!!', time)
     this.init();
     this.source.start(time);
   }
-  window.Sample = Sample;
-}(window));
+}

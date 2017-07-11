@@ -164,7 +164,7 @@ module.exports = {
     }),
     new CleanWebpackPlugin(['dist'],{
       root: __dirname,
-      exclude: ['assets', 'audio', 'json', 'images']
+      exclude: ['assets', 'audio', 'json', 'images', 'time-worker.js']
     }),
     new webpack.DefinePlugin({
       'process.env.NODE_ENV': JSON.stringify(process.env.NODE_ENV)

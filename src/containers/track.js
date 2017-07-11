@@ -2,7 +2,7 @@ import Track from '../components/track'
 import { connect } from 'react-redux'
 import {
       removeTrack,
-      assignVoiceId,
+      assignBufferId,
       updateTrackVolume,
       updateTrackPan,
       updateTrackReverbSend,
@@ -19,7 +19,7 @@ function mapStateToProps({ track }){
 
 export default connect(null,
   { removeTrack,
-    assignVoiceId,
+    assignBufferId,
     updateTrackVolume,
     updateTrackPan,
     updateTrackReverbSend,

@@ -1,20 +1,17 @@
-!(function(window){
-  'use strict';
-  function Reverb(ctx){
-    this.context = ctx;
+export default class Reverb {
+  constructor(ctx){
+    this.ctx = ctx;
     this.convolver = ctx.createConvolver();
     this.convolverGain = ctx.createGain();
-    this.mixNode;
-    this.isOn = false;
+    this.output;
   }
-  Reverb.prototype.init = function(mixNode){
-    //console.log('REVERB INIT beatsecs');
-    this.mixNode = mixNode;
+  init(output){
+    this.output = output;
     this.convolverGain.gain.value = 0;
     this.convolver.loop = true;
     this.convolver.normalize = true;
   }
-  Reverb.prototype.loadImpulse = function(url){
+  loadImpulse(url){
     let self = this;
     this.convolverGain.gain.value = 0;
     const request = new XMLHttpRequest();
@@ -22,7 +19,7 @@
     request.open('get', url, true);
     request.responseType = 'arraybuffer';
     request.onload = function() {
-      self.context.decodeAudioData(request.response, function(buffer) {
+      self.ctx.decodeAudioData(request.response, function(buffer) {
         //console.log('LOAD IMPULSE', buffer);
         self.convolver.buffer = buffer;
         self.convolverGain.gain.value = .7;
@@ -32,28 +29,21 @@
     };
     request.send();
   }
-  Reverb.prototype.convolverNode = function(){
+  convolverNode(){
     return this.convolver;
   }
-  Reverb.prototype.gainNode = function(){
+  gainNode(){
     return this.convolverGain;
   }
-  Reverb.prototype.connect = function(){
+  connect(){
     this.convolverGain.connect(this.convolver);
-    this.convolver.connect(this.mixNode);
+    this.convolver.connect(this.output);
   }
-  Reverb.prototype.disconnect = function(){
+  disconnect(){
     this.convolverGain.disconnect(this.convolver);
-    this.convolver.disconnect(this.mixNode);
+    this.convolver.disconnect(this.output);
   }
-  Reverb.prototype.isConnected = function(){
-    return this.isOn;
+  toggleReverb(on){
+    on ? this.connect() : this.disconnect();
   }
-  Reverb.prototype.toggleReverb = function(e){
-    console.log('toggleReverb', e.target);
-    e.target.classList.toggle('on');
-    this.isOn = !this.isOn;
-    this.isOn ? this.connect() : this.disconnect();
-  }
-  window.Reverb = Reverb;
-}(window));
+}

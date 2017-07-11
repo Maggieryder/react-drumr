@@ -12,7 +12,7 @@ const INITIAL_STATE = {
   tempo: 96,
   swing: 0,
   numBars: 2,
-  barId: 1,
+  barId: 0,
   beatId: 0,
   resolution: 16,
   signature: [4,4],

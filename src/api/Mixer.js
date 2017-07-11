@@ -1,7 +1,5 @@
-!(function(window){
-  'use strict';
-  function Mixer(ctx){
-    //this.context = ctx;
+export default class Mixer {
+  constructor(ctx){
     ctx.listener.setOrientation(0, 0, -1, 0, 1, 0);
     this.destination = ctx.destination;
     // final output
@@ -12,24 +10,17 @@
     this.masterDry.gain.value = .7;
     this.masterWet = ctx.createGain();
     this.masterWet.gain.value = .7;
-    // tracks array
-    this.tracks = [];
-    // Solo vars
-    this.soloBtns = document.querySelectorAll('.solo');
-    this.muteBtns = document.querySelectorAll('.mute');
-    this.soloTracks = [];
-    this.mutedTracks = [];
     // Connect master dry and wet to finalOutput.
     this.masterDry.connect(this.finalOutput);
     this.masterWet.connect(this.finalOutput);
-    this.dryMute = false;
-    this.wetMute = false;
     // Connect to speakers
     this.finalOutput.connect(ctx.destination);
     // FX
     this.compressor;
     this.reverb;
     this.delay;
+    // Tracks
+    this.tracks = [];
     /*
     // separate reverb & delay :::
     this.reverbMix = this.context.createGain();
@@ -42,43 +33,47 @@
     this.delayMix.connect(this.masterWet);
     */
   }
-  Mixer.prototype.addFX = function(reverb, delay){
+  masterDryNode(){
+    return this.masterDry
+  }
+  addFX(reverb, delay){
     this.reverb = reverb;
     this.reverb.init(this.masterWet);
     this.delay = delay;
     this.delay.init(this.masterWet);
   }
-  Mixer.prototype.addCompressor = function(compressor){
+  addCompressor(compressor){
     this.compressor = compressor;
     this.compressor.init(this.finalOutput, this.destination);
   }
-  Mixer.prototype.updateGlobalVolume = function(val){
-    this.finalOutput.gain.value = val;
+  updateGlobalVolume(value){
+    this.finalOutput.gain.value = value;
   }
-  Mixer.prototype.updateDryVolume = function(val){
-    this.masterDry.gain.value = val;
+  updateTrackPan(index,value){
+    this.tracks[index].panX(value);
   }
-  Mixer.prototype.updateWetVolume = function(val){
-    this.masterWet.gain.value =  val;
+  updateTrackReverb(index, value){
+    this.tracks[index].updateSendGain(0,value);
   }
-  Mixer.prototype.toggleWetMute = function(e){
-    console.log('toggleWetMute', e.target);
-    e.target.classList.toggle('on');
-    this.wetMute = !this.wetMute;
-    this.wetMute ? this.masterWet.disconnect(this.finalOutput) : this.masterWet.connect(this.finalOutput);
+  updateTrackDelay(index, value){
+    this.tracks[index].updateSendGain(1,value);
   }
-  Mixer.prototype.toggleDryMute = function(e){
-    console.log('toggleDryMute', e.target);
-    e.target.classList.toggle('on');
-    this.dryMute = !this.dryMute;
-    this.dryMute ? this.masterDry.disconnect(this.finalOutput) : this.masterDry.connect(this.finalOutput);
+  updateDryVolume(value){
+    this.masterDry.gain.value = value;
   }
-  Mixer.prototype.toggleTrackMute = function(index){
-    //console.log('toggleTrackMute', index);
-    this.muteBtns[index].classList.toggle('on');
+  updateWetVolume(value){
+    this.masterWet.gain.value =  value;
+  }
+  toggleWetMute(mute){
+    mute ? this.masterWet.disconnect(this.finalOutput) : this.masterWet.connect(this.finalOutput);
+  }
+  toggleDryMute(mute){
+    mute ? this.masterDry.disconnect(this.finalOutput) : this.masterDry.connect(this.finalOutput);
+  }
+  toggleTrackMute(index){
     this.tracks[index].toggleMute();
   }
-  Mixer.prototype.toggleTrackSolo = function(index){
+  toggleTrackSolo(index){
     let self = this;
     if (this.soloTracks.length<1){
       //make record of what tracks were muted before first solo triggered
@@ -125,46 +120,37 @@
       if (track.isMute()) self.toggleTrackMute(track.getId());
     });
   }
-  Mixer.prototype.soloOn = function(){
+  soloOn(){
     return this.soloTracks.length>0;
   }
-  Mixer.prototype.updateTrackPan = function(index,val){
-    this.tracks[index].panX(val);
-  }
-  Mixer.prototype.updateTrackReverb = function(trackIndex, val){
-    this.tracks[trackIndex].updateSendGain(0,val);
-  }
-  Mixer.prototype.updateTrackDelay = function(trackIndex, val){
-    this.tracks[trackIndex].updateSendGain(1,val);
-  }
+
   /*
-  Mixer.prototype.updateReverbVolume = function(val){
+  updateReverbVolume(val){
     this.reverbMix.gain.value = val;
   }
-  Mixer.prototype.updateDelayVolume = function(val){
+  updateDelayVolume(val){
     this.delayMix.gain.value = val;
   }
   */
-  Mixer.prototype.getTracks = function(){
+  getTracks(){
     return this.tracks;
   }
-  Mixer.prototype.addTrack = function(track){
+  addTrack(track){
     track.init(this.masterDry, this.reverb.gainNode(), this.delay.delayNode());
     this.tracks.push(track);
   }
-  Mixer.prototype.removeTrackAtIndex = function(index){
+  removeTrackAtIndex(index){
     this.tracks[index].disconnect();
     this.tracks.splice(index,1);
   }
-  Mixer.prototype.clearTracks = function(){
+  clearTracks(){
     let i = this.tracks.length;
     while (i--){
       this.tracks[i].disconnect();
       this.tracks.pop();
     }
   }
-  Mixer.prototype.updateTrackVolume = function(index, val){
-    this.tracks[index].updateVolume(val);
+  updateTrackVolume(index, value){
+    this.tracks[index].updateVolume(value);
   }
-  window.Mixer = Mixer;
-}(window));
+}

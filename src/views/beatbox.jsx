@@ -8,16 +8,19 @@ import Delay from '../containers/delay'
 import Compressor from '../containers/compressor'
 import Mixer from '../containers/mixer'
 
+import Drumr from '../api/drumr'
+const drumr = new Drumr();
 
 const BeatBox = () => {
+
   return (
     <div className="beat-box">
-      <Controller />
-      <Tracks />
-      <Reverb />
-      <Delay />
-      <Compressor />
-      <Mixer />
+      <Controller drumr={drumr} />
+      <Tracks drumr={drumr} />
+      <Reverb drumr={drumr} />
+      <Delay drumr={drumr} />
+      <Compressor drumr={drumr} />
+      <Mixer drumr={drumr} />
     </div>
   )
 }
@@ -27,6 +30,3 @@ BeatBox.propTypes = {
 }
 
 export default BeatBox
-
-
-// export default withRouter(connect(mapStateToProps)(Something))

@@ -1,56 +1,47 @@
-!(function(window){
-  'use strict';
-  function Delay(ctx){
+export default class Delay {
+  constructor(ctx){
     this.delay = ctx.createDelay();
     this.feedback = ctx.createGain();
     this.filter = ctx.createBiquadFilter();
-    this.mixNode;
-    this.isOn = false;
+    this.output;
   }
-  Delay.prototype.init = function(mixNode){
+  init(output, defaults = {
+      time: .25,
+      feedback: .5,
+      frequency: 1000
+    }){
     console.log('DELAY INIT beatsecs', this.delay.delayTime.value);
-    this.mixNode = mixNode;
+    this.output = output;
     // this is the magic formula
-    this.updateDelayTime(.25);
-    this.updateFeedbackGain(.5);
-    this.updateFrequency(1000);
-    //this.connect();
+    this.updateDelayTime(defaults.time);
+    this.updateFeedbackGain(defaults.feedback);
+    this.updateFrequency(defaults.frequency);
   }
-  Delay.prototype.delayNode = function(){
+  gainNode(){
     return this.delay;
   }
-  Delay.prototype.updateDelayTime = function(val){
-    console.log('updateDelayTime', val);
-    this.delay.delayTime.value = val;
+  updateDelayTime(value){
+    this.delay.delayTime.value = value;
   }
-  Delay.prototype.updateFeedbackGain = function(val){
-    console.log('updateFeedbackGain', val);
-    this.feedback.gain.value = val;
+  updateFeedbackGain(value){
+    this.feedback.gain.value = value;
   }
-  Delay.prototype.updateFrequency = function(val){
-    console.log('updateFrequency', val);
-    this.filter.frequency.value = val;
+  updateFrequency(val){
+    this.filter.frequency.value = value;
   }
-  Delay.prototype.connect = function(){
+  connect(){
     this.delay.connect(this.feedback);
     this.feedback.connect(this.filter);
     this.filter.connect(this.delay);
-    this.delay.connect(this.mixNode);
+    this.delay.connect(this.output);
   }
-  Delay.prototype.disconnect = function(){
+  disconnect(){
     this.delay.disconnect(this.feedback);
     this.feedback.disconnect(this.filter);
     this.filter.disconnect(this.delay);
-    this.delay.disconnect(this.mixNode);
+    this.delay.disconnect(this.output);
   }
-  Delay.prototype.isConnected = function(){
-    return this.isOn;
+  toggleDelay(on){
+    on ? this.connect() : this.disconnect();
   }
-  Delay.prototype.toggleDelay = function(e){
-    console.log('toggleDelay', e.target);
-    e.target.classList.toggle('on');
-    this.isOn = !this.isOn;
-    this.isOn ? this.connect() : this.disconnect();
-  }
-  window.Delay = Delay;
-}(window));
+}

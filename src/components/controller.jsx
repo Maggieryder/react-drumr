@@ -9,12 +9,13 @@ const Controller = ({
   updateSwing,
   updateResolution,
   updateBars,
-  //updateKit,
+  assignBuffers,
   assignKitId,
   togglePlay,
   toggleMixer,
   toggleBar,
   controller,
+  drumr,
   kits
 }) => {
 
@@ -30,8 +31,21 @@ const Controller = ({
     return barlist;
   }
 
-  let { kitData, kitId } = kits
+  const togglePlayState = () => {
+    togglePlay();
+    drumr.togglePlay();
+  }
+
+  const updateKit = (value) => {
+    assignKitId(value);
+    drumr.loadBuffers(kitData[kitId], assignBuffers)
+  }
+
+  let { kitData, kitId, buffers } = kits
   let { tempo, swing, isPlaying, numBars, barId, resolution } = controller
+
+  // console.log('assignKitData', kitData)
+  // if(kitData[kitId]) drumr.loadBuffers(kitData[kitId], assignBuffers)
 
   return (
     <div className='controls'>
@@ -41,13 +55,13 @@ const Controller = ({
         </a>
       </div>
       <div>
-        <a id='playBtn' href='#' onClick={()=>{togglePlay()}}>
+        <a id='playBtn' href='#' onClick={()=>{togglePlayState()}}>
           {isPlaying ? <Icon type='pause'/> : <Icon type='play'/> }
         </a>
       </div>
       <Fader label='tempo' min={30} max={160} value={tempo} step={1} units=' bpm' onChange={ e => updateTempo(Number(e.target.value)) }/>
       <Fader label='swing' min={0} max={100} value={swing} step={1} units='%' onChange={ e => updateSwing(Number(e.target.value)) }/>
-      <Options id='kits' options={kitData} value={kitId} onChange={ e => assignKitId(parseInt(e.target.value)) }/>
+      <Options id='kits' options={kitData} value={kitId} onChange={ e => updateKit(parseInt(e.target.value)) }/>
       <div>
         {renderBars(numBars, barId)}
       </div>

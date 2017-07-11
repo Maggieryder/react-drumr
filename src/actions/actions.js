@@ -1,7 +1,7 @@
 import axios from 'axios'
 import * as Types from './types'
 
-//import Drumr from '../api/drumr2'
+//import Drumr from '../api/drumr'
 
 export const loadData = (url, callback) => {
   return function(dispatch) {
@@ -44,6 +44,14 @@ export const assignKitId = (id) => {
   return {
     type: Types.ASSIGN_KIT_ID,
     id// ES6 syntax - is same as id: id
+  }
+}
+
+export const assignBuffers = (buffers) => {
+  //console.log('ASSIGN BUFFERS!!', id)
+  return {
+    type: Types.ASSIGN_BUFFERS,
+    buffers
   }
 }
 
@@ -106,11 +114,12 @@ export const togglePlay = () => {
   }
 }
 // Tracks actions
+
 export const addTrack = ( track ) => {
-  console.log('ADD TRACK!!', track )
+  //console.log('ADD TRACK!!', track )
   return {
     type: Types.ADD_TRACK,
-    track: track
+    track
   }
 }
 
@@ -135,10 +144,10 @@ export const assignTrackName = ({ id, name }) => {
   }
 }
 
-export const assignVoiceId = ( { id, value } ) => {
-  //console.log('assignVoiceId trackId: ',id, 'voiceId: ', value )
+export const assignBufferId = ( { id, value } ) => {
+  //console.log('assignBufferId trackId: ',id, 'bufferId: ', value )
   return {
-    type: Types.ASSIGN_VOICE_ID,
+    type: Types.ASSIGN_BUFFER_ID,
     track: { id, value }
   }
 }

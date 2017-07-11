@@ -1,27 +1,11 @@
-//import React, {Component} from 'react'
-//import {render} from 'react-dom'
-//import Container from './components/container.jsx'
-
-//import './css/main.css';
-
-//render(<Container />, document.getElementById('root'))
-
-
 import React from 'react'
 import {render} from 'react-dom'
 import { Provider } from 'react-redux'
 import { createStore, applyMiddleware } from 'redux'
-//import ReduxPromise from 'redux-promise'
-
-import Routes from './routes.jsx'
-import reducers from './reducers'
-
-import { loadData, assignKitData, assignReverbData } from './actions'
-
-
-//import rootReducer from '../reducers/rootReducer'
 import thunk from 'redux-thunk';
-
+import reducers from './reducers'
+import Routes from './routes.jsx'
+import { loadData, assignKitData, assignReverbData } from './actions'
 
 /*
 export default function configureStore() {
@@ -43,13 +27,9 @@ import './scss/main.scss'
 //const createStoreWithMiddleware = applyMiddleware(thunk)(createStore)
 //const store = createStoreWithMiddleware(reducers)
 
-
 const store = createStore(reducers, applyMiddleware(thunk))
-
 store.dispatch(loadData('json/kits.json', assignKitData))
 store.dispatch(loadData('json/verbs.json', assignReverbData))
-
-
 
 render(
   <Provider store={store}>

@@ -2,19 +2,17 @@ import React, { Component } from 'react'
 import PropTypes  from 'prop-types'
 import Options from './options'
 import Switch from './switch'
-import { loadImpulse } from '../api/reverb'
 
 const Reverb = ({
   toggleReverb,
   assignReverbId,
-  reverb
+  reverb,
+  drumr
 }) => {
 
-  const onChange = (e) => {
-    let { reverbData } = reverb
-    console.log('Reverb onChange value',e.target.value)
-    loadImpulse('assets/'+reverbData[e.target.value].smpl)
-    assignReverbId(e.target.value);
+  const updateReverb = (value) => {
+    assignReverbId(value);
+    drumr.updateReverbPreset('assets/audio/' + reverbData[reverbId].smpl)
   }
 
   let { active, reverbData, reverbId } = reverb
@@ -23,7 +21,7 @@ const Reverb = ({
     <div className='track' id='reverb'>
       <div className='name'>reverb</div>
       <div className='params'>
-        <Options id='verbs' options={reverbData} value={reverbId} onChange={ e => assignReverbId(parseInt(e.target.value)) }/>
+        <Options id='verbs' options={reverbData} value={reverbId} onChange={ e => updateReverb(parseInt(e.target.value)) }/>
         <Switch label='on/off' cname={active ? 'on' : ''} onClick={toggleReverb}/>
       </div>
     </div>

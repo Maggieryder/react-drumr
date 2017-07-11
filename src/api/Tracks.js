@@ -1,48 +1,17 @@
-export default class Mixer {
-  constructor(ctx){
-    ctx.listener.setOrientation(0, 0, -1, 0, 1, 0);
-    this.destination = ctx.destination;
-    // final output
-    this.finalOutput = ctx.createGain();
-    this.finalOutput.gain.value = .7;
-    // Create master wet and dry.
-    this.masterDry = ctx.createGain();
-    this.masterDry.gain.value = .7;
-    this.masterWet = ctx.createGain();
-    this.masterWet.gain.value = .7;
-    // Connect master dry and wet to finalOutput.
-    this.masterDry.connect(this.finalOutput);
-    this.masterWet.connect(this.finalOutput);
-    // Connect to speakers
-    this.finalOutput.connect(ctx.destination);
-    // FX
-    this.compressor;
-    this.reverb;
-    this.delay;
-    /*
-    // separate reverb & delay :::
-    this.reverbMix = this.context.createGain();
-    this.reverbMix.gain.value = 0;
-    this.reverb.connect(this.reverbMix);
-    this.reverbMix.connect(this.masterWet);
-    this.delayMix = this.context.createGain();
-    this.delayMix.gain.value = 0;
-    this.delay.connect(this.delayMix);
-    this.delayMix.connect(this.masterWet);
-    */
+export default class Tracks {
+  constructor(ctx, reverbNode, delayNode, masterDryNode){
+    this.ctx = ctx;
+    this.tracks = [];
+    this.reverbNode = reverbNode;
+    this.delayNode = delayNode;
+    this.masterDryNode = masterDryNode;
   }
-  addFX(reverb, delay){
-    this.reverb = reverb;
-    this.reverb.init(this.masterWet);
-    this.delay = delay;
-    this.delay.init(this.masterWet);
+  addTrack(track){
+    track.init(this.masterDryNode, this.reverbNode, this.delayNode);
+    this.tracks.push(track);
   }
-  addCompressor(compressor){
-    this.compressor = compressor;
-    this.compressor.init(this.finalOutput, this.destination);
-  }
-  updateGlobalVolume(value){
-    this.finalOutput.gain.value = value;
+  updateTrackVolume(index, value){
+    this.tracks[index].updateVolume(value);
   }
   updateTrackPan(index,value){
     this.tracks[index].panX(value);
@@ -52,18 +21,6 @@ export default class Mixer {
   }
   updateTrackDelay(index, value){
     this.tracks[index].updateSendGain(1,value);
-  }
-  updateDryVolume(value){
-    this.masterDry.gain.value = value;
-  }
-  updateWetVolume(value){
-    this.masterWet.gain.value =  value;
-  }
-  toggleWetMute(mute){
-    mute ? this.masterWet.disconnect(this.finalOutput) : this.masterWet.connect(this.finalOutput);
-  }
-  toggleDryMute(mute){
-    mute ? this.masterDry.disconnect(this.finalOutput) : this.masterDry.connect(this.finalOutput);
   }
   toggleTrackMute(index){
     this.tracks[index].toggleMute();
@@ -118,21 +75,11 @@ export default class Mixer {
   soloOn(){
     return this.soloTracks.length>0;
   }
-
-  /*
-  updateReverbVolume(val){
-    this.reverbMix.gain.value = val;
-  }
-  updateDelayVolume(val){
-    this.delayMix.gain.value = val;
-  }
-  */
   getTracks(){
     return this.tracks;
   }
-  addTrack(track){
-    track.init(this.masterDry, this.reverb.gainNode(), this.delay.delayNode());
-    this.tracks.push(track);
+  removeTrackWithId(id){
+    this.tracks.filter(t => t.id !== id)
   }
   removeTrackAtIndex(index){
     this.tracks[index].disconnect();
@@ -144,8 +91,5 @@ export default class Mixer {
       this.tracks[i].disconnect();
       this.tracks.pop();
     }
-  }
-  updateTrackVolume(index, value){
-    this.tracks[index].updateVolume(value);
   }
 }
