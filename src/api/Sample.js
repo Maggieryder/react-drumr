@@ -13,7 +13,7 @@ export default class Sample {
     this.source.connect(this.panner);
     this.panner.connect(this.reverb);
     this.panner.connect(this.delay);
-    this.source.connect(this.output);
+    this.panner.connect(this.output);
   }
 
   trigger(time){

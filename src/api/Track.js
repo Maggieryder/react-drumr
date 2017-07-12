@@ -30,6 +30,8 @@ export default class Track {
     this.output;
     this.reverbNode;
     this.delayNode;
+    this.mute;
+    this.solo;
   }
   init(output, reverbNode, delayNode){
     let self = this;
@@ -91,19 +93,24 @@ export default class Track {
   assignInstrumentName(index, str){
     this.instrumentName = str;
   }
-  toggleMute(mute){
-    mute ? this.connect() : this.disconnect();
+  toggleMute(){
+    this.mute ? this.connect() : this.disconnect();
+    this.mute = !this.mute;
+    // console.log('Track '+this.id+' mute', this.mute )
   }
   auxSend(i){
     return this.sendGains[i];
   }
   updateSendGain(index, value){
+    console.log('Track '+this.id+' send ' + index, 'value '+value )
     this.sendGains[index].gain.value = value;
   }
   updateVolume(value){
+    // console.log('Track '+this.id+' volume', value )
     this.outputGain.gain.value = value;
   }
   panX(value){
+    // console.log('Track '+this.id+' pan', value )
     let xpos = value,
     zpos = 1 - Math.abs(xpos);
     this.panner.setPosition(xpos, 0, zpos);
@@ -113,6 +120,7 @@ export default class Track {
   //   this.sequencer.updateSequence(this.id, sequence)
   // }
   connect(){
+    // console.log('Track '+this.id+' connect')
     this.sendGains[0].connect(this.reverbNode);
     this.sendGains[1].connect(this.delayNode);
     this.outputGain.connect(this.meter);
@@ -120,6 +128,7 @@ export default class Track {
     this.outputGain.connect(this.output);
   }
   disconnect(){
+    // console.log('Track '+this.id+' disconnect')
     this.sendGains[0].disconnect(this.reverbNode);
     this.sendGains[1].disconnect(this.delayNode);
     this.outputGain.disconnect(this.meter);

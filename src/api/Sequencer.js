@@ -27,7 +27,7 @@ export default class Sequencer {
     }
     // this.stepIndex = this.stepIndex === (this.noteResolution -1) ? 0 : ++this.stepIndex;
     if (this.stepIndex === (this.noteResolution -1)){
-      console.log('nextNote', this.barIndex, this.stepIndex)
+      // console.log('nextNote', this.barIndex, this.stepIndex)
       this.barIndex = this.barIndex === (this.numBars - 1) ? 0 : ++this.barIndex;
       this.stepIndex = 0;
     } else {
@@ -36,7 +36,7 @@ export default class Sequencer {
 
   }
   scheduleNote(step, time){
-    console.log(step)
+    // console.log(step)
     for (let i=0;i<this.sequences.length; i++){
       let barSeq = this.sequences[i].sequence
       // console.log('scheduleNote note', step )
@@ -61,7 +61,7 @@ export default class Sequencer {
     this.timeWorker = new Worker('./time-worker.js');
     this.timeWorker.onmessage = function(e) {
       if (e.data === 'tick') {
-        console.log('tick!');
+        // console.log('tick!');
         self.startScheduler();
       } else {
         console.log('message: ' + e.data);

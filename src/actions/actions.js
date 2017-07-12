@@ -168,7 +168,7 @@ export const updateTrackSequence = ({ id, barId, seqId }) => {
 }
 
 export const updateTrackVolume = ( { id, value } ) => {
-  console.log('UPDATE_VOLUME!!', { id, value } )
+  // console.log('UPDATE_VOLUME!!', { id, value } )
   return {
     type: Types.UPDATE_VOLUME,
     track: { id, value }

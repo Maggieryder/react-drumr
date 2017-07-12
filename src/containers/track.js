@@ -1,4 +1,4 @@
-import Track from '../components/track'
+import Track from '../components/track2'
 import { connect } from 'react-redux'
 import {
       removeTrack,

@@ -68,7 +68,6 @@ export default class Drumr {
   }
   removeTrackWithId(id){
     console.log('drumr REMOVE TRACK id '+id)
-    let track = new Track(CTX, id, SEQUENCER);
     TRACKS.removeTrackWithId(id)
     MIXER.removeTrackWithId(id)
     SEQUENCER.removeTrackWithId(id)
@@ -139,27 +138,21 @@ export default class Drumr {
   }
   // REVERB FUNCTIONS
   toggleReverb(){
-    REVERB.toggleReverb(e);
+    REVERB.toggleReverb();
   }
   updateReverbPreset(value){
     REVERB.loadImpulse(value);
-  }
-  updateReverbSend(index, value){
-    MIXER.updateTrackReverb(index, value);
   }
 
   // DELAY FUNCTIONS
   toggleDelay(){
     DELAY.toggleDelay();
   }
-  updateDelaySend(index, value){
-    MIXER.updateTrackDelay(index, value);
-  }
   updateDelayTime(value){
     DELAY.updateDelayTime(SEQUENCER.secondsPerBeat()*value);
   }
   updateFeedbackGain(value){
-    DELAY.updateFeedbackGain(val/100);
+    DELAY.updateFeedbackGain(value/100);
   }
   updateFrequency(value){
     DELAY.updateFrequency(value);
@@ -196,6 +189,12 @@ export default class Drumr {
   }
   updateTrackPan(index, value){
     MIXER.updateTrackPan(index, value);
+  }
+  updateDelaySend(index, value){
+    MIXER.updateTrackDelay(index, value);
+  }
+  updateReverbSend(index, value){
+    MIXER.updateTrackReverb(index, value);
   }
   updateKit(){
     // TODO load drum samples dynamically

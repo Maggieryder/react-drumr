@@ -4,6 +4,7 @@ export default class Delay {
     this.feedback = ctx.createGain();
     this.filter = ctx.createBiquadFilter();
     this.output;
+    this.active;
   }
   init(output, defaults = {
       time: .25,
@@ -42,6 +43,7 @@ export default class Delay {
     this.delay.disconnect(this.output);
   }
   toggleDelay(on){
-    on ? this.connect() : this.disconnect();
+    this.active ? this.disconnect() : this.connect();
+    this.active = !this.active
   }
 }

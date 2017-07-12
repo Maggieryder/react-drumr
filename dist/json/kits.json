@@ -6,7 +6,8 @@
         {"label":"kick", "smple":"FK_BD_08.wav"},
         {"label":"snare", "smple":"FK_SNR_03.wav"},
         {"label":"hihat", "smple":"FK_HH_05.wav"},
-        {"label":"open hihat", "smple":"FK_CYM_03.wav"}
+        {"label":"open hihat", "smple":"FK_CYM_03.wav"},
+        {"label":"loop", "smple":"loop.mp3"}
     ]
   },
   {
