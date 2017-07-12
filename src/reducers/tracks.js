@@ -26,7 +26,6 @@ export default function(state = INITIAL_STATE, action) {
       return state.filter(t => t.id !== action.id)
     case ASSIGN_NAME:
     case ASSIGN_BUFFER_ID:
-    case ASSIGN_BUFFER:
     case UPDATE_SEQUENCE:
     case UPDATE_VOLUME:
     case UPDATE_PAN:

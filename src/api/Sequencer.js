@@ -11,7 +11,7 @@ export default class Sequencer {
     this.timeWorker;
     this.sequences = [];
     this.tracks = [];
-    this.tempo = 120;
+    this.tempo = 96;
     this.noteResolution = 16;
     this.swingFactor = 0;
     //this.updateParams(options);
@@ -39,18 +39,18 @@ export default class Sequencer {
     console.log(step)
     for (let i=0;i<this.sequences.length; i++){
       let barSeq = this.sequences[i].sequence
-      // console.log('scheduleNote note', barSeq[bar] )
-      for (let j=0;j<barSeq[this.barIndex].length;j++){
+      // console.log('scheduleNote note', step )
+      // for (let j=0;j<barSeq[this.barIndex].length;j++){
         if (barSeq[this.barIndex][step]===1){
-          console.log('scheduleNote note', i, this.barIndex, j )
+          // console.log('scheduleNote note', i, this.barIndex )
           this.tracks[i].triggerSample(time);
         }
-      }
+      // }
     }
   }
 
   startScheduler(){
-    console.log('startScheduler')
+    // console.log('startScheduler')
     while (this.nextNoteTime < this.context.currentTime + this.scheduleAhead){
       this.scheduleNote(this.stepIndex, this.nextNoteTime);
       this.nextNote();
@@ -107,12 +107,12 @@ export default class Sequencer {
     this.sequences = [];
   }
   // e.g. use sequencer.updateParams({sequences});
-  // updateParams(obj){
-  //   for (let prop in obj){
-  //     console.log( prop + ' :: ' + obj[prop]);
-  //     this[prop]= obj[prop];
-  //   }
-  // }
+  updateParams(obj){
+    for (let prop in obj){
+      console.log( prop + ' :: ' + obj[prop]);
+      this[prop]= obj[prop];
+    }
+  }
 
   secondsPerBeat(str){
     return 60.0 / this.tempo;

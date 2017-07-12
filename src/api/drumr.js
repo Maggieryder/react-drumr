@@ -14,7 +14,7 @@ const SEQUENCER = new Sequencer(CTX);
 const DELAY = new Delay(CTX);
 const REVERB = new Reverb(CTX);
 const MIXER = new Mixer(CTX);
-const TRACKS = new Tracks(CTX, REVERB.gainNode(), DELAY.gainNode(), MIXER.masterDryNode())
+const TRACKS = new Tracks();
 const COMPRESSOR = new Compressor(CTX);
 const VISUALIZER = new Visualizer(CTX);
 
@@ -23,18 +23,9 @@ export default class Drumr {
   constructor(){
     //const CTX = initAudioCtx();
     SEQUENCER.init();
-  }
-
-  addTrackSequence(id, sequence){
-    //console.log('drumr.initSequence', id, sequence)
-    SEQUENCER.addTrackSequence(id,sequence)
-    // TRACKS.track[id].updateSequence(sequence);
-
-
-    // MIXER.addFX(REVERB,DELAY);
-    // MIXER.addCompressor(COMPRESSOR);
-    // assignTracks(buffers);
-    // loadBuffers(LIB.kits[0], assignTracks);
+    MIXER.addDelay(DELAY);
+    MIXER.addReverb(REVERB);
+    MIXER.addCompressor(COMPRESSOR);
   }
 
   loadBuffers(kit, callback){
@@ -53,6 +44,7 @@ export default class Drumr {
       });
     }
   }
+
   loadSample(url, callback) {
     const request = new XMLHttpRequest();
     //header('Access-Control-Allow-Origin: *');
@@ -71,12 +63,14 @@ export default class Drumr {
     console.log('drumr ADD TRACK id '+id)
     let track = new Track(CTX, id);
     TRACKS.addTrack(track)
+    MIXER.addTrack(track)
     SEQUENCER.addTrack(track)
   }
   removeTrackWithId(id){
     console.log('drumr REMOVE TRACK id '+id)
     let track = new Track(CTX, id, SEQUENCER);
     TRACKS.removeTrackWithId(id)
+    MIXER.removeTrackWithId(id)
     SEQUENCER.removeTrackWithId(id)
   }
   assignSample(id, buffer){
@@ -103,6 +97,17 @@ export default class Drumr {
   //   SEQUENCER.updateParams({sequences});
   //   console.log(index, 'sequence', sequences[index].steps);
   // }
+  addTrackSequence(id, sequence){
+    //console.log('drumr.initSequence', id, sequence)
+    SEQUENCER.addTrackSequence(id, sequence)
+    // TRACKS.track[id].updateSequence(sequence);
+
+
+    // MIXER.addFX(REVERB,DELAY);
+    // MIXER.addCompressor(COMPRESSOR);
+    // assignTracks(buffers);
+    // loadBuffers(LIB.kits[0], assignTracks);
+  }
   togglePlay(){
     SEQUENCER.togglePlay();
   }
@@ -126,6 +131,12 @@ export default class Drumr {
   updateWetVolume(value){
     MIXER.updateWetVolume(value);
   }
+  toggleWetMute(){
+    MIXER.toggleWetMute();
+  }
+  toggleDryMute(){
+    MIXER.toggleDryMute();
+  }
   // REVERB FUNCTIONS
   toggleReverb(){
     REVERB.toggleReverb(e);
@@ -136,6 +147,7 @@ export default class Drumr {
   updateReverbSend(index, value){
     MIXER.updateTrackReverb(index, value);
   }
+
   // DELAY FUNCTIONS
   toggleDelay(){
     DELAY.toggleDelay();
@@ -153,6 +165,9 @@ export default class Drumr {
     DELAY.updateFrequency(value);
   }
   // COMPRESSOR FUNCTIONS
+  toggleCompressor(){
+    COMPRESSOR.toggleCompressor();
+  }
   updateThreshold(value){
     COMPRESSOR.updateThreshold(value);
   }
@@ -168,27 +183,13 @@ export default class Drumr {
   updateRelease(value){
     COMPRESSOR.updateRelease(value);
   }
-  toggleCompressor(){
-    COMPRESSOR.toggleCompressor();
-  }
+
   // TRACK FUNCTIONS
-  onMute(e){
-    e.preventDefault();
-    let $target = $(this).parent().parent().parent();
-    switch ($target.attr('id')){
-      case 'wetmix':
-      MIXER.toggleWetMute(e);
-      break;
-      case 'drymix':
-      MIXER.toggleDryMute(e);
-      break;
-      default:
-      MIXER.toggleTrackMute($target.index());
-      break;
-    }
+  toggleTrackMute(id){
+    MIXER.toggleTrackMute(id);
   }
-  onSolo(index){
-    MIXER.toggleTrackSolo(index);
+  toggleTrackSolo(id){
+    MIXER.toggleTrackSolo(id);
   }
   updateTrackVolume(index, value){
     MIXER.updateTrackVolume(index, value);

@@ -21,24 +21,13 @@ export default class Mixer {
     this.delay;
     // Tracks
     this.tracks = [];
-    /*
-    // separate reverb & delay :::
-    this.reverbMix = this.context.createGain();
-    this.reverbMix.gain.value = 0;
-    this.reverb.connect(this.reverbMix);
-    this.reverbMix.connect(this.masterWet);
-    this.delayMix = this.context.createGain();
-    this.delayMix.gain.value = 0;
-    this.delay.connect(this.delayMix);
-    this.delayMix.connect(this.masterWet);
-    */
   }
-  masterDryNode(){
-    return this.masterDry
-  }
-  addFX(reverb, delay){
+  // FX
+  addReverb(reverb){
     this.reverb = reverb;
     this.reverb.init(this.masterWet);
+  }
+  addDelay(delay){
     this.delay = delay;
     this.delay.init(this.masterWet);
   }
@@ -46,17 +35,9 @@ export default class Mixer {
     this.compressor = compressor;
     this.compressor.init(this.finalOutput, this.destination);
   }
+  // global
   updateGlobalVolume(value){
     this.finalOutput.gain.value = value;
-  }
-  updateTrackPan(index,value){
-    this.tracks[index].panX(value);
-  }
-  updateTrackReverb(index, value){
-    this.tracks[index].updateSendGain(0,value);
-  }
-  updateTrackDelay(index, value){
-    this.tracks[index].updateSendGain(1,value);
   }
   updateDryVolume(value){
     this.masterDry.gain.value = value;
@@ -69,6 +50,23 @@ export default class Mixer {
   }
   toggleDryMute(mute){
     mute ? this.masterDry.disconnect(this.finalOutput) : this.masterDry.connect(this.finalOutput);
+  }
+  // tracks
+  addTrack(track){
+    track.init(this.masterDry, this.reverb.gainNode(), this.delay.gainNode());
+    this.tracks.push(track);
+  }
+  updateTrackVolume(index, value){
+    this.tracks[index].updateVolume(value);
+  }
+  updateTrackPan(index,value){
+    this.tracks[index].panX(value);
+  }
+  updateTrackReverb(index, value){
+    this.tracks[index].updateSendGain(0,value);
+  }
+  updateTrackDelay(index, value){
+    this.tracks[index].updateSendGain(1,value);
   }
   toggleTrackMute(index){
     this.tracks[index].toggleMute();
@@ -120,24 +118,14 @@ export default class Mixer {
       if (track.isMute()) self.toggleTrackMute(track.getId());
     });
   }
-  soloOn(){
-    return this.soloTracks.length>0;
-  }
-
-  /*
-  updateReverbVolume(val){
-    this.reverbMix.gain.value = val;
-  }
-  updateDelayVolume(val){
-    this.delayMix.gain.value = val;
-  }
-  */
+  // soloOn(){
+  //   return this.soloTracks.length>0;
+  // }
   getTracks(){
     return this.tracks;
   }
-  addTrack(track){
-    track.init(this.masterDry, this.reverb.gainNode(), this.delay.delayNode());
-    this.tracks.push(track);
+  removeTrackWithId(id){
+    this.tracks.filter(t => t.id !== id)
   }
   removeTrackAtIndex(index){
     this.tracks[index].disconnect();
@@ -149,8 +137,5 @@ export default class Mixer {
       this.tracks[i].disconnect();
       this.tracks.pop();
     }
-  }
-  updateTrackVolume(index, value){
-    this.tracks[index].updateVolume(value);
   }
 }

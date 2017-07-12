@@ -18,7 +18,7 @@ const INITIAL_STATE = {
     name: 'unassigned',
     buffers: [],
     bufferId: 0,
-    sequence: [[0,0,0,0,1,0,0,0,0,0,0,0,1,0,0,0],[0,0,0,0,1,0,0,0,0,0,0,0,1,0,0,0]],
+    sequence: [[0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],[0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0]],
     volume: 7,
     pan: 0,
     clip: false,

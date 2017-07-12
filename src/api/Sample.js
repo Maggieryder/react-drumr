@@ -17,7 +17,7 @@ export default class Sample {
   }
 
   trigger(time){
-    console.log('GOT TRIGGER!!', time)
+    // console.log('GOT TRIGGER!!', time)
     this.init();
     this.source.start(time);
   }

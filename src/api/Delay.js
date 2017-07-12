@@ -26,7 +26,7 @@ export default class Delay {
   updateFeedbackGain(value){
     this.feedback.gain.value = value;
   }
-  updateFrequency(val){
+  updateFrequency(value){
     this.filter.frequency.value = value;
   }
   connect(){
