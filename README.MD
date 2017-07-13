@@ -1,2 +1,2 @@
-ReactWebpack2Template
+Drumr project
 # react-drumr
