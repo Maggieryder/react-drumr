@@ -1,27 +1,18 @@
-import React, { Component } from 'react'
+import React from 'react'
 import PropTypes  from 'prop-types'
 import Knob from './knob'
 import Switch from './switch'
 
-class Delay extends Component {
-  constructor(props) {
-    super(props);
-  }
-  componentDidMount(){
+const Delay = ({
+  updateDelayTime,
+  updateDelayFeedback,
+  updateDelayFrequency,
+  toggleDelay,
+  delay,
+  drumr
+}) => {
 
-  }
-  componentWillReceiveProps(props){
-    let { delay } = props
-    console.log('>>> DELAY componentWillReceiveProps PROPS', delay)
-    // if (this.props.buffers !== props.buffers) drumr.assignSample(trackId, buffers[track.bufferId]);
-  }
-  handleInteraction = (action, value) => {
-    let {
-      updateDelayTime,
-      updateDelayFeedback,
-      updateDelayFrequency,
-      toggleDelay,
-      drumr } = this.props
+  const handleInteraction = (action, value) => {
 
     console.log('handleInteraction: ', action)
 
@@ -46,26 +37,29 @@ class Delay extends Component {
       //
     }
   }
-  render(){
-    let handleInteraction = this.handleInteraction
-    let { active, time, feedback, frequency } = this.props.delay
 
-    return (
-      <div className='track' id='delay'>
-        <div className='name'>delay</div>
-        <div className='params'>
-          <Knob label='time' min={0} max={1} value={time} step={.01} onChange={ e => handleInteraction('updateTime', e)}/>
-          <Knob label='feedback' min={0} max={.95} value={feedback} step={.01} onChange={ e => handleInteraction('updateFeedback', e)}/>
-          <Knob label='frequency' min={0} max={4000} value={frequency} step={40} onChange={ e => handleInteraction('updateFrequency', e)}/>
-          <Switch label='on/off' cname={active ? 'on' : ''} onClick={() => handleInteraction('toggleDelay')}/>
-        </div>
+  let { active, time, feedback, frequency } = delay
+
+  return (
+    <div className='track' id='delay'>
+      <div className='name'>delay</div>
+      <div className='params'>
+        <Knob label='time' min={0} max={1} value={time} step={.01} onChange={ e => handleInteraction('updateTime', e)}/>
+        <Knob label='feedback' min={0} max={.95} value={feedback} step={.01} onChange={ e => handleInteraction('updateFeedback', e)}/>
+        <Knob label='frequency' min={0} max={4000} value={frequency} step={40} onChange={ e => handleInteraction('updateFrequency', e)}/>
+        <Switch label='on/off' cname={active ? 'on' : ''} onClick={() => handleInteraction('toggleDelay')}/>
       </div>
-    )
-  }
+    </div>
+  )
 }
 
 Delay.propTypes = {
-
+  drumr: PropTypes.object.isRequired,
+  delay: PropTypes.object.isRequired,
+  updateDelayTime: PropTypes.func.isRequired,
+  updateDelayFeedback: PropTypes.func.isRequired,
+  updateDelayFrequency: PropTypes.func.isRequired,
+  toggleDelay: PropTypes.func.isRequired
 }
 
 export default Delay

@@ -4,12 +4,8 @@ import Track from '../containers/track'
 
 let nextTrackId = 0;
 
-const Tracks = ({ tracks, kits, addTrack, drumr }) => {
+const Tracks = ({ tracks, addTrack, drumr }) => {
 
-  let { kitData, kitId, buffers } = kits
-  // console.log('TRACKSSSS',buffers)
-  // if (kitData[kitId]) drumr.loadBuffers(kitData[kitId], assignBuffers )
-  // let { voices } = kitData[kitId].voices
   // let mutedTracks = tracks.filter(t => t.mute)
   // console.log('mutedTracks', mutedTracks)
   // let soloedTracks = tracks.filter(t => t.solo)
@@ -24,15 +20,15 @@ const Tracks = ({ tracks, kits, addTrack, drumr }) => {
       <li className="track">
         <a className='addTrackBtn' href='#' onClick={ () => addNewTrack(nextTrackId++) }>+</a> ADD TRACK
       </li>
-      {tracks.map((track, i) => <Track key={i} track={track} drumr={drumr} buffers={buffers} voices={ kitData[kitId] ? kitData[kitId].voices : [] }/>)}
-
+      {tracks.map((track, i) => <Track key={i} track={track} drumr={drumr} />)}
     </ul>
   )
-
 }
 
 Tracks.propTypes = {
-
+  addTrack: PropTypes.func.isRequired,
+  tracks:   PropTypes.array.isRequired,
+  drumr:    PropTypes.object.isRequired
 }
 
 export default Tracks

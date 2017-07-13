@@ -3,32 +3,29 @@ import PropTypes  from 'prop-types'
 import Options from './options'
 import Switch from './switch'
 
-const Reverb = ({
-  toggleReverb,
-  assignReverbId,
-  reverb,
-  drumr
-}) => {
-
-  const updateReverb = (value) => {
-    assignReverbId(value);
+class Reverb extends Component {
+  constructor(props) {
+    super(props);
+  }
+  componentDidMount(){
+    //
+  }
+  componentWillReceiveProps(props){
+    let { reverb, drumr } = props
+    let { reverbData, reverbId } = reverb
+    console.log('>>> REVERB componentWillReceiveProps PROPS', reverb)
+    // if (reverbId !== this.props.reverb.reverbId)
     drumr.updateReverbPreset('assets/audio/' + reverbData[reverbId].smpl)
   }
-
-  const handleInteraction = (action, value) => {
-    // let {
-    //   updateDelayTime,
-    //   updateDelayFeedback,
-    //   updateDelayFrequency,
-    //   toggleReverb,
-    //   drumr } = props
+  handleInteraction = (action, value) => {
+    let { toggleReverb, assignReverbId, drumr } = this.props
 
     console.log('handleInteraction: ', action)
 
     switch ( action ) {
       case 'updateReverb':
       assignReverbId(value)
-      drumr.updateReverbPreset('assets/audio/' + reverbData[value].smpl)
+      // drumr.updateReverbPreset('assets/audio/' + reverbData[value].smpl)
       break;
       case 'toggleReverb':
       toggleReverb()
@@ -38,24 +35,27 @@ const Reverb = ({
       //
     }
   }
+  render(){
+    let handleInteraction = this.handleInteraction
+    let { active, reverbData, reverbId } = this.props.reverb
 
-  let { active, reverbData, reverbId } = reverb
-  console.log('reverbData[reverbId]',reverbData[reverbId])
-  return (
-    <div className='track' id='reverb'>
-      <div className='name'>reverb</div>
-      <div className='params'>
-        <Options id='verbs' options={reverbData} value={reverbId} onChange={ e => handleInteraction('updateReverb', parseInt(e.target.value)) }/>
-        <Switch label='on/off' cname={active ? 'on' : ''} onClick={() => handleInteraction('toggleReverb')}/>
+    return (
+      <div className='track' id='reverb'>
+        <div className='name'>reverb</div>
+        <div className='params'>
+          <Options id='verbs' options={reverbData} value={reverbId} onChange={ e => handleInteraction('updateReverb', parseInt(e.target.value)) }/>
+          <Switch label='on/off' cname={active ? 'on' : ''} onClick={() => handleInteraction('toggleReverb')}/>
+        </div>
       </div>
-    </div>
-  )
+    )
+  }
 }
 
 Reverb.propTypes = {
-  reverb: PropTypes.object.isRequired,
   assignReverbId: PropTypes.func.isRequired,
-  toggleReverb: PropTypes.func.isRequired
+  toggleReverb:   PropTypes.func.isRequired,
+  reverb:         PropTypes.object.isRequired,
+  drumr:          PropTypes.object.isRequired
 }
 
 export default Reverb

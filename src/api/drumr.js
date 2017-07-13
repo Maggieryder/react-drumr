@@ -74,7 +74,7 @@ export default class Drumr {
   }
   assignSample(id, buffer){
     //console.log('BUFFER for track ' + id +' is', buffer )
-    console.log('TRACKS.tracks.filter(t => t.id===id )', TRACKS.tracks )
+    console.log('TRACKS.tracks.filter(t => t.id===id )', TRACKS.tracks[id] )
     let t = TRACKS.tracks[id]
     t.assignSample(buffer);
   }

@@ -1,4 +1,4 @@
-import Track from '../components/track2'
+import Track from '../components/track'
 import { connect } from 'react-redux'
 import {
       removeTrack,
@@ -11,13 +11,13 @@ import {
       soloTrack
     } from '../actions'
 
-/*
-function mapStateToProps({ track }){
-  return { track }
-}
-*/
 
-export default connect(null,
+function mapStateToProps({ kits }){
+  return { kits }
+}
+
+
+export default connect(mapStateToProps,
   { removeTrack,
     assignBufferId,
     updateTrackVolume,

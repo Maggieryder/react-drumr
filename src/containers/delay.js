@@ -11,7 +11,7 @@ function mapStateToProps({ delay }){
 
 export default connect(
   mapStateToProps,
-  { updateDelayTime, 
+  { updateDelayTime,
     updateDelayFeedback,
     updateDelayFrequency,
     toggleDelay

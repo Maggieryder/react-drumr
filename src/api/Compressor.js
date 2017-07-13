@@ -3,6 +3,7 @@ export default class Compressor {
     this.compressor = ctx.createDynamicsCompressor();
     this.source;
     this.output;
+    this.active;
   }
   init(source, output, defaults = {
       threshold: -24,
@@ -56,7 +57,8 @@ export default class Compressor {
     this.source.connect(this.output);
   }
   toggleCompressor(on){
-    on ? this.connect() : this.disconnect();
+    this.active ? this.disconnect() : this.connect();
+    this.active = !this.active;
   }
   compressorNode(){
     return this.compressor;
