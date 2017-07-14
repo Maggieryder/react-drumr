@@ -9,8 +9,39 @@ const Mixer = ({
   muteWetMix,
   updateDryMix,
   muteDryMix,
-  updateMasterVolume
+  updateMasterVolume,
+  drumr
 }) => {
+
+  const handleInteraction = (action, value) => {
+
+    console.log('handleInteraction: ', action)
+
+    switch ( action ) {
+      case 'updateMasterVolume':
+      updateMasterVolume(value)
+      drumr.updateGlobalVolume(value/10)
+      break;
+      case 'updateDryMix':
+      updateDryMix(value)
+      drumr.updateDryVolume(value/10)
+      break;
+      case 'updateWetMix':
+      updateWetMix(value)
+      drumr.updateWetVolume(value/10)
+      break;
+      case 'muteDryMix':
+      muteDryMix()
+      drumr.toggleDryMute()
+      break;
+      case 'muteWetMix':
+      muteWetMix()
+      drumr.toggleWetMute()
+      break;
+      default:
+      //
+    }
+  }
 
   let { wetMix, wetMute, dryMix, dryMute, masterGain } = mixer
   return (
@@ -18,21 +49,21 @@ const Mixer = ({
       <div className='track' id='wetmix'>
         <div className='name'>wet mix</div>
         <div className='params'>
-          <Fader label='' min={0} max={10}  value={wetMix} step={.5} onChange={(e)=>{updateWetMix(Number(e.target.value))}}/>
-          <Switch label='mute' cname={wetMute ? 'mute on' : 'mute'} onClick={muteWetMix}/>
+          <Fader label='' min={0} max={10}  value={wetMix} step={.5} onChange={ e => handleInteraction('updateWetMix', Number(e.target.value)) }/>
+          <Switch label='mute' cname={wetMute ? 'mute on' : 'mute'} onClick={ () => handleInteraction('muteWetMix') }/>
         </div>
       </div>
       <div className='track' id='drymix'>
         <div className='name'>dry mix</div>
         <div className='params'>
-          <Fader label='' min={0} max={10} value={dryMix} step={.5} onChange={(e)=>{updateDryMix(Number(e.target.value))}}/>
-          <Switch label='mute' cname={dryMute ? 'mute on' : 'mute'} onClick={muteDryMix}/>
+          <Fader label='' min={0} max={10} value={dryMix} step={.5} onChange={ e => handleInteraction('updateDryMix', Number(e.target.value)) }/>
+          <Switch label='mute' cname={dryMute ? 'mute on' : 'mute'} onClick={ () => handleInteraction('muteDryMix') }/>
         </div>
       </div>
       <div className='track' id='global'>
         <div className='name'>master</div>
         <div className='params'>
-          <Fader label='' min={0} max={10} value={masterGain} step={.5} onChange={(e)=>{updateMasterVolume(Number(e.target.value))}}/>
+          <Fader label='' min={0} max={10} value={masterGain} step={.5} onChange={ e => handleInteraction('updateMasterVolume', Number(e.target.value)) }/>
         </div>
       </div>
     </div>

@@ -21,6 +21,9 @@ export default class Mixer {
     this.delay;
     // Tracks
     this.tracks = [];
+    // toggle
+    this.wetMute;
+    this.dryMute;
   }
   // FX
   addReverb(reverb){
@@ -45,11 +48,13 @@ export default class Mixer {
   updateWetVolume(value){
     this.masterWet.gain.value =  value;
   }
-  toggleWetMute(mute){
-    mute ? this.masterWet.disconnect(this.finalOutput) : this.masterWet.connect(this.finalOutput);
+  toggleWetMute(){
+    this.wetMute ? this.masterWet.connect(this.finalOutput) : this.masterWet.disconnect(this.finalOutput);
+    this.wetMute = !this.wetMute;
   }
-  toggleDryMute(mute){
-    mute ? this.masterDry.disconnect(this.finalOutput) : this.masterDry.connect(this.finalOutput);
+  toggleDryMute(){
+    this.dryMute ? this.masterDry.connect(this.finalOutput) : this.masterDry.disconnect(this.finalOutput);
+    this.dryMute = !this.dryMute;
   }
   // tracks
   addTrack(track){
