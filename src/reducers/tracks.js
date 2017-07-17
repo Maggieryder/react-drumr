@@ -9,7 +9,8 @@ import { ADD_TRACK,
       UPDATE_REVERB_SEND,
       UPDATE_DELAY_SEND,
       MUTE_TRACK,
-      SOLO_TRACK } from '../actions'
+      SOLO_TRACK,
+      CLIP_TRACK } from '../actions'
 
 import track from './track'
 
@@ -33,6 +34,7 @@ export default function(state = INITIAL_STATE, action) {
     case UPDATE_DELAY_SEND:
     case MUTE_TRACK:
     case SOLO_TRACK:
+    case CLIP_TRACK:
       return state.map(t => track(t, action))
     default:
       return state

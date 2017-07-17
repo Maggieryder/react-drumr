@@ -9,7 +9,7 @@ class Note extends Component {
   }
 
   onNoteTap(){
-    let { id, trackId, controller, sequence, updateTrackSequence, drumr } = this.props;
+    let { id, bar, trackId, controller, sequence, updateTrackSequence, drumr } = this.props;
     let { barId, resolution } = controller
     updateTrackSequence({id:trackId, barId:barId, seqId:id%resolution })
     // console.log('Note', sequence)
@@ -18,9 +18,9 @@ class Note extends Component {
 
   render(){
 
-    let { id, trackId, sequence, controller } = this.props;
-    let { isPlaying, beatId, resolution } = controller
-    // console.log('Note', sequence)
+    let { id, bar, trackId, sequence, controller } = this.props;
+    let { isPlaying, beatId, barId, resolution } = controller
+    // console.log('Note beatId', beatId)
     return (
       <li id={id}
         className={sequence[id%resolution] === 1 ? isPlaying && beatId===id ? 'note now' : 'note on' : 'note'}

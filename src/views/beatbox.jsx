@@ -9,9 +9,11 @@ import Compressor from '../containers/compressor'
 import Mixer from '../containers/mixer'
 
 import Drumr from '../api/drumr'
-const drumr = new Drumr();
 
-const BeatBox = () => {
+
+const BeatBox = (props, {store}) => {
+
+  const drumr = new Drumr(store);
 
   return (
     <div className="beat-box">
@@ -23,6 +25,10 @@ const BeatBox = () => {
       <Mixer drumr={drumr} />
     </div>
   )
+}
+
+BeatBox.contextTypes = {
+  store: PropTypes.object
 }
 
 BeatBox.propTypes = {

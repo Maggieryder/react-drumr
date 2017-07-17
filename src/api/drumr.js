@@ -20,9 +20,10 @@ const VISUALIZER = new Visualizer(CTX);
 
 export default class Drumr {
 
-  constructor(){
-    //const CTX = initAudioCtx();
-    SEQUENCER.init();
+  constructor(store){
+
+    // console.log(store)
+    SEQUENCER.init(store);
     MIXER.addDelay(DELAY);
     MIXER.addReverb(REVERB);
     MIXER.addCompressor(COMPRESSOR);
@@ -60,7 +61,7 @@ export default class Drumr {
   }
 
   addTrack(id){
-    console.log('drumr ADD TRACK id '+id)
+    // console.log('drumr ADD TRACK id '+id)
     let track = new Track(CTX, id);
     TRACKS.addTrack(track)
     MIXER.addTrack(track)
@@ -74,38 +75,22 @@ export default class Drumr {
   }
   assignSample(id, buffer){
     //console.log('BUFFER for track ' + id +' is', buffer )
-    console.log('TRACKS.tracks.filter(t => t.id===id )', TRACKS.tracks[id] )
+    // console.log('TRACKS.tracks.filter(t => t.id===id )', TRACKS.tracks[id] )
     let t = TRACKS.tracks[id]
     t.assignSample(buffer);
   }
   // SEQUENCER FUNCTIONS
   onNoteTap(id){
-    console.log('drumr.onNoteTap id', id)
-    console.log('SEQUENCER.running()', SEQUENCER.running())
+    // console.log('drumr.onNoteTap id', id)
+    // console.log('SEQUENCER.running()', SEQUENCER.running())
     if (!SEQUENCER.running()){
       TRACKS.tracks[id].triggerSample(CTX.currentTime);
     }
-    // SEQUENCER.updateSequence(obj.id, obj.barId, obj.seqId);
-    //TRACKS.tracks[obj.id].updateSequence(obj.barId, obj.seqId);
-    //SEQUENCER.updateParams({sequence});
-    //sequenceNote(id,step);
   }
 
-  // sequenceNote(index, step){
-  //   sequences[index].steps[step] = sequences[index].steps[step]===0 ? 1 : 0;
-  //   SEQUENCER.updateParams({sequences});
-  //   console.log(index, 'sequence', sequences[index].steps);
-  // }
   addTrackSequence(id, sequence){
     //console.log('drumr.initSequence', id, sequence)
     SEQUENCER.addTrackSequence(id, sequence)
-    // TRACKS.track[id].updateSequence(sequence);
-
-
-    // MIXER.addFX(REVERB,DELAY);
-    // MIXER.addCompressor(COMPRESSOR);
-    // assignTracks(buffers);
-    // loadBuffers(LIB.kits[0], assignTracks);
   }
   togglePlay(){
     SEQUENCER.togglePlay();
@@ -195,9 +180,6 @@ export default class Drumr {
   }
   updateReverbSend(index, value){
     MIXER.updateTrackReverb(index, value);
-  }
-  updateKit(){
-    // TODO load drum samples dynamically
   }
 
 }

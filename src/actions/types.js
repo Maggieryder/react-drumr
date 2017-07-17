@@ -9,6 +9,7 @@ export const ASSIGN_BUFFERS = 'ASSIGN_BUFFERS'
 // Controller types
 export const UPDATE_TEMPO = 'UPDATE_TEMPO'
 export const UPDATE_SWING = 'UPDATE_SWING'
+export const UPDATE_BAR_ID = 'UPDATE_BAR_ID'
 export const UPDATE_BEAT_ID = 'UPDATE_BEAT_ID'
 export const UPDATE_BARS = 'UPDATE_BARS'
 export const UPDATE_RESOLTION = 'UPDATE_RESOLTION'

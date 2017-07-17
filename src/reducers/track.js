@@ -50,7 +50,7 @@ export default function(state = INITIAL_STATE, action) {
       if (state.id !== action.id) { return state }
       return {...state, buffer: action.buffer }
     case UPDATE_SEQUENCE:
-      console.log('action received', action.track)
+      // console.log('action received', action.track)
       if (state.id !== action.track.id) { return state }
       //return [...state, sequence(undefined, action)]
       return {...state, sequence: state.sequence.map((arr, b) => b === action.track.barId ? arr.map((value, i) => i === action.track.seqId ? value === 0 ? 1 : 0 : value) : arr )}
@@ -75,11 +75,11 @@ export default function(state = INITIAL_STATE, action) {
       if (state.id !== action.id) { return state }
       return {...state, clip: action.clip }
     case MUTE_TRACK:
-      console.log('action received for MUTE TRACK', action.id, !state.mute)
+      // console.log('action received for MUTE TRACK', action.id, !state.mute)
       if (state.id !== action.id) { return state }
       return {...state, mute: !state.mute }
     case SOLO_TRACK:
-      console.log('action received for SOLO TRACK', action.id, !state.solo )
+      // console.log('action received for SOLO TRACK', action.id, !state.solo )
       if (state.id !== action.id) { return state }
       return {...state, solo: !state.solo  }
     default:

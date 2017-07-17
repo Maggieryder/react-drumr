@@ -32,6 +32,7 @@ export default class Track {
     this.delayNode;
     this.mute;
     this.solo;
+    this.lastClipTime;
   }
   init(output, reverbNode, delayNode){
     let self = this;
@@ -50,7 +51,7 @@ export default class Track {
   }
 
   processAudio(e) {
-    //console.log('processAudio', e);
+    // console.log('processAudio', e);
     let leftBuffer = e.inputBuffer.getChannelData(0);
     this.checkClipping(leftBuffer);
     /*
@@ -74,15 +75,20 @@ export default class Track {
     }
   }
   renderMeter() {
-    // let self = this;
-    // let muteBtn = document.querySelectorAll('.mute')[this.id];
-    // let now = new Date()
-    // let didRecentlyClip = (now - this.lastClipTime) < 100;
-    // muteBtn.classList.toggle('clip', didRecentlyClip);
+    let self = this;
+    let now = new Date()
+    let didRecentlyClip = (now - this.lastClipTime) < 100;
+    // clipTrack({id:this.id,clip:didRecentlyClip})
     // requestAnimationFrame(function() { self.renderMeter() });
   }
   getId(){
     return this.id;
+  }
+  isMute(){
+    return this.mute;
+  }
+  isSolo(){
+    return this.solo;
   }
   assignSample(buffer){
     this.sample = new Sample(this.context, buffer, this.panner, this.outputGain,this.sendGains[0],this.sendGains[1]);
@@ -96,13 +102,18 @@ export default class Track {
   toggleMute(){
     this.mute ? this.connect() : this.disconnect();
     this.mute = !this.mute;
+    // muteTrack(this.id)
     // console.log('Track '+this.id+' mute', this.mute )
+  }
+  toggleSolo(){
+    this.solo = !this.solo;
+    // soloTrack(this.id)
   }
   auxSend(i){
     return this.sendGains[i];
   }
   updateSendGain(index, value){
-    console.log('Track '+this.id+' send ' + index, 'value '+value )
+    // console.log('Track '+this.id+' send ' + index, 'value '+value )
     this.sendGains[index].gain.value = value;
   }
   updateVolume(value){
@@ -139,7 +150,4 @@ export default class Track {
 
 // assignId(id){
 //   this.id = id;
-// }
-// toggleSolo(){
-//   this.solo = !this.solo;
 // }

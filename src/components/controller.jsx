@@ -32,7 +32,7 @@ class Controller extends Component {
   componentWillReceiveProps(props){
     let { kits, drumr, assignBuffers } = props
     let { kitData, kitId } = kits
-    console.log('>>> CONTROLLER componentWillReceiveProps same kitData PROPS', kitData === this.props.kits.kitData)
+    // console.log('>>> CONTROLLER componentWillReceiveProps same kitData PROPS', kitData === this.props.kits.kitData)
     if ( kitData !== this.props.kits.kitData) drumr.loadBuffers(kitData[kitId], assignBuffers)
   }
   handleInteraction = (action, value) => {

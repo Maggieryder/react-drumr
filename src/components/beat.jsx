@@ -10,13 +10,13 @@ class Beat extends Component {
   }
   renderNotes(){
     let { resolution } = this.props.controller;
-    let { trackId, beatId, sequence, drumr } = this.props
-    
+    let { trackId, bar, beatId, sequence, drumr } = this.props
+
     let numNotes = resolution === 16 ? 4 : 3;
     let notes = []
     for (let i=0;i<numNotes;i++){
       //console.log('>>> note ID', beatId*numNotes+i)
-      notes.push(<Note key={beatId*numNotes+i} id={beatId*numNotes+i} drumr={drumr} trackId={trackId} sequence={sequence}/>)
+      notes.push(<Note key={beatId*numNotes+i} id={beatId*numNotes+i} drumr={drumr} bar={bar} trackId={trackId} sequence={sequence}/>)
     }
     return notes
   }

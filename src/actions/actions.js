@@ -100,7 +100,7 @@ export const updateBars = (value) => {
 }
 
 export const toggleBar = (id) => {
-  console.log('TOGGLE BAR!! id =', id)
+  // console.log('TOGGLE BAR!! id =', id)
   return {
     type: Types.TOGGLE_BAR,
     id
@@ -200,7 +200,7 @@ export const updateTrackDelaySend = ({ id, value }) => {
 }
 
 export const clipTrack = ({ id, clip }) => {
-  console.log('CLIP_TRACK!!', id, clip )
+  // console.log('CLIP_TRACK!!', id, clip )
   return {
     type: Types.CLIP_TRACK,
     track: { id, clip }

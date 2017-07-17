@@ -9,7 +9,7 @@ class Sequence extends Component {
     super(props);
   }
   componentDidMount(){
-    console.log('Sequence did Mount')
+    // console.log('Sequence did Mount')
     let { trackId, sequence, drumr } = this.props
     drumr.addTrackSequence(trackId, sequence);
   }
@@ -19,14 +19,14 @@ class Sequence extends Component {
     let bars = []
     for (let i=0;i<numBars;i++){
       // console.log('>>> bar ID', i===barId)
-      bars.push(<Bar key={'bar_'+i} id={'bar_'+i} trackId={trackId} drumr={drumr} cname={i===barId ? ' active' : ''} sequence={sequence[i]}/>)
+      bars.push(<Bar key={'bar_'+i} id={'bar_'+i} bar={i} trackId={trackId} drumr={drumr} cname={i===barId ? ' active' : ''} sequence={sequence[i]}/>)
     }
     return bars
     //return <Bar key={'bar_'+barId} id={'bar_'+barId} trackId={trackId} sequence={sequence[barId]}/>
   }
   componentWillReceiveProps(props){
     let { drumr, sequence, trackId } = props
-    console.log('>>> Sequence componentWillReceiveProps PROPS', sequence)
+    // console.log('>>> Sequence componentWillReceiveProps PROPS', sequence)
     drumr.updateSequence(trackId, sequence);
   }
 

@@ -1,6 +1,7 @@
 import {
         UPDATE_TEMPO,
         UPDATE_SWING,
+        UPDATE_BAR_ID,
         UPDATE_BEAT_ID,
         UPDATE_BARS,
         UPDATE_RESOLTION,
@@ -22,13 +23,16 @@ const INITIAL_STATE = {
 export default function(state = INITIAL_STATE, action) {
   switch(action.type){
     case UPDATE_TEMPO:
-      console.log('action received', action)
+      // console.log('action received', action)
       return {...state, tempo: action.value }
     case UPDATE_SWING:
-      console.log('action received', action)
+      // console.log('action received', action)
       return {...state, swing: action.value }
-    case UPDATE_BEAT_ID:
+    case UPDATE_BAR_ID:
       console.log('action received', action)
+      return {...state, barId: action.value }
+    case UPDATE_BEAT_ID:
+      // console.log('action received', action)
       return {...state, beatId: action.value }
     case UPDATE_BARS:
       console.log('action received', action)
@@ -40,10 +44,10 @@ export default function(state = INITIAL_STATE, action) {
       console.log('action received', action)
       return {...state, signature: action.value }
     case TOGGLE_BAR:
-      console.log('action received for TOGGLE BAR', action.id )
+      // console.log('action received for TOGGLE BAR', action.id )
       return {...state, barId: action.id }
     case TOGGLE_PLAY:
-      console.log('action received for TOGGLE PLAY', !state.isPlaying )
+      // console.log('action received for TOGGLE PLAY', !state.isPlaying )
       return {...state, isPlaying: !state.isPlaying }
     default:
       return state

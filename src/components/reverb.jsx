@@ -13,7 +13,7 @@ class Reverb extends Component {
   componentWillReceiveProps(props){
     let { reverb, drumr } = props
     let { reverbData, reverbId } = reverb
-    console.log('>>> REVERB componentWillReceiveProps PROPS', reverb)
+    // console.log('>>> REVERB componentWillReceiveProps PROPS', reverb)
     // if (reverbId !== this.props.reverb.reverbId)
     drumr.updateReverbPreset('assets/audio/' + reverbData[reverbId].smpl)
   }

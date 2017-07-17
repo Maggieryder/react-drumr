@@ -1,3 +1,5 @@
+import * as Types from '../actions/types'
+
 export default class Sequencer {
   constructor(ctx){
     this.context = ctx;
@@ -14,6 +16,7 @@ export default class Sequencer {
     this.tempo = 96;
     this.noteResolution = 16;
     this.swingFactor = 0;
+    this.store;
     //this.updateParams(options);
   }
   nextNote(){
@@ -29,6 +32,7 @@ export default class Sequencer {
     if (this.stepIndex === (this.noteResolution -1)){
       // console.log('nextNote', this.barIndex, this.stepIndex)
       this.barIndex = this.barIndex === (this.numBars - 1) ? 0 : ++this.barIndex;
+      this.store.dispatch({type:Types.TOGGLE_BAR, id: this.barIndex })
       this.stepIndex = 0;
     } else {
       this.stepIndex++;
@@ -43,6 +47,7 @@ export default class Sequencer {
       // for (let j=0;j<barSeq[this.barIndex].length;j++){
         if (barSeq[this.barIndex][step]===1){
           // console.log('scheduleNote note', i, this.barIndex )
+          this.store.dispatch({type:Types.UPDATE_BEAT_ID, value: step})
           this.tracks[i].triggerSample(time);
         }
       // }
@@ -56,7 +61,8 @@ export default class Sequencer {
       this.nextNote();
     }
   }
-  init(){
+  init(store){
+    this.store = store;
     let self = this;
     this.timeWorker = new Worker('./time-worker.js');
     this.timeWorker.onmessage = function(e) {
@@ -71,26 +77,26 @@ export default class Sequencer {
   }
   addTrack(track){
     this.tracks.push(track);
-    console.log('SEQ TRACKS',this.tracks)
+    // console.log('SEQ TRACKS',this.tracks)
   }
   removeTrackWithId(id){
     this.tracks = this.tracks.filter(t => t.id !== id)
-    console.log('SEQ TRACKS',this.tracks)
+    // console.log('SEQ TRACKS',this.tracks)
     this.removeTrackSequenceWithId(id);
   }
   addTrackSequence(id, sequence){
-    console.log('SEQUENCER addTrackSequence', id, sequence)
+    // console.log('SEQUENCER addTrackSequence', id, sequence)
     this.sequences.push({id, sequence});
-    console.log(this.sequences)
+    // console.log(this.sequences)
   }
   removeTrackSequenceWithId(id){
-    console.log('SEQUENCER removeTrackSequence', id)
+    // console.log('SEQUENCER removeTrackSequence', id)
     this.sequences = this.sequences.filter(s => !s.id == id)
-    console.log(this.sequences)
+    // console.log(this.sequences)
   }
   updateSequence(id, sequence){
-    console.log('SEQUENCER updateSequence', id, sequence)
-    console.log('SEQUENCER this.sequences[id]', this.sequences)
+    // console.log('SEQUENCER updateSequence', id, sequence)
+    // console.log('SEQUENCER this.sequences[id]', this.sequences)
     this.sequences[id].sequence = sequence;
     // let t = this.sequences.filter(s => s.id == id);
     // console.log(t[0])
@@ -100,7 +106,7 @@ export default class Sequencer {
     //                     ? value === 0 ? 1 : 0
     //                     : value)
     //                   : arr );
-    console.log(this.sequences)
+    // console.log(this.sequences)
   }
   clearSequences(){
     console.log('SEQUENCER clearSequences')

@@ -21,6 +21,7 @@ export default class Mixer {
     this.delay;
     // Tracks
     this.tracks = [];
+    this.mutedTracks = [];
     // toggle
     this.wetMute;
     this.dryMute;
@@ -77,32 +78,30 @@ export default class Mixer {
     this.tracks[index].toggleMute();
   }
   toggleTrackSolo(index){
-    let self = this;
-    if (this.soloTracks.length<1){
-      //make record of what tracks were muted before first solo triggered
-      this.mutedTracks = this.tracks.filter(function(track) {
-        return track.isMute();
-      });
-      console.log('this.mutedTracks', this.mutedTracks);
+    let self = this,
+        soloTracks = this.tracks.filter(t => t.solo)
+
+    if (soloTracks.length<1){
+      // make record of what tracks were muted before first solo triggered
+      this.mutedTracks = this.tracks.filter(t => t.mute);
+      console.log('mutedTracks', this.mutedTracks);
     }
 
-    this.soloBtns[index].classList.toggle('on');
     this.tracks[index].toggleSolo();
 
-    this.soloTracks = this.tracks.filter(function(track) {
-      return track.isSolo();
-    });
-    console.log('this.soloTracks', this.soloTracks);
+    soloTracks = this.tracks.filter(t => t.solo)
+    console.log('soloTracks', soloTracks);
 
     // NO MORE SOLOS
-    if (this.soloTracks.length<1){
+    if (soloTracks.length<1){
       // toggle mute on all tracks
-      this.tracks.forEach(function(track){
-        if (track.isMute()) self.toggleTrackMute(track.getId());
+      this.tracks.forEach(t => {
+        if (t.isMute()) self.toggleTrackMute(t.getId());
       });
+
       // reset previously muted tracks
-      this.mutedTracks.forEach(function(track){
-        if (!track.isMute()) self.toggleTrackMute(track.getId());
+      this.mutedTracks.forEach(t => {
+        if (!t.isMute()) self.toggleTrackMute(t.getId());
       });
       // clear muted tracks array
       this.mutedTracks = [];
@@ -111,16 +110,16 @@ export default class Mixer {
     }
     // ONE OR MORE SOLO BUTTONS ACTIVE
     // else mute un-flagged tracks
-    let unsoloed = this.tracks.filter(function(track) {
-      return !track.isSolo();
+    let unsoloed = this.tracks.filter(t => {
+      return !t.isSolo();
     });
     console.log('unsoloed', unsoloed);
-    unsoloed.forEach(function(track){
-      if (!track.isMute()) self.toggleTrackMute(track.getId());
+    unsoloed.forEach(t => {
+      if (!t.isMute()) self.toggleTrackMute(t.getId());
     });
     // and solo flagged tracks
-    this.soloTracks.forEach(function(track){
-      if (track.isMute()) self.toggleTrackMute(track.getId());
+    soloTracks.forEach(t => {
+      if (t.isMute()) self.toggleTrackMute(t.getId());
     });
   }
   // soloOn(){

@@ -19,7 +19,7 @@ class Track extends Component {
     let { drumr, kits, track } = props
     let { buffers } = kits
     // let{ id, name, bufferId, sequence, volume, pan, clip, mute, solo, reverbSend, delaySend } = track
-    console.log('>>> TRACK componentWillReceiveProps PROPS', track.id, buffers[track.bufferId])
+    // console.log('>>> TRACK componentWillReceiveProps PROPS', track.id, buffers[track.bufferId])
     if (this.props.kits !== props.kits) drumr.assignSample(track.id, buffers[track.bufferId]);
   }
 
@@ -77,10 +77,11 @@ class Track extends Component {
 
   render(){
     let handleInteraction = this.handleInteraction
-    let { drumr, kits, track } = this.props
-    // let { track, voices, buffers, drumr } = this.props
+    let { drumr, kits, track, soloActive } = this.props
+
     let voices = kits.kitData[kits.kitId].voices;
     let{ id, name, bufferId, sequence, volume, pan, clip, mute, solo, reverbSend, delaySend } = track
+    // console.log('clip', clip)
     return(
       <li className="track" id={id}>
         <div>
@@ -94,7 +95,7 @@ class Track extends Component {
           <Knob label='pan' min={-5} max={5} value={pan} step={1} width={50} onChange={ e => handleInteraction('updatePan', id, e ) } />
           <Knob label='delay' min={0} max={10} value={delaySend} step={1} width={50} onChange={ e => handleInteraction('updateDelay', id, e ) } />
           <Knob label='reverb' min={0} max={10} value={reverbSend} step={1} width={50} onChange={ e => handleInteraction('updateReverb', id, e ) } />
-          <Switch label='mute' cname={mute ? 'mute on' : clip ? 'mute clip' : 'mute'} onClick={() => handleInteraction('mute', id ) }/>
+          <Switch label='mute' cname={(soloActive && !solo) || (mute && !solo) ? 'mute on' : clip ? 'mute clip' : 'mute'} onClick={() => handleInteraction('mute', id ) }/>
           <Switch label='solo' cname={solo ? 'on' : ''} onClick={() => handleInteraction('solo', id) } />
         </div>
         <Sequence id={`seq_${id}`} trackId={id} drumr={drumr} sequence={sequence}/>
@@ -114,7 +115,8 @@ Track.propTypes = {
   soloTrack:              PropTypes.func.isRequired,
   track:                  PropTypes.object.isRequired,
   drumr:                  PropTypes.object.isRequired,
-  kits:                   PropTypes.object.isRequired
+  kits:                   PropTypes.object.isRequired,
+  soloActive:             PropTypes.bool
 }
 
 export default Track

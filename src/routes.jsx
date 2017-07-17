@@ -1,8 +1,5 @@
 import React from 'react'
 import { HashRouter as Router, Switch, Route } from 'react-router-dom'
-//import { createHashHistory } from 'history'
-//const appHistory = useRouterHistory(createHashHistory)({ queryKey: false })
-// const history =
 
 import Shell from './views/shell.jsx'
 import BeatBox from './views/beatbox.jsx'
