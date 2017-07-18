@@ -23,6 +23,7 @@ export default class Drumr {
   constructor(store){
 
     // console.log(store)
+    this.store = store;
     SEQUENCER.init(store);
     MIXER.addDelay(DELAY);
     MIXER.addReverb(REVERB);
@@ -62,7 +63,7 @@ export default class Drumr {
 
   addTrack(id){
     // console.log('drumr ADD TRACK id '+id)
-    let track = new Track(CTX, id);
+    let track = new Track(CTX, id, this.store);
     TRACKS.addTrack(track)
     MIXER.addTrack(track)
     SEQUENCER.addTrack(track)

@@ -1,10 +1,12 @@
 import Sample from './Sample'
+import * as Types from '../actions/types'
 // import Sequencer from './Sequencer'
 
 export default class Track {
-  constructor(ctx, id){
+  constructor(ctx, id, store){
     this.context = ctx;
     this.id = id;
+    this.store = store;
     this.sample;
     this.sourceNode;
     this.instrumentName;
@@ -78,8 +80,10 @@ export default class Track {
     let self = this;
     let now = new Date()
     let didRecentlyClip = (now - this.lastClipTime) < 100;
+    let track = {id: this.id, clip: didRecentlyClip }
+    this.store.dispatch({type:Types.CLIP_TRACK, track })
     // clipTrack({id:this.id,clip:didRecentlyClip})
-    // requestAnimationFrame(function() { self.renderMeter() });
+    requestAnimationFrame(function() { self.renderMeter() });
   }
   getId(){
     return this.id;

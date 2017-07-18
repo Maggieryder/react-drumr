@@ -72,8 +72,8 @@ export default function(state = INITIAL_STATE, action) {
       return {...state, delaySend: action.track.value }
     case CLIP_TRACK:
       // console.log('action received', action)
-      if (state.id !== action.id) { return state }
-      return {...state, clip: action.clip }
+      if (state.id !== action.track.id) { return state }
+      return {...state, clip: action.track.clip }
     case MUTE_TRACK:
       // console.log('action received for MUTE TRACK', action.id, !state.mute)
       if (state.id !== action.id) { return state }

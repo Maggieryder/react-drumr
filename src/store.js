@@ -10,7 +10,7 @@ const customMiddleWare = store => next => action => {
 export function configureStore() {
   return createStore(
     reducers,
-    applyMiddleware(thunk,customMiddleWare)
+    applyMiddleware(thunk)
   );
 }
 

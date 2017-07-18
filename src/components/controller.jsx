@@ -4,20 +4,6 @@ import Fader from './fader'
 import Options from './options'
 import Icon from './icon'
 
-// const Controller = ({
-//   updateTempo,
-//   updateSwing,
-//   updateResolution,
-//   updateBars,
-//   assignBuffers,
-//   assignKitId,
-//   togglePlay,
-//   toggleMixer,
-//   toggleBar,
-//   controller,
-//   drumr,
-//   kits
-// }) => {
 
 class Controller extends Component {
   constructor(props) {
