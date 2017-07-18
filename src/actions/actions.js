@@ -87,7 +87,7 @@ export const updateSignature = (value) => {
 
 export const updateBeatId = (value) => {
   return {
-    type: Types.UPDATE_BEAT_ID,
+    type: Types.UPDATE_STEP_ID,
     value
   }
 }

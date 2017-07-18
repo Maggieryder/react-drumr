@@ -15,13 +15,13 @@ class Bar extends Component {
     let beats = []
     for (let i=0;i<numBeats;i++){
       //console.log('>>> beat ID', 'beat_'+(barId*numBeats)+i)
-      beats.push(<Beat key={'beat_'+(barId*numBeats)+i} bar={bar} trackId={trackId} drumr={drumr} beatId={(barId*numBeats)+i} sequence={this.props.sequence}/>)
+      beats.push(<Beat key={'beat_'+(barId*numBeats)+i} bar={bar} trackId={trackId} drumr={drumr} stepId={(barId*numBeats)+i} sequence={this.props.sequence}/>)
     }
     return beats
   }
   render(){
     return (
-      <li className={`bar${this.props.cname}`}>
+      <li className={`bar ${this.props.cname}`}>
         <ul>
           {this.renderBeats()}
         </ul>

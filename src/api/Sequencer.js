@@ -42,16 +42,18 @@ export default class Sequencer {
   scheduleNote(step, time){
     // console.log(step)
     for (let i=0;i<this.sequences.length; i++){
-      let barSeq = this.sequences[i].sequence
+      let bars = this.sequences[i].sequence
       // console.log('scheduleNote note', step )
-      // for (let j=0;j<barSeq[this.barIndex].length;j++){
-        if (barSeq[this.barIndex][step]===1){
+      for (let j=0;j<bars.length;j++){
+
+        if (j===this.barIndex && bars[j][step]===1){
           // console.log('scheduleNote note', i, this.barIndex )
-          this.store.dispatch({type:Types.UPDATE_BEAT_ID, value: step})
+
           this.tracks[i].triggerSample(time);
         }
-      // }
+      }
     }
+    this.store.dispatch({type:Types.UPDATE_STEP_ID, value: (this.barIndex*this.noteResolution)+ step})
   }
 
   startScheduler(){

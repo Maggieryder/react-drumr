@@ -31,22 +31,22 @@ const INITIAL_STATE = {
 export default function(state = INITIAL_STATE, action) {
   switch(action.type){
     case ADD_TRACK:
-      console.log('action received for ADD_TRACK', action.track.id)
+      // console.log('action received for ADD_TRACK', action.track.id)
       return {...state,
         id: action.track.id,
         name: action.track.name || 'unassigned',
         buffer: action.track.buffer || {}
       }
     case ASSIGN_NAME:
-      console.log('action received for ASSIGN NAME', action.id)
+      // console.log('action received for ASSIGN NAME', action.id)
       if (state.id !== action.id) { return state }
       return {...state, name: action.name }
     case ASSIGN_BUFFER_ID:
-      console.log('action received for ASSIGN_BUFFER_ID', action.track)
+      // console.log('action received for ASSIGN_BUFFER_ID', action.track)
       if (state.id !== action.track.id) { return state }
       return {...state, bufferId: action.track.value }
     case ASSIGN_BUFFER:
-      console.log('action received for ASSIGN BUFFER', action.buffer)
+      // console.log('action received for ASSIGN BUFFER', action.buffer)
       if (state.id !== action.id) { return state }
       return {...state, buffer: action.buffer }
     case UPDATE_SEQUENCE:
@@ -55,23 +55,23 @@ export default function(state = INITIAL_STATE, action) {
       //return [...state, sequence(undefined, action)]
       return {...state, sequence: state.sequence.map((arr, b) => b === action.track.barId ? arr.map((value, i) => i === action.track.seqId ? value === 0 ? 1 : 0 : value) : arr )}
     case UPDATE_VOLUME:
-      console.log('action received', action)
+      // console.log('action received', action)
       if (state.id !== action.track.id) { return state }
       return {...state, volume: action.track.value }
     case UPDATE_PAN:
-      console.log('action received', action)
+      // console.log('action received', action)
       if (state.id !== action.track.id) { return state }
       return {...state, pan: action.track.value }
     case UPDATE_REVERB_SEND:
-      console.log('action received', action)
+      // console.log('action received', action)
       if (state.id !== action.track.id) { return state }
       return {...state, reverbSend: action.track.value }
     case UPDATE_DELAY_SEND:
-      console.log('action received', action)
+      // console.log('action received', action)
       if (state.id !== action.track.id) { return state }
       return {...state, delaySend: action.track.value }
     case CLIP_TRACK:
-      console.log('action received', action)
+      // console.log('action received', action)
       if (state.id !== action.id) { return state }
       return {...state, clip: action.clip }
     case MUTE_TRACK:

@@ -19,11 +19,11 @@ class Note extends Component {
   render(){
 
     let { id, bar, trackId, sequence, controller } = this.props;
-    let { isPlaying, beatId, barId, resolution } = controller
-    // console.log('Note beatId', beatId)
+    let { isPlaying, stepId, barId, resolution } = controller
+    // console.log('Note stepId', stepId)
     return (
       <li id={id}
-        className={sequence[id%resolution] === 1 ? isPlaying && beatId===id ? 'note now' : 'note on' : 'note'}
+        className={sequence[id%resolution] === 1 ? isPlaying && stepId===id ? 'note now' : 'note on' : 'note'}
         onClick={ () => this.onNoteTap() } >
         <div className='status'>
           <div></div>

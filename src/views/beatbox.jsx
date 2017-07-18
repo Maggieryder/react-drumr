@@ -10,7 +10,6 @@ import Mixer from '../containers/mixer'
 
 import Drumr from '../api/drumr'
 
-
 const BeatBox = (props, {store}) => {
 
   const drumr = new Drumr(store);

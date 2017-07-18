@@ -22,7 +22,7 @@ export default function(state = INITIAL_STATE, action) {
       // console.log('action received for ADD TRACK', action)
       return [...state, track(undefined, action)]
     case REMOVE_TRACK:
-      console.log('action received for REMOVE TRACK', action.id)
+      // console.log('action received for REMOVE TRACK', action.id)
       //return [ ...state.slice(0, action.index), ...state.slice(action.index + 1)]
       return state.filter(t => t.id !== action.id)
     case ASSIGN_NAME:

@@ -16,13 +16,13 @@ class Sequence extends Component {
   renderBars(){
     let { numBars, barId } = this.props.controller
     let { trackId, sequence, drumr } = this.props
-    let bars = []
-    for (let i=0;i<numBars;i++){
-      // console.log('>>> bar ID', i===barId)
-      bars.push(<Bar key={'bar_'+i} id={'bar_'+i} bar={i} trackId={trackId} drumr={drumr} cname={i===barId ? ' active' : ''} sequence={sequence[i]}/>)
-    }
-    return bars
-    //return <Bar key={'bar_'+barId} id={'bar_'+barId} trackId={trackId} sequence={sequence[barId]}/>
+    // let bars = []
+    // for (let i=0;i<numBars;i++){
+    //   // console.log('>>> bar ID', i===barId)
+    //   bars.push(<Bar key={'bar_'+i} id={'bar_'+i} bar={i} trackId={trackId} drumr={drumr} cname={i===barId ? ' active' : ''} sequence={sequence[i]}/>)
+    // }
+    // return bars
+    return <Bar key={'bar_'+barId} id={'bar_'+barId} trackId={trackId} cname='active' drumr={drumr} sequence={sequence[barId]}/>
   }
   componentWillReceiveProps(props){
     let { drumr, sequence, trackId } = props

@@ -2,7 +2,7 @@ import {
         UPDATE_TEMPO,
         UPDATE_SWING,
         UPDATE_BAR_ID,
-        UPDATE_BEAT_ID,
+        UPDATE_STEP_ID,
         UPDATE_BARS,
         UPDATE_RESOLTION,
         UPDATE_SIGNATURE,
@@ -14,7 +14,7 @@ const INITIAL_STATE = {
   swing: 0,
   numBars: 2,
   barId: 0,
-  beatId: 0,
+  stepId: 0,
   resolution: 16,
   signature: [4,4],
   isPlaying: false
@@ -29,19 +29,19 @@ export default function(state = INITIAL_STATE, action) {
       // console.log('action received', action)
       return {...state, swing: action.value }
     case UPDATE_BAR_ID:
-      console.log('action received', action)
-      return {...state, barId: action.value }
-    case UPDATE_BEAT_ID:
       // console.log('action received', action)
-      return {...state, beatId: action.value }
+      return {...state, barId: action.value }
+    case UPDATE_STEP_ID:
+      // console.log('action received', action)
+      return {...state, stepId: action.value }
     case UPDATE_BARS:
-      console.log('action received', action)
+      // console.log('action received', action)
       return {...state, numBars: action.value }
     case UPDATE_RESOLTION:
-      console.log('action received', action)
+      // console.log('action received', action)
       return {...state, resolution: action.value }
     case UPDATE_SIGNATURE:
-      console.log('action received', action)
+      // console.log('action received', action)
       return {...state, signature: action.value }
     case TOGGLE_BAR:
       // console.log('action received for TOGGLE BAR', action.id )
