@@ -14,9 +14,9 @@ export default class Delay {
     // console.log('DELAY INIT beatsecs', this.delay.delayTime.value);
     this.output = output;
     // this is the magic formula
-    // this.updateDelayTime(defaults.time);
-    // this.updateFeedbackGain(defaults.feedback);
-    // this.updateFrequency(defaults.frequency);
+    this.updateDelayTime(defaults.time);
+    this.updateFeedbackGain(defaults.feedback);
+    this.updateFrequency(defaults.frequency);
   }
   gainNode(){
     return this.delay;

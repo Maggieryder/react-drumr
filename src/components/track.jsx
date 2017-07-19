@@ -1,6 +1,6 @@
 import React, { Component }  from 'react'
 import PropTypes  from 'prop-types'
-import Sequence from './sequence'
+import Sequence from '../containers/sequence'
 import Options from './options'
 import Knob from './knob'
 import Switch from './switch'
@@ -36,7 +36,8 @@ class Track extends Component {
       kits,
       drumr } = this.props
 
-      console.log('handleInteraction: ', action, id, value)
+    // console.log('handleInteraction: ', action, id, value)
+
     switch( action ){
       case 'removeTrack':
       removeTrack(id)

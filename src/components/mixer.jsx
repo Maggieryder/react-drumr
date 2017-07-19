@@ -15,7 +15,7 @@ const Mixer = ({
 
   const handleInteraction = (action, value) => {
 
-    console.log('handleInteraction: ', action)
+    // console.log('handleInteraction: ', action)
 
     switch ( action ) {
       case 'updateMasterVolume':

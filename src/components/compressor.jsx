@@ -16,7 +16,7 @@ const Compressor = ({
 
   const handleInteraction = (action, value) => {
 
-    console.log('handleInteraction: ', action)
+    // console.log('handleInteraction: ', action)
 
     switch ( action ) {
       case 'updateThreshold':

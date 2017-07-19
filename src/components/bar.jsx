@@ -3,31 +3,33 @@ import PropTypes  from 'prop-types'
 import Beat from './beat'
 import { connect } from 'react-redux'
 
-class Bar extends Component {
-  constructor(props) {
-    super(props);
-  }
-  renderBeats(){
-    let { barId, signature } = this.props.controller
-    let { trackId, drumr, bar } = this.props
+const Bar = ({ trackId, sequence, cname, controller, drumr  }) => {
+
+  let { barId, signature, resolution } = controller
+
+  const renderBeats = () => {
 
     let numBeats = signature[0]
     let beats = []
     for (let i=0;i<numBeats;i++){
       //console.log('>>> beat ID', 'beat_'+(barId*numBeats)+i)
-      beats.push(<Beat key={'beat_'+(barId*numBeats)+i} bar={bar} trackId={trackId} drumr={drumr} stepId={(barId*numBeats)+i} sequence={this.props.sequence}/>)
+      beats.push(<Beat key={'beat_'+(barId*numBeats)+i}
+        step={(barId*numBeats)+i}
+        trackId={trackId}
+        resolution={resolution}
+        sequence={sequence}
+        drumr={drumr} />)
     }
     return beats
   }
-  render(){
-    return (
-      <li className={`bar ${this.props.cname}`}>
-        <ul>
-          {this.renderBeats()}
-        </ul>
-      </li>
-    )
-  }
+
+  return (
+    <li className={`bar ${cname}`}>
+      <ul>
+        {renderBeats()}
+      </ul>
+    </li>
+  )
 }
 
 function mapStateToProps({ controller }){

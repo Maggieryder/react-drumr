@@ -1,6 +1,5 @@
 import Sample from './Sample'
 import * as Types from '../actions/types'
-// import Sequencer from './Sequencer'
 
 export default class Track {
   constructor(ctx, id, store){
@@ -106,12 +105,9 @@ export default class Track {
   toggleMute(){
     this.mute ? this.connect() : this.disconnect();
     this.mute = !this.mute;
-    // muteTrack(this.id)
-    // console.log('Track '+this.id+' mute', this.mute )
   }
   toggleSolo(){
     this.solo = !this.solo;
-    // soloTrack(this.id)
   }
   auxSend(i){
     return this.sendGains[i];
@@ -151,7 +147,3 @@ export default class Track {
     this.outputGain.disconnect(this.output);
   }
 }
-
-// assignId(id){
-//   this.id = id;
-// }

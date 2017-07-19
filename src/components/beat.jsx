@@ -1,38 +1,35 @@
-import React, { Component } from 'react'
+import React from 'react'
 import PropTypes  from 'prop-types'
-import Note from './note'
-import { connect } from 'react-redux'
+import Step from '../containers/step'
 
+const Beat = ({ trackId, step, resolution, sequence, drumr }) => {
 
-class Beat extends Component {
-  constructor(props) {
-    super(props);
-  }
-  renderNotes(){
-    let { resolution } = this.props.controller;
-    let { trackId, bar, stepId, sequence, drumr } = this.props
+  const renderSteps = () => {
 
     let numNotes = resolution === 16 ? 4 : 3;
-    let notes = []
+    let steps = []
     for (let i=0;i<numNotes;i++){
-      // console.log('>>> note ID', stepId*numNotes+i)
-      notes.push(<Note key={stepId*numNotes+i} id={stepId*numNotes+i} drumr={drumr} bar={bar} trackId={trackId} sequence={sequence}/>)
+      // console.log('>>> note ID', step*numNotes+i)
+      steps.push(<Step key={step*numNotes+i}
+                  id={step*numNotes+i}
+                  trackId={trackId}
+                  sequence={sequence}
+                  drumr={drumr}/>)
     }
-    return notes
+    return steps
   }
-  render(){
-    return (
-      <li>
-        <ul className='beat'>
-          {this.renderNotes()}
-        </ul>
-      </li>
-    )
-  }
+
+  return (
+    <li>
+      <ul className='beat'>
+        {renderSteps()}
+      </ul>
+    </li>
+  )
 }
 
-function mapStateToProps({ controller }){
-  return { controller }
+Beat.propTypes = {
+  drumr: PropTypes.object.isRequired
 }
 
-export default connect(mapStateToProps)(Beat)
+export default Beat

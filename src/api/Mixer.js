@@ -84,13 +84,13 @@ export default class Mixer {
     if (soloTracks.length<1){
       // make record of what tracks were muted before first solo triggered
       this.mutedTracks = this.tracks.filter(t => t.mute);
-      console.log('mutedTracks', this.mutedTracks);
+      // console.log('mutedTracks', this.mutedTracks);
     }
 
     this.tracks[index].toggleSolo();
 
     soloTracks = this.tracks.filter(t => t.solo)
-    console.log('soloTracks', soloTracks);
+    // console.log('soloTracks', soloTracks);
 
     // NO MORE SOLOS
     if (soloTracks.length<1){
@@ -105,7 +105,7 @@ export default class Mixer {
       });
       // clear muted tracks array
       this.mutedTracks = [];
-      console.log('this.mutedTracks', this.mutedTracks);
+      // console.log('this.mutedTracks', this.mutedTracks);
       return;
     }
     // ONE OR MORE SOLO BUTTONS ACTIVE
@@ -113,7 +113,7 @@ export default class Mixer {
     let unsoloed = this.tracks.filter(t => {
       return !t.isSolo();
     });
-    console.log('unsoloed', unsoloed);
+    // console.log('unsoloed', unsoloed);
     unsoloed.forEach(t => {
       if (!t.isMute()) self.toggleTrackMute(t.getId());
     });
@@ -122,9 +122,6 @@ export default class Mixer {
       if (t.isMute()) self.toggleTrackMute(t.getId());
     });
   }
-  // soloOn(){
-  //   return this.soloTracks.length>0;
-  // }
   getTracks(){
     return this.tracks;
   }

@@ -21,14 +21,11 @@ export default class Sequencer {
   }
   nextNote(){
     let kMaxSwing = .08;
-    //let secondsPerBeat = 60.0 / this.tempo; // length of beat
-// this.nextNoteTime += this.secondsPerBeat() * .25; // without swing
     if (this.stepIndex % 2) {
       this.nextNoteTime += (0.25 - kMaxSwing * this.swingFactor) * this.secondsPerBeat();
     } else {
       this.nextNoteTime += (0.25 + kMaxSwing * this.swingFactor) * this.secondsPerBeat();
     }
-    // this.stepIndex = this.stepIndex === (this.noteResolution -1) ? 0 : ++this.stepIndex;
     if (this.stepIndex === (this.noteResolution -1)){
       // console.log('nextNote', this.barIndex, this.stepIndex)
       this.barIndex = this.barIndex === (this.numBars - 1) ? 0 : ++this.barIndex;
@@ -37,18 +34,13 @@ export default class Sequencer {
     } else {
       this.stepIndex++;
     }
-
   }
   scheduleNote(step, time){
     // console.log(step)
     for (let i=0;i<this.sequences.length; i++){
       let bars = this.sequences[i].sequence
-      // console.log('scheduleNote note', step )
       for (let j=0;j<bars.length;j++){
-
         if (j===this.barIndex && bars[j][step]===1){
-          // console.log('scheduleNote note', i, this.barIndex )
-
           this.tracks[i].triggerSample(time);
         }
       }
@@ -114,7 +106,6 @@ export default class Sequencer {
     console.log('SEQUENCER clearSequences')
     this.sequences = [];
   }
-  // e.g. use sequencer.updateParams({sequences});
   updateParams(obj){
     for (let prop in obj){
       console.log( prop + ' :: ' + obj[prop]);

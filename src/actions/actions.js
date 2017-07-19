@@ -1,8 +1,6 @@
 import axios from 'axios'
 import * as Types from './types'
 
-//import Drumr from '../api/drumr'
-
 export const loadData = (url, callback) => {
   return function(dispatch) {
     dispatch(loadDataStart())
@@ -39,16 +37,14 @@ export const assignKitData = data => {
   }
 }
 
-export const assignKitId = (id) => {
-  //console.log('ASSIGN KIT ID!!', id)
+export const assignKitId = id => {
   return {
     type: Types.ASSIGN_KIT_ID,
-    id// ES6 syntax - is same as id: id
+    id
   }
 }
 
-export const assignBuffers = (buffers) => {
-  //console.log('ASSIGN BUFFERS!!', id)
+export const assignBuffers = buffers => {
   return {
     type: Types.ASSIGN_BUFFERS,
     buffers
@@ -56,50 +52,48 @@ export const assignBuffers = (buffers) => {
 }
 
 // Controller actions
-export const updateTempo = (value) => {
-  //console.log('UPDATE TEMPO!!', value)
+export const updateTempo = value => {
   return {
     type: Types.UPDATE_TEMPO,
-    value // ES6 syntax - is same as tempo: tempo
+    value
   }
 }
 
-export const updateSwing = (value) => {
-  //console.log('UPDATE SWING!!', value)
+export const updateSwing = value => {
   return {
     type: Types.UPDATE_SWING,
-    value // ES6 syntax - is same as swing: swing
+    value
   }
 }
 
-export const updateResolution = (value) => {
+export const updateResolution = value => {
   return {
     type: Types.UPDATE_RESOLTION,
     value
   }
 }
-export const updateSignature = (value) => {
+export const updateSignature = value => {
   return {
     type: Types.UPDATE_SIGNATURE,
     value
   }
 }
 
-export const updateBeatId = (value) => {
+export const updateBeatId = value => {
   return {
     type: Types.UPDATE_STEP_ID,
     value
   }
 }
 
-export const updateBars = (value) => {
+export const updateBars = value => {
   return {
     type: Types.UPDATE_BARS,
     value
   }
 }
 
-export const toggleBar = (id) => {
+export const toggleBar = id => {
   // console.log('TOGGLE BAR!! id =', id)
   return {
     type: Types.TOGGLE_BAR,
@@ -108,34 +102,26 @@ export const toggleBar = (id) => {
 }
 
 export const togglePlay = () => {
-  //console.log('TOGGLE PLAY!!')
   return {
     type: Types.TOGGLE_PLAY
   }
 }
-// Tracks actions
 
-export const addTrack = ( track ) => {
-  //console.log('ADD TRACK!!', track )
+// Tracks actions
+export const addTrack = track => {
   return {
     type: Types.ADD_TRACK,
     track
   }
 }
 
-export const removeTrack = (id) => {
+export const removeTrack = id => {
   return {
     type: Types.REMOVE_TRACK,
-    id// ES6 syntax - is same as id: id
+    id
   }
 }
-/*
-export const soloTracks = () => {
-  return {
-    type: Types.SOLO_TRACKS,
-  }
-}
-*/
+
 // Track actions
 export const assignTrackName = ({ id, name }) => {
   return {
@@ -144,8 +130,7 @@ export const assignTrackName = ({ id, name }) => {
   }
 }
 
-export const assignBufferId = ( { id, value } ) => {
-  //console.log('assignBufferId trackId: ',id, 'bufferId: ', value )
+export const assignBufferId = ({ id, value }) => {
   return {
     type: Types.ASSIGN_BUFFER_ID,
     track: { id, value }
@@ -160,15 +145,13 @@ export const assignTrackBuffer = ({ id, buffer }) => {
 }
 
 export const updateTrackSequence = ({ id, barId, seqId }) => {
-  //console.log('UPDATE_SEQUENCE!!', { id, barId, seqId } )
   return {
     type: Types.UPDATE_SEQUENCE,
     track: { id, barId, seqId }
   }
 }
 
-export const updateTrackVolume = ( { id, value } ) => {
-  // console.log('UPDATE_VOLUME!!', { id, value } )
+export const updateTrackVolume = ({ id, value }) => {
   return {
     type: Types.UPDATE_VOLUME,
     track: { id, value }
@@ -176,7 +159,6 @@ export const updateTrackVolume = ( { id, value } ) => {
 }
 
 export const updateTrackPan = ({ id, value }) => {
-  //console.log('UPDATE_PAN!!', { id, value } )
   return {
     type: Types.UPDATE_PAN,
     track: { id, value }
@@ -184,7 +166,6 @@ export const updateTrackPan = ({ id, value }) => {
 }
 
 export const updateTrackReverbSend = ({ id, value }) => {
-  //console.log('UPDATE_REVERB_SEND!!', { id, value } )
   return {
     type: Types.UPDATE_REVERB_SEND,
     track: { id, value }
@@ -192,7 +173,6 @@ export const updateTrackReverbSend = ({ id, value }) => {
 }
 
 export const updateTrackDelaySend = ({ id, value }) => {
-  //console.log('UPDATE_DELAY_SEND!!', { id, value } )
   return {
     type: Types.UPDATE_DELAY_SEND,
     track: { id, value }
@@ -200,62 +180,55 @@ export const updateTrackDelaySend = ({ id, value }) => {
 }
 
 export const clipTrack = ({ id, clip }) => {
-  // console.log('CLIP_TRACK!!', id, clip )
   return {
     type: Types.CLIP_TRACK,
     track: { id, clip }
   }
 }
 
-export const muteTrack = (id) => {
-  //console.log('MUTE_TRACK!!', id)
+export const muteTrack = id => {
   return {
     type: Types.MUTE_TRACK,
     id
   }
 }
 
-export const soloTrack = (id) => {
-  //console.log('SOLO_TRACK!!', id)
+export const soloTrack = id => {
   return {
     type: Types.SOLO_TRACK,
     id
   }
 }
+
 // Mixer actions
-export const updateWetMix = (value) => {
-  //console.log('UPDATE_WETMIX!!', value)
+export const updateWetMix = value => {
   return {
     type: Types.UPDATE_WETMIX,
-    value// ES6 syntax - is same as value: value
+    value
   }
 }
 
-export const updateDryMix = (value) => {
-  //console.log('UPDATE_DRYMIX!!', value)
+export const updateDryMix = value => {
   return {
     type: Types.UPDATE_DRYMIX,
-    value// ES6 syntax - is same as value: value
+    value
   }
 }
 
-export const updateMasterVolume = (value) => {
-  //console.log('UPDATE_MASTER_GAIN!!', value)
+export const updateMasterVolume = value => {
   return {
     type: Types.UPDATE_MASTER_GAIN,
-    value// ES6 syntax - is same as value: value
+    value
   }
 }
 
 export const muteWetMix = () => {
-  //console.log('MUTE_WETMIX!!')
   return {
     type: Types.MUTE_WETMIX
   }
 }
 
 export const muteDryMix = () => {
-  //console.log('MUTE_DRYMIX!!')
   return {
     type: Types.MUTE_DRYMIX
   }
@@ -263,106 +236,95 @@ export const muteDryMix = () => {
 
 // Delay actions
 export const toggleDelay = () => {
-  //console.log('TOGGLE_DELAY!!')
   return {
     type: Types.TOGGLE_DELAY
   }
 }
 
-export const updateDelayTime = (value) => {
-  //console.log('UPDATE_DELAY_TIME!!', value)
+export const updateDelayTime = value => {
   return {
     type: Types.UPDATE_DELAY_TIME,
-    value// ES6 syntax - is same as value: value
+    value
   }
 }
 
-export const updateDelayFeedback = (value) =>{
-  //console.log('UPDATE_DELAY_FEEDBACK!!', value)
+export const updateDelayFeedback = value => {
   return {
     type: Types.UPDATE_DELAY_FEEDBACK,
-    value// ES6 syntax - is same as value: value
+    value
   }
 }
 
-export const updateDelayFrequency = (value) => {
-  //console.log('UPDATE_DELAY_FREQUENCY!!', value)
+export const updateDelayFrequency = value => {
   return {
     type: Types.UPDATE_DELAY_FREQUENCY,
-    value// ES6 syntax - is same as value: value
+    value
   }
 }
 
 // Reverb actions
 export const toggleReverb = () => {
-  //console.log('TOGGLE_REVERB!!')
   return {
     type: Types.TOGGLE_REVERB
   }
 }
 
-export const assignReverbData = (options) => {
+export const assignReverbData = options => {
   return {
     type: Types.ASSIGN_REVERB_DATA,
-    options// ES6 syntax - is same as options: options
+    options
   }
 }
 
-export const assignReverbId = (id) => {
-  //console.log('ASSIGN_REVERB_ID!!', id)
+export const assignReverbId = id => {
   return {
     type: Types.ASSIGN_REVERB_ID,
-    id// ES6 syntax - is same as id: id
+    id
   }
 }
 
 // Compressor actions
 export const toggleCompressor = () => {
-  //console.log('TOGGLE_COMPRESSOR!!')
   return {
     type: Types.TOGGLE_COMPRESSOR
   }
 }
 
-export const updateThreshold = (value) => {
-  //console.log('UPDATE_THRESHOLD!!', value)
+export const updateThreshold = value => {
   return {
     type: Types.UPDATE_THRESHOLD,
-    value// ES6 syntax - is same as value: value
+    value
   }
 }
 
-export const updateKnee = (value) => {
-  //console.log('UPDATE_KNEE!!', value)
+export const updateKnee = value => {
   return {
     type: Types.UPDATE_KNEE,
-    value// ES6 syntax - is same as value: value
+    value
   }
 }
 
-export const updateRatio = (value) => {
-  //console.log('UPDATE_RATIO!!', value)
+export const updateRatio = value => {
   return {
     type: Types.UPDATE_RATIO,
-    value// ES6 syntax - is same as value: value
+    value
   }
 }
 
-export const updateAttack = (value) => {
-  //console.log('UPDATE_ATTACK!!', value)
+export const updateAttack = value => {
   return {
     type: Types.UPDATE_ATTACK,
-    value// ES6 syntax - is same as value: value
+    value
   }
 }
 
-export const updateRelease = (value) => {
-  //console.log('UPDATE_RELEASE!!', value)
+export const updateRelease = value => {
   return {
     type: Types.UPDATE_RELEASE,
-    value// ES6 syntax - is same as value: value
+    value
   }
 }
+
 // Visuals
 export const toggleMixer = () => {
   //console.log('TOGGLE MIXER!!')

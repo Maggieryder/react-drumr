@@ -16,7 +16,6 @@ function mapStateToProps({ kits }){
   return { kits }
 }
 
-
 export default connect(mapStateToProps,
   { removeTrack,
     assignBufferId,

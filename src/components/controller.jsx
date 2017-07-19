@@ -35,7 +35,7 @@ class Controller extends Component {
       kits,
       drumr } = this.props
 
-    console.log('handleInteraction: ', action)
+    // console.log('handleInteraction: ', action)
 
     switch ( action ) {
       case 'updateTempo':

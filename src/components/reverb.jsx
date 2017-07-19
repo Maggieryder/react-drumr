@@ -20,7 +20,7 @@ class Reverb extends Component {
   handleInteraction = (action, value) => {
     let { toggleReverb, assignReverbId, drumr } = this.props
 
-    console.log('handleInteraction: ', action)
+    // console.log('handleInteraction: ', action)
 
     switch ( action ) {
       case 'updateReverb':

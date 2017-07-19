@@ -6,11 +6,6 @@ let nextTrackId = 0;
 
 const Tracks = ({ tracks, addTrack, drumr }) => {
 
-  // let mutedTracks = tracks.filter(t => t.mute)
-  // console.log('mutedTracks', mutedTracks)
-  // let soloedTracks = tracks.filter(t => t.solo)
-  // console.log('soloedTracks', soloedTracks)
-
   const addNewTrack = (id) => {
     drumr.addTrack(id)
     addTrack({id:id})

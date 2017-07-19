@@ -1,8 +1,6 @@
 import React, { Component } from 'react'
 import PropTypes  from 'prop-types'
 import Bar from './bar'
-import { connect } from 'react-redux'
-
 
 class Sequence extends Component {
   constructor(props) {
@@ -14,8 +12,9 @@ class Sequence extends Component {
     drumr.addTrackSequence(trackId, sequence);
   }
   renderBars(){
-    let { numBars, barId } = this.props.controller
-    let { trackId, sequence, drumr } = this.props
+
+    let { trackId, sequence, controller, drumr } = this.props
+    let { numBars, barId } = controller
     // let bars = []
     // for (let i=0;i<numBars;i++){
     //   // console.log('>>> bar ID', i===barId)
@@ -31,8 +30,7 @@ class Sequence extends Component {
   }
 
   render(){
-    let { barId } = this.props.controller
-    let { trackId, sequence } = this.props
+    
     return (
       <ul className='sequence'>
         {this.renderBars()}
@@ -41,8 +39,9 @@ class Sequence extends Component {
   }
 }
 
-function mapStateToProps({ controller }){
-  return { controller }
+Sequence.propTypes = {
+  controller:   PropTypes.object.isRequired,
+  drumr:    PropTypes.object.isRequired
 }
 
-export default connect(mapStateToProps)( Sequence )
+export default Sequence
