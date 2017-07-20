@@ -24,13 +24,13 @@ class Sequence extends Component {
     return <Bar key={'bar_'+barId} id={'bar_'+barId} trackId={trackId} cname='active' drumr={drumr} sequence={sequence[barId]}/>
   }
   componentWillReceiveProps(props){
-    let { drumr, sequence, trackId } = props
+    let { trackId, sequence, drumr } = props
     // console.log('>>> Sequence componentWillReceiveProps PROPS', sequence)
     drumr.updateSequence(trackId, sequence);
   }
 
   render(){
-    
+
     return (
       <ul className='sequence'>
         {this.renderBars()}

@@ -15,12 +15,11 @@ class Track extends Component {
     drumr.assignSample(track.id, buffers[track.bufferId]);
   }
 
-  componentWillReceiveProps(props){
-    let { drumr, kits, track } = props
+  componentWillReceiveProps(nextProps){
+    let { drumr, kits, track } = nextProps
     let { buffers } = kits
-    // let{ id, name, bufferId, sequence, volume, pan, clip, mute, solo, reverbSend, delaySend } = track
     // console.log('>>> TRACK componentWillReceiveProps PROPS', track.id, buffers[track.bufferId])
-    if (this.props.kits !== props.kits) drumr.assignSample(track.id, buffers[track.bufferId]);
+    if (this.props.kits !== nextProps.kits) drumr.assignSample(track.id, buffers[track.bufferId]);
   }
 
   handleInteraction = ( action , id, value ) => {
@@ -80,8 +79,8 @@ class Track extends Component {
     let handleInteraction = this.handleInteraction
     let { drumr, kits, track, soloActive } = this.props
 
-    let voices = kits.kitData[kits.kitId].voices;
-    let{ id, name, bufferId, sequence, volume, pan, clip, mute, solo, reverbSend, delaySend } = track
+    let bufferNames = kits.kitData[kits.kitId].voices;
+    let{ id, bufferId, sequence, volume, pan, clip, mute, solo, reverbSend, delaySend } = track
     // console.log('clip', clip)
     return(
       <li className="track" id={id}>
@@ -89,7 +88,7 @@ class Track extends Component {
           <a className='removeTrackBtn' href='#' onClick={ () => handleInteraction('removeTrack', id) }>x</a>
         </div>
         <div className="name">
-          <Options cname='voices' options={voices} value={bufferId} onChange={ e => handleInteraction('updateVoice', id, parseInt(e.target.value)) }/>
+          <Options cname='voices' options={bufferNames} value={bufferId} onChange={ e => handleInteraction('updateVoice', id, parseInt(e.target.value)) }/>
         </div>
         <div className="params">
           <Knob label='gain' min={0} max={10} value={volume} step={1} width={50} onChange={ e => handleInteraction('updateVolume', id, e ) } />
