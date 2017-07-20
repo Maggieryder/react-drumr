@@ -21,8 +21,7 @@ const VISUALIZER = new Visualizer(CTX);
 export default class Drumr {
 
   constructor(store){
-
-    // console.log(store)
+    
     this.store = store;
     SEQUENCER.init(store);
     MIXER.addDelay(DELAY);

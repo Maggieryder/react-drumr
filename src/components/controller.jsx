@@ -10,10 +10,10 @@ class Controller extends Component {
     super(props);
   }
   componentDidMount(){
-    let { drumr, controller } = this.props
-    let { tempo, swing } = controller
-    drumr.updateTempo(tempo);
-    drumr.updateSwingFactor(swing);
+    // let { drumr, controller } = this.props
+    // let { tempo, swing } = controller
+    // drumr.updateTempo(tempo);
+    // drumr.updateSwingFactor(swing);
   }
   componentWillReceiveProps(props){
     let { kits, drumr, assignBuffers } = props

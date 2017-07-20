@@ -13,8 +13,9 @@ export default class Sequencer {
     this.timeWorker;
     this.sequences = [];
     this.tracks = [];
-    this.tempo = 96;
+    this.tempo = 120;
     this.noteResolution = 16;
+    this.timeSignature = [4,4];
     this.swingFactor = 0;
     this.store;
     //this.updateParams(options);
@@ -55,8 +56,22 @@ export default class Sequencer {
       this.nextNote();
     }
   }
-  init(store){
+
+  setState(store){
     this.store = store;
+    let { controller } = store.getState();
+    let { tempo, swing, numBars, barId, stepId, resolution, signature, isPlaying } = controller;
+    this.updateParams({'tempo':tempo})
+    this.updateParams({'swingFactor':swing})
+    this.updateParams({'numBars':numBars})
+    this.updateParams({'barIndex':barId})
+    this.updateParams({'stepIndex':stepId})
+    this.updateParams({'noteResolution':resolution})
+    this.updateParams({'timeSignature':signature})
+    this.updateParams({'isPlaying':isPlaying})
+  }
+  init(store){
+    this.setState(store)
     let self = this;
     this.timeWorker = new Worker('./time-worker.js');
     this.timeWorker.onmessage = function(e) {
