@@ -5,18 +5,11 @@ export default class Delay {
     this.filter = ctx.createBiquadFilter();
     this.output;
     this.active;
+    this.store;
   }
-  init(output, defaults = {
-      time: .25,
-      feedback: .5,
-      frequency: 1000
-    }){
-    // console.log('DELAY INIT beatsecs', this.delay.delayTime.value);
+  init( output ){
+    console.log('DELAY INIT beatsecs', this.delay.delayTime.value);
     this.output = output;
-    // this is the magic formula
-    this.updateDelayTime(defaults.time);
-    this.updateFeedbackGain(defaults.feedback);
-    this.updateFrequency(defaults.frequency);
   }
   gainNode(){
     return this.delay;
@@ -29,6 +22,12 @@ export default class Delay {
   }
   updateFrequency(value){
     this.filter.frequency.value = value;
+  }
+  updateParams(obj){
+    for (let prop in obj){
+      console.log( prop + ' :: ' + obj[prop]);
+      this[prop]= obj[prop];
+    }
   }
   connect(){
     this.delay.connect(this.feedback);
@@ -47,3 +46,9 @@ export default class Delay {
     this.active = !this.active
   }
 }
+
+// defaults = {
+//     time: .25,
+//     feedback: .5,
+//     frequency: 1000
+//   }

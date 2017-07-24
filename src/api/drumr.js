@@ -21,12 +21,13 @@ const VISUALIZER = new Visualizer(CTX);
 export default class Drumr {
 
   constructor(store){
-    
+
     this.store = store;
     SEQUENCER.init(store);
     MIXER.addDelay(DELAY);
     MIXER.addReverb(REVERB);
     MIXER.addCompressor(COMPRESSOR);
+    this.initDelay(store);
   }
 
   loadBuffers(kit, callback){
@@ -130,16 +131,27 @@ export default class Drumr {
   }
 
   // DELAY FUNCTIONS
+  initDelay(store){
+    let { delay } = store.getState();
+    let { time, feedback, frequency, active } = delay;
+    this.updateDelayTime(time)
+    this.updateFeedbackGain(feedback)
+    this.updateFrequency(frequency)
+    // this.updateParams({'active':active})
+  }
   toggleDelay(){
     DELAY.toggleDelay();
   }
   updateDelayTime(value){
+    console.log('updateDelayTime', value )
     DELAY.updateDelayTime(SEQUENCER.secondsPerBeat()*value);
   }
   updateFeedbackGain(value){
+    console.log('updateFeedbackGain', value )
     DELAY.updateFeedbackGain(value/100);
   }
   updateFrequency(value){
+    console.log('updateFrequency', value )
     DELAY.updateFrequency(value);
   }
   // COMPRESSOR FUNCTIONS

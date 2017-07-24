@@ -1,7 +1,5 @@
 import { LOAD_DATA_START, LOAD_DATA_FAIL, LOAD_DATA_SUCCESS } from '../actions'
 
-import kits from './kits'
-
 const INITIAL_STATE = []
 
 export default function(state = INITIAL_STATE, action) {

@@ -5,8 +5,6 @@ import {
         MUTE_DRYMIX,
         UPDATE_MASTER_GAIN } from '../actions'
 
-//import tracks from './tracks'
-
 const INITIAL_STATE = {
   tracks: [],
   mutedTracks: [],

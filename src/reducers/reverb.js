@@ -4,7 +4,7 @@ import { ASSIGN_REVERB_ID,
 
 const INITIAL_STATE = {
   reverbData: [],
-  reverbId: 0,
+  reverbId: 13,
   active: false
 }
 

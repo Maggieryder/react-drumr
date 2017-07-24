@@ -1,3 +1,5 @@
+// full state
+export const DRUMR_STATE = 'DRUMR_STATE'
 // Async types
 export const LOAD_DATA_START = 'LOAD_DATA_START'
 export const LOAD_DATA_FAIL = 'LOAD_DATA_FAIL'
