@@ -9,6 +9,8 @@ import Visualizer from './Visualizer'
 
 import { initAudioCtx } from './context'
 
+import * as Types from '../actions/types'
+
 const CTX = initAudioCtx();
 const SEQUENCER = new Sequencer(CTX);
 const DELAY = new Delay(CTX);
@@ -27,7 +29,8 @@ export default class Drumr {
     MIXER.addDelay(DELAY);
     MIXER.addReverb(REVERB);
     MIXER.addCompressor(COMPRESSOR);
-    this.initDelay(store);
+    DELAY.setStore(store);
+    REVERB.setStore(store)
   }
 
   loadBuffers(kit, callback){
@@ -93,19 +96,22 @@ export default class Drumr {
     //console.log('drumr.initSequence', id, sequence)
     SEQUENCER.addTrackSequence(id, sequence)
   }
-  togglePlay(){
-    SEQUENCER.togglePlay();
-  }
+  // togglePlay(){
+  //   this.store.dispatch({type:Types.TOGGLE_PLAY })
+  //   SEQUENCER.togglePlay();
+  // }
   updateSequence(id, sequence){
     SEQUENCER.updateSequence(id, sequence);
   }
-  updateSwingFactor(value){
-  	SEQUENCER.updateParams({swingFactor:value});
-  }
-  updateTempo(value){
-    SEQUENCER.updateParams({tempo:value});
-    DELAY.updateDelayTime(SEQUENCER.secondsPerBeat()*.5);
-  }
+  // updateSwing(value){
+  //   // this.store.dispatch({type:Types.UPDATE_SWING, value: value })
+  // 	SEQUENCER.updateParams({swing:value/100});
+  // }
+  // updateTempo(value){
+  //   // this.store.dispatch({type:Types.UPDATE_TEMPO, value: value })
+  //   SEQUENCER.updateParams({tempo:value});
+  //   DELAY.updateDelayTime(SEQUENCER.secondsPerBeat()*.5);
+  // }
   // MIXER FUNCTIONS
   updateGlobalVolume(value){
     MIXER.updateGlobalVolume(value);
@@ -123,37 +129,29 @@ export default class Drumr {
     MIXER.toggleDryMute();
   }
   // REVERB FUNCTIONS
-  toggleReverb(){
-    REVERB.toggleReverb();
-  }
+  // toggleReverb(){
+  //   REVERB.toggleReverb();
+  // }
   updateReverbPreset(value){
     REVERB.loadImpulse(value);
   }
 
   // DELAY FUNCTIONS
-  initDelay(store){
-    let { delay } = store.getState();
-    let { time, feedback, frequency, active } = delay;
-    this.updateDelayTime(time)
-    this.updateFeedbackGain(feedback)
-    this.updateFrequency(frequency)
-    // this.updateParams({'active':active})
-  }
-  toggleDelay(){
-    DELAY.toggleDelay();
-  }
-  updateDelayTime(value){
-    console.log('updateDelayTime', value )
-    DELAY.updateDelayTime(SEQUENCER.secondsPerBeat()*value);
-  }
-  updateFeedbackGain(value){
-    console.log('updateFeedbackGain', value )
-    DELAY.updateFeedbackGain(value/100);
-  }
-  updateFrequency(value){
-    console.log('updateFrequency', value )
-    DELAY.updateFrequency(value);
-  }
+  // toggleDelay(){
+  //   DELAY.toggleDelay();
+  // }
+  // updateDelayTime(value){
+  //   console.log('updateDelayTime', value )
+  //   DELAY.updateDelayTime(SEQUENCER.secondsPerBeat()*value);
+  // }
+  // updateFeedbackGain(value){
+  //   console.log('updateFeedbackGain', value )
+  //   DELAY.updateFeedbackGain(value/100);
+  // }
+  // updateFrequency(value){
+  //   console.log('updateFrequency', value )
+  //   DELAY.updateFrequency(value);
+  // }
   // COMPRESSOR FUNCTIONS
   toggleCompressor(){
     COMPRESSOR.toggleCompressor();

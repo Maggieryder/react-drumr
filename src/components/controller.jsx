@@ -39,20 +39,20 @@ class Controller extends Component {
 
     switch ( action ) {
       case 'updateTempo':
-      updateTempo(value);
-      drumr.updateTempo(value);
+      // updateTempo(value);
+      // drumr.updateTempo(value);
       break;
       case 'updateSwing':
-      updateSwing(value);
-      drumr.updateSwingFactor(value/100);
+      // updateSwing(value);
+      // drumr.updateSwingFactor(value/100);
       break;
       case 'updateKit':
       assignKitId(value);
       drumr.loadBuffers(kits.kitData[value], assignBuffers)
       break;
       case 'togglePlay':
-      togglePlay();
-      drumr.togglePlay();
+      // togglePlay();
+      // drumr.togglePlay();
       break;
       default:
       //
@@ -74,7 +74,7 @@ class Controller extends Component {
 
   render(){
     let handleInteraction = this.handleInteraction
-    let { kits, controller } = this.props
+    let { kits, controller, drumr, updateTempo, updateSwing, togglePlay } = this.props
     let { kitData, kitId, buffers } = kits
     let { tempo, swing, isPlaying, numBars, barId, resolution } = controller
 
@@ -86,12 +86,12 @@ class Controller extends Component {
           </a>
         </div>
         <div>
-          <a id='playBtn' href='#' onClick={()=> handleInteraction('togglePlay') }>
+          <a id='playBtn' href='#' onClick={ () => togglePlay() }>
             {isPlaying ? <Icon type='pause'/> : <Icon type='play'/> }
           </a>
         </div>
-        <Fader label='tempo' min={30} max={160} value={tempo} step={1} units=' bpm' onChange={ e => handleInteraction('updateTempo', parseInt(e.target.value)) }/>
-        <Fader label='swing' min={0} max={100} value={swing} step={1} units='%' onChange={ e => handleInteraction('updateSwing', parseInt(e.target.value)) }/>
+        <Fader label='tempo' min={30} max={160} value={tempo} step={1} units=' bpm' onChange={ e => updateTempo(parseInt(e.target.value)) }/>
+        <Fader label='swing' min={0} max={100} value={swing} step={1} units='%' onChange={ e => updateSwing(parseInt(e.target.value)) }/>
         <Options id='kits' options={kitData} value={kitId} onChange={ e => handleInteraction('updateKit', parseInt(e.target.value)) }/>
         <div>
           {this.renderBars(numBars, barId)}

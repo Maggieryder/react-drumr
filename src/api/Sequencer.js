@@ -1,10 +1,14 @@
 import * as Types from '../actions/types'
 
+const kMaxSwing = .08;
+
 export default class Sequencer {
   constructor(ctx){
     this.context = ctx;
     this.isPlaying = false;
-    this.numBars = 2;
+    // this.tempo = 120;
+    // this.swing = 0;
+    // this.numBars = 2;
     this.barIndex = 0;
     this.stepIndex = 0;
     this.nextNoteTime = 0.0;
@@ -13,23 +17,22 @@ export default class Sequencer {
     this.timeWorker;
     this.sequences = [];
     this.tracks = [];
-    this.tempo = 120;
-    this.noteResolution = 16;
-    this.timeSignature = [4,4];
-    this.swingFactor = 0;
+    // this.noteResolution = 16;
+    // this.timeSignature = [4,4];
     this.store;
-    //this.updateParams(options);
   }
   nextNote(){
-    let kMaxSwing = .08;
+    let { controller } = this.store.getState();
+    let { swing, resolution, numBars, barId, stepId } = controller;
+    let swingFactor = kMaxSwing * swing/100;
     if (this.stepIndex % 2) {
-      this.nextNoteTime += (0.25 - kMaxSwing * this.swingFactor) * this.secondsPerBeat();
+      this.nextNoteTime += (0.25 - swingFactor) * this.secondsPerBeat();
     } else {
-      this.nextNoteTime += (0.25 + kMaxSwing * this.swingFactor) * this.secondsPerBeat();
+      this.nextNoteTime += (0.25 + swingFactor) * this.secondsPerBeat();
     }
-    if (this.stepIndex === (this.noteResolution -1)){
+    if (this.stepIndex === (resolution -1)){
       // console.log('nextNote', this.barIndex, this.stepIndex)
-      this.barIndex = this.barIndex === (this.numBars - 1) ? 0 : ++this.barIndex;
+      this.barIndex = this.barIndex === (numBars - 1) ? 0 : ++this.barIndex;
       this.store.dispatch({type:Types.TOGGLE_BAR, id: this.barIndex })
       this.stepIndex = 0;
     } else {
@@ -37,16 +40,18 @@ export default class Sequencer {
     }
   }
   scheduleNote(step, time){
+    let { controller } = this.store.getState();
+    let { resolution, barId } = controller;
     // console.log(step)
     for (let i=0;i<this.sequences.length; i++){
       let bars = this.sequences[i].sequence
       for (let j=0;j<bars.length;j++){
-        if (j===this.barIndex && bars[j][step]===1){
+        if (j===barId && bars[j][step]===1){
           this.tracks[i].triggerSample(time);
         }
       }
     }
-    this.store.dispatch({type:Types.UPDATE_STEP_ID, value: (this.barIndex*this.noteResolution)+ step})
+    this.store.dispatch({type:Types.UPDATE_STEP_ID, value: (barId*resolution) + step})
   }
 
   startScheduler(){
@@ -57,21 +62,26 @@ export default class Sequencer {
     }
   }
 
-  setState(store){
-    this.store = store;
-    let { controller } = store.getState();
+  updateState(){
+    // this.store = store;
+    let { controller } = this.store.getState();
     let { tempo, swing, numBars, barId, stepId, resolution, signature, isPlaying } = controller;
-    this.updateParams({'tempo':tempo})
-    this.updateParams({'swingFactor':swing})
-    this.updateParams({'numBars':numBars})
-    this.updateParams({'barIndex':barId})
-    this.updateParams({'stepIndex':stepId})
-    this.updateParams({'noteResolution':resolution})
-    this.updateParams({'timeSignature':signature})
-    this.updateParams({'isPlaying':isPlaying})
+    // if (this.tempo !== tempo) this.updateParams({'tempo':tempo})
+    // if (this.swing !== swing/100) this.updateParams({'swing':swing/100})
+    // if (this.isPlaying !== isPlaying) this.updateParams({'isPlaying':isPlaying})
+    if (this.isPlaying !== isPlaying) this.togglePlay()
+    // if (this.numBars !== numBars) this.updateParams({'numBars':numBars})
+    // if (this.barIndex !== barId) this.updateParams({'barIndex':barId})
+    // if (this.stepIndex !== stepId) this.updateParams({'stepIndex':stepId})
+    // if (this.noteResolution !== resolution) this.updateParams({'noteResolution':resolution})
+    // if (this.timeSignature !== signature) this.updateParams({'timeSignature':signature})
+
   }
+
   init(store){
-    this.setState(store)
+    this.store = store;
+    this.store.subscribe(this.updateState.bind(this))
+    this.updateState()
     let self = this;
     this.timeWorker = new Worker('./time-worker.js');
     this.timeWorker.onmessage = function(e) {
@@ -129,10 +139,12 @@ export default class Sequencer {
   }
 
   secondsPerBeat(str){
-    return 60.0 / this.tempo;
+    let { controller } = this.store.getState();
+    return 60.0 / controller.tempo;
   }
   togglePlay(){
-    this.isPlaying = !this.isPlaying;
+    let { controller } = this.store.getState();
+    this.isPlaying = controller.isPlaying;
     if (this.isPlaying) { // start playing
         this.stepIndex = 0;
         this.nextNoteTime = this.context.currentTime;

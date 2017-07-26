@@ -19,19 +19,19 @@ const Delay = ({
     switch ( action ) {
       case 'updateTime':
       updateDelayTime(value)
-      drumr.updateDelayTime(value)
+      // drumr.updateDelayTime(value)
       break;
       case 'updateFeedback':
       updateDelayFeedback(value)
-      drumr.updateFeedbackGain(value)
+      // drumr.updateFeedbackGain(value)
       break;
       case 'updateFrequency':
       updateDelayFrequency(value)
-      drumr.updateFrequency(value)
+      // drumr.updateFrequency(value)
       break;
       case 'toggleDelay':
       toggleDelay()
-      drumr.toggleDelay()
+      // drumr.toggleDelay()
       break;
       default:
       //

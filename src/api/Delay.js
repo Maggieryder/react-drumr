@@ -3,12 +3,25 @@ export default class Delay {
     this.delay = ctx.createDelay();
     this.feedback = ctx.createGain();
     this.filter = ctx.createBiquadFilter();
-    this.output;
-    this.active;
+    this.active = false;
     this.store;
+    this.output;
+  }
+  setStore( store ){
+    this.store = store;
+    this.store.subscribe(this.updateState.bind(this))
+    this.updateState()
+  }
+  updateState(){
+    let { delay, controller } = this.store.getState();
+    let { time, feedback, frequency, active } = delay;
+    let { tempo } = controller;
+    if ( this.delay.delayTime.value !== 60.0 / tempo * time ) this.updateDelayTime( 60.0 / tempo * time )
+    if ( this.feedback.gain.value !== feedback ) this.updateFeedbackGain( feedback )
+    if ( this.filter.frequency.value !== frequency ) this.updateFrequency( frequency )
+    if ( this.active !== active ) this.toggleDelay(active)
   }
   init( output ){
-    console.log('DELAY INIT beatsecs', this.delay.delayTime.value);
     this.output = output;
   }
   gainNode(){
@@ -23,12 +36,6 @@ export default class Delay {
   updateFrequency(value){
     this.filter.frequency.value = value;
   }
-  updateParams(obj){
-    for (let prop in obj){
-      console.log( prop + ' :: ' + obj[prop]);
-      this[prop]= obj[prop];
-    }
-  }
   connect(){
     this.delay.connect(this.feedback);
     this.feedback.connect(this.filter);
@@ -41,14 +48,8 @@ export default class Delay {
     this.filter.disconnect(this.delay);
     this.delay.disconnect(this.output);
   }
-  toggleDelay(on){
+  toggleDelay(active){
     this.active ? this.disconnect() : this.connect();
-    this.active = !this.active
+    this.active = active
   }
 }
-
-// defaults = {
-//     time: .25,
-//     feedback: .5,
-//     frequency: 1000
-//   }

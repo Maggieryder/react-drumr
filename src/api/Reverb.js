@@ -3,8 +3,19 @@ export default class Reverb {
     this.ctx = ctx;
     this.convolver = ctx.createConvolver();
     this.convolverGain = ctx.createGain();
-    this.active;
+    this.active = false;
     this.output;
+    this.store;
+  }
+  setStore( store ){
+    this.store = store;
+    this.store.subscribe(this.updateState.bind(this))
+    this.updateState()
+  }
+  updateState(){
+    let { reverb } = this.store.getState();
+    let { active } = reverb;
+    if ( this.active !== active ) this.toggleReverb(active)
   }
   init(output){
     this.output = output;
@@ -44,8 +55,8 @@ export default class Reverb {
     this.convolverGain.disconnect(this.convolver);
     this.convolver.disconnect(this.output);
   }
-  toggleReverb(){
+  toggleReverb(active){
     this.active ? this.disconnect() : this.connect();
-    this.active = !this.active;
+    this.active = active;
   }
 }

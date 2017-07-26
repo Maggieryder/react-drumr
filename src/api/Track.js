@@ -80,7 +80,7 @@ export default class Track {
     let now = new Date()
     let didRecentlyClip = (now - this.lastClipTime) < 100;
     let track = {id: this.id, clip: didRecentlyClip }
-    this.store.dispatch({type:Types.CLIP_TRACK, track })
+    // this.store.dispatch({type:Types.CLIP_TRACK, track })
     // clipTrack({id:this.id,clip:didRecentlyClip})
     requestAnimationFrame(function() { self.renderMeter() });
   }

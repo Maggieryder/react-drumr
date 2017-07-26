@@ -28,8 +28,8 @@ class Reverb extends Component {
       // drumr.updateReverbPreset('assets/audio/' + reverbData[value].smpl)
       break;
       case 'toggleReverb':
-      toggleReverb()
-      drumr.toggleReverb()
+      // toggleReverb()
+      // drumr.toggleReverb()
       break;
       default:
       //
@@ -37,14 +37,15 @@ class Reverb extends Component {
   }
   render(){
     let handleInteraction = this.handleInteraction
-    let { active, reverbData, reverbId } = this.props.reverb
+    let { toggleReverb, assignReverbId, drumr, reverb } = this.props
+    let { active, reverbData, reverbId } = reverb
 
     return (
       <div className='track' id='reverb'>
         <div className='name'>reverb</div>
         <div className='params'>
           <Options id='verbs' options={reverbData} value={reverbId} onChange={ e => handleInteraction('updateReverb', parseInt(e.target.value)) }/>
-          <Switch label='on/off' cname={active ? 'on' : ''} onClick={() => handleInteraction('toggleReverb')}/>
+          <Switch label='on/off' cname={active ? 'on' : ''} onClick={ () => toggleReverb() }/>
         </div>
       </div>
     )
