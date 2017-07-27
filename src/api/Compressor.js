@@ -4,6 +4,7 @@ export default class Compressor {
     this.active = false;
     this.source;
     this.output;
+    this.store;
   }
   setStore( store ){
     this.store = store;

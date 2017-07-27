@@ -138,15 +138,15 @@ export default class Mixer {
       if (t.isMute()) self.toggleTrackMute(t.getId());
     });
   }
-  getTracks(){
-    return this.tracks;
-  }
   removeTrackWithId(id){
     this.tracks.filter(t => t.id !== id)
   }
   removeTrackAtIndex(index){
     this.tracks[index].disconnect();
     this.tracks.splice(index,1);
+  }
+  getTracks(){
+    return this.tracks;
   }
   clearTracks(){
     let i = this.tracks.length;

@@ -10,10 +10,7 @@ class Controller extends Component {
     super(props);
   }
   componentDidMount(){
-    // let { drumr, controller } = this.props
-    // let { tempo, swing } = controller
-    // drumr.updateTempo(tempo);
-    // drumr.updateSwingFactor(swing);
+    //
   }
   componentWillReceiveProps(props){
     let { kits, drumr, assignBuffers } = props
@@ -80,7 +77,7 @@ Controller.propTypes = {
   assignKitId:    PropTypes.func.isRequired,
   togglePlay:     PropTypes.func.isRequired,
   toggleMixer:    PropTypes.func.isRequired,
-  updateBarId:      PropTypes.func.isRequired,
+  updateBarId:    PropTypes.func.isRequired,
   kits:           PropTypes.object.isRequired,
   drumr:          PropTypes.object.isRequired
 }
