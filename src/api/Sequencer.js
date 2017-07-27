@@ -65,18 +65,17 @@ export default class Sequencer {
   updateState(){
     // this.store = store;
     let { controller, tracks } = this.store.getState();
-    let { tempo, swing, numBars, barId, stepId, resolution, signature, isPlaying } = controller;
+    // let { tempo, swing, numBars, barId, stepId, resolution, signature, isPlaying } = controller;
     // if ( this.tracks !== tracks) this.tracks = tracks;
     // if (this.tempo !== tempo) this.updateParams({'tempo':tempo})
     // if (this.swing !== swing/100) this.updateParams({'swing':swing/100})
     // if (this.isPlaying !== isPlaying) this.updateParams({'isPlaying':isPlaying})
-    if (this.isPlaying !== isPlaying) this.togglePlay(isPlaying)
+    if (this.isPlaying !== controller.isPlaying) this.togglePlay(controller.isPlaying)
     // if (this.numBars !== numBars) this.updateParams({'numBars':numBars})
     // if (this.barIndex !== barId) this.updateParams({'barIndex':barId})
     // if (this.stepIndex !== stepId) this.updateParams({'stepIndex':stepId})
     // if (this.noteResolution !== resolution) this.updateParams({'noteResolution':resolution})
     // if (this.timeSignature !== signature) this.updateParams({'timeSignature':signature})
-
   }
 
   init(store){
@@ -138,14 +137,15 @@ export default class Sequencer {
       this[prop]= obj[prop];
     }
   }
-
   secondsPerBeat(str){
     let { controller } = this.store.getState();
     return 60.0 / controller.tempo;
   }
   togglePlay(isPlaying){
     this.isPlaying = isPlaying;
-    if (this.isPlaying) { // start playing
+    if (this.isPlaying) {
+        this.barIndex = 0;
+        this.store.dispatch({type:Types.UPDATE_BAR_ID, value: 0 })
         this.stepIndex = 0;
         this.nextNoteTime = this.context.currentTime;
         this.timeWorker.postMessage('start');
