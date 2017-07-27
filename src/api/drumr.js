@@ -26,11 +26,13 @@ export default class Drumr {
 
     this.store = store;
     SEQUENCER.init(store);
+    MIXER.setStore(store);
     MIXER.addDelay(DELAY);
     MIXER.addReverb(REVERB);
     MIXER.addCompressor(COMPRESSOR);
     DELAY.setStore(store);
-    REVERB.setStore(store)
+    REVERB.setStore(store);
+    COMPRESSOR.setStore(store);
   }
 
   loadBuffers(kit, callback){
@@ -91,85 +93,18 @@ export default class Drumr {
       TRACKS.tracks[id].triggerSample(CTX.currentTime);
     }
   }
-
   addTrackSequence(id, sequence){
     //console.log('drumr.initSequence', id, sequence)
     SEQUENCER.addTrackSequence(id, sequence)
   }
-  // togglePlay(){
-  //   this.store.dispatch({type:Types.TOGGLE_PLAY })
-  //   SEQUENCER.togglePlay();
-  // }
   updateSequence(id, sequence){
     SEQUENCER.updateSequence(id, sequence);
   }
-  // updateSwing(value){
-  //   // this.store.dispatch({type:Types.UPDATE_SWING, value: value })
-  // 	SEQUENCER.updateParams({swing:value/100});
-  // }
-  // updateTempo(value){
-  //   // this.store.dispatch({type:Types.UPDATE_TEMPO, value: value })
-  //   SEQUENCER.updateParams({tempo:value});
-  //   DELAY.updateDelayTime(SEQUENCER.secondsPerBeat()*.5);
-  // }
-  // MIXER FUNCTIONS
-  updateGlobalVolume(value){
-    MIXER.updateGlobalVolume(value);
-  }
-  updateDryVolume(value){
-    MIXER.updateDryVolume(value);
-  }
-  updateWetVolume(value){
-    MIXER.updateWetVolume(value);
-  }
-  toggleWetMute(){
-    MIXER.toggleWetMute();
-  }
-  toggleDryMute(){
-    MIXER.toggleDryMute();
-  }
+
+
   // REVERB FUNCTIONS
-  // toggleReverb(){
-  //   REVERB.toggleReverb();
-  // }
   updateReverbPreset(value){
     REVERB.loadImpulse(value);
-  }
-
-  // DELAY FUNCTIONS
-  // toggleDelay(){
-  //   DELAY.toggleDelay();
-  // }
-  // updateDelayTime(value){
-  //   console.log('updateDelayTime', value )
-  //   DELAY.updateDelayTime(SEQUENCER.secondsPerBeat()*value);
-  // }
-  // updateFeedbackGain(value){
-  //   console.log('updateFeedbackGain', value )
-  //   DELAY.updateFeedbackGain(value/100);
-  // }
-  // updateFrequency(value){
-  //   console.log('updateFrequency', value )
-  //   DELAY.updateFrequency(value);
-  // }
-  // COMPRESSOR FUNCTIONS
-  toggleCompressor(){
-    COMPRESSOR.toggleCompressor();
-  }
-  updateThreshold(value){
-    COMPRESSOR.updateThreshold(value);
-  }
-  updateKnee(value){
-    COMPRESSOR.updateKnee(value);
-  }
-  updateRatio(value){
-    COMPRESSOR.updateRatio(value);
-  }
-  updateAttack(value){
-    COMPRESSOR.updateAttack(value);
-  }
-  updateRelease(value){
-    COMPRESSOR.updateRelease(value);
   }
 
   // TRACK FUNCTIONS
@@ -193,3 +128,72 @@ export default class Drumr {
   }
 
 }
+// MIXER FUNCTIONS
+// updateGlobalVolume(value){
+//   MIXER.updateGlobalVolume(value);
+// }
+// updateDryVolume(value){
+//   MIXER.updateDryVolume(value);
+// }
+// updateWetVolume(value){
+//   MIXER.updateWetVolume(value);
+// }
+// toggleWetMute(){
+//   MIXER.toggleWetMute();
+// }
+// toggleDryMute(){
+//   MIXER.toggleDryMute();
+// }
+// SEQUENCER FUNCTIONS
+// togglePlay(){
+//   this.store.dispatch({type:Types.TOGGLE_PLAY })
+//   SEQUENCER.togglePlay();
+// }
+// updateSwing(value){
+//   // this.store.dispatch({type:Types.UPDATE_SWING, value: value })
+// 	SEQUENCER.updateParams({swing:value/100});
+// }
+// updateTempo(value){
+//   // this.store.dispatch({type:Types.UPDATE_TEMPO, value: value })
+//   SEQUENCER.updateParams({tempo:value});
+//   DELAY.updateDelayTime(SEQUENCER.secondsPerBeat()*.5);
+// }
+// REVERB FUNCTIONS
+// toggleReverb(){
+//   REVERB.toggleActive();
+// }
+// DELAY FUNCTIONS
+// toggleDelay(){
+//   DELAY.toggleActive();
+// }
+// updateDelayTime(value){
+//   console.log('updateDelayTime', value )
+//   DELAY.updateDelayTime(SEQUENCER.secondsPerBeat()*value);
+// }
+// updateFeedbackGain(value){
+//   console.log('updateFeedbackGain', value )
+//   DELAY.updateFeedbackGain(value/100);
+// }
+// updateFrequency(value){
+//   console.log('updateFrequency', value )
+//   DELAY.updateFrequency(value);
+// }
+// COMPRESSOR FUNCTIONS
+// toggleCompressor(){
+//   COMPRESSOR.toggleActive();
+// }
+// updateThreshold(value){
+//   COMPRESSOR.updateThreshold(value);
+// }
+// updateKnee(value){
+//   COMPRESSOR.updateKnee(value);
+// }
+// updateRatio(value){
+//   COMPRESSOR.updateRatio(value);
+// }
+// updateAttack(value){
+//   COMPRESSOR.updateAttack(value);
+// }
+// updateRelease(value){
+//   COMPRESSOR.updateRelease(value);
+// }

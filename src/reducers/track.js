@@ -15,7 +15,6 @@ import sequence from './sequence'
 
 const INITIAL_STATE = {
     id: 0,
-    name: 'unassigned',
     buffers: [],
     bufferId: 0,
     sequence: [[0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],[0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0]],
@@ -31,16 +30,11 @@ const INITIAL_STATE = {
 export default function(state = INITIAL_STATE, action) {
   switch(action.type){
     case ADD_TRACK:
-      // console.log('action received for ADD_TRACK', action.track.id)
+      // console.log('action received for ADD_TRACK', action.track)
       return {...state,
         id: action.track.id,
-        name: action.track.name || 'unassigned',
         buffer: action.track.buffer || {}
       }
-    case ASSIGN_NAME:
-      // console.log('action received for ASSIGN NAME', action.id)
-      if (state.id !== action.id) { return state }
-      return {...state, name: action.name }
     case ASSIGN_BUFFER_ID:
       // console.log('action received for ASSIGN_BUFFER_ID', action.track)
       if (state.id !== action.track.id) { return state }

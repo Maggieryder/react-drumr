@@ -33,7 +33,7 @@ export default class Sequencer {
     if (this.stepIndex === (resolution -1)){
       // console.log('nextNote', this.barIndex, this.stepIndex)
       this.barIndex = this.barIndex === (numBars - 1) ? 0 : ++this.barIndex;
-      this.store.dispatch({type:Types.TOGGLE_BAR, id: this.barIndex })
+      this.store.dispatch({type:Types.UPDATE_BAR_ID, value: this.barIndex })
       this.stepIndex = 0;
     } else {
       this.stepIndex++;
@@ -64,12 +64,13 @@ export default class Sequencer {
 
   updateState(){
     // this.store = store;
-    let { controller } = this.store.getState();
+    let { controller, tracks } = this.store.getState();
     let { tempo, swing, numBars, barId, stepId, resolution, signature, isPlaying } = controller;
+    // if ( this.tracks !== tracks) this.tracks = tracks;
     // if (this.tempo !== tempo) this.updateParams({'tempo':tempo})
     // if (this.swing !== swing/100) this.updateParams({'swing':swing/100})
     // if (this.isPlaying !== isPlaying) this.updateParams({'isPlaying':isPlaying})
-    if (this.isPlaying !== isPlaying) this.togglePlay()
+    if (this.isPlaying !== isPlaying) this.togglePlay(isPlaying)
     // if (this.numBars !== numBars) this.updateParams({'numBars':numBars})
     // if (this.barIndex !== barId) this.updateParams({'barIndex':barId})
     // if (this.stepIndex !== stepId) this.updateParams({'stepIndex':stepId})
@@ -142,9 +143,8 @@ export default class Sequencer {
     let { controller } = this.store.getState();
     return 60.0 / controller.tempo;
   }
-  togglePlay(){
-    let { controller } = this.store.getState();
-    this.isPlaying = controller.isPlaying;
+  togglePlay(isPlaying){
+    this.isPlaying = isPlaying;
     if (this.isPlaying) { // start playing
         this.stepIndex = 0;
         this.nextNoteTime = this.context.currentTime;

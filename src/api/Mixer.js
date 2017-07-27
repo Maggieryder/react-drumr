@@ -23,8 +23,24 @@ export default class Mixer {
     this.tracks = [];
     this.mutedTracks = [];
     // toggle
-    this.wetMute;
-    this.dryMute;
+    this.wetMute = false;
+    this.dryMute = false;
+  }
+  // store
+  setStore( store ){
+    this.store = store;
+    this.store.subscribe(this.updateState.bind(this))
+    this.updateState()
+  }
+  updateState(){
+    let { mixer, tracks } = this.store.getState();
+    let { wetMix, wetMute, dryMix, dryMute, masterGain } = mixer;
+    // if ( this.tracks !== tracks ) this.tracks = tracks;
+    if ( this.finalOutput.gain.value !== masterGain ) this.updateGlobalVolume( masterGain / 10 );
+    if ( this.masterDry.gain.value !== dryMix ) this.updateDryVolume( dryMix / 10 );
+    if ( this.masterWet.gain.value !== wetMix ) this.updateWetVolume( wetMix / 10 );
+    if ( this.dryMute !== dryMute ) this.toggleDryMute(dryMute);
+    if ( this.wetMute !== wetMute ) this.toggleWetMute(wetMute);
   }
   // FX
   addReverb(reverb){
@@ -49,13 +65,13 @@ export default class Mixer {
   updateWetVolume(value){
     this.masterWet.gain.value =  value;
   }
-  toggleWetMute(){
+  toggleWetMute(wetMute){
     this.wetMute ? this.masterWet.connect(this.finalOutput) : this.masterWet.disconnect(this.finalOutput);
-    this.wetMute = !this.wetMute;
+    this.wetMute = wetMute;
   }
-  toggleDryMute(){
+  toggleDryMute(dryMute){
     this.dryMute ? this.masterDry.connect(this.finalOutput) : this.masterDry.disconnect(this.finalOutput);
-    this.dryMute = !this.dryMute;
+    this.dryMute = dryMute;
   }
   // tracks
   addTrack(track){

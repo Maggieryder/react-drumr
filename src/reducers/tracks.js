@@ -1,6 +1,5 @@
 import { ADD_TRACK,
       REMOVE_TRACK,
-      ASSIGN_NAME,
       ASSIGN_BUFFER_ID,
       ASSIGN_BUFFER,
       UPDATE_SEQUENCE,
@@ -25,7 +24,6 @@ export default function(state = INITIAL_STATE, action) {
       // console.log('action received for REMOVE TRACK', action.id)
       //return [ ...state.slice(0, action.index), ...state.slice(action.index + 1)]
       return state.filter(t => t.id !== action.id)
-    case ASSIGN_NAME:
     case ASSIGN_BUFFER_ID:
     case UPDATE_SEQUENCE:
     case UPDATE_VOLUME:

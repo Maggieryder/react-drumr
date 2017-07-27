@@ -1,28 +1,28 @@
 export default class Compressor {
   constructor(ctx){
     this.compressor = ctx.createDynamicsCompressor();
+    this.active = false;
     this.source;
     this.output;
-    this.active;
   }
-  init(source, output, defaults = {
-      threshold: -24,
-      knee: 30,
-      ratio: 12,
-      attack: 0.003,
-      release: .25,
-    }){
-    //console.log('COMPRESSOR INIT');
+  setStore( store ){
+    this.store = store;
+    this.store.subscribe(this.updateState.bind(this))
+    this.updateState()
+  }
+  updateState(){
+    let { compressor } = this.store.getState();
+    let { active, threshold, knee, ratio, attack, release } = compressor;
+    if ( this.compressor.threshold.value !== threshold ) this.updateThreshold( threshold );
+    if ( this.compressor.knee.value !== knee ) this.updateKnee( knee );
+    if ( this.compressor.ratio.value !== ratio ) this.updateRatio( ratio );
+    if ( this.compressor.attack.value !== attack ) this.updateAttack( attack );
+    if ( this.compressor.release.value !== release ) this.updateRelease( release );
+    if ( this.active !== active ) this.toggleActive(active);
+  }
+  init( source, output ){
     this.source = source;
     this.output = output;
-    // set to defaults
-    this.updateThreshold(defaults.threshold);
-    this.updateKnee(defaults.knee);
-    this.updateRatio(defaults.ratio);
-    // readonly attribute: this.updateReduction(-20.0);
-    this.updateAttack(defaults.attack);
-    this.updateRelease(defaults.release);
-    //this.connect();
   }
   updateThreshold(value){
     this.compressor.threshold.value = value;
@@ -56,9 +56,9 @@ export default class Compressor {
     this.compressor.disconnect(this.output);
     this.source.connect(this.output);
   }
-  toggleCompressor(on){
+  toggleActive(active){
     this.active ? this.disconnect() : this.connect();
-    this.active = !this.active;
+    this.active = active;
   }
   compressorNode(){
     return this.compressor;

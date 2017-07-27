@@ -8,7 +8,7 @@ import { updateTempo,
       assignKitId,
       togglePlay,
       toggleMixer,
-      toggleBar } from '../actions'
+      updateBarId } from '../actions'
 
 function mapStateToProps({ controller, kits }){
   return { controller, kits }
@@ -23,4 +23,4 @@ export default connect(mapStateToProps,
       assignKitId,
       togglePlay,
       toggleMixer,
-      toggleBar })(Controller)
+      updateBarId })(Controller)

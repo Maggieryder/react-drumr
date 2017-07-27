@@ -79,7 +79,7 @@ export const updateSignature = value => {
   }
 }
 
-export const updateBeatId = value => {
+export const updateStepId = value => {
   return {
     type: Types.UPDATE_STEP_ID,
     value
@@ -93,11 +93,11 @@ export const updateBars = value => {
   }
 }
 
-export const toggleBar = id => {
+export const updateBarId = value => {
   // console.log('TOGGLE BAR!! id =', id)
   return {
-    type: Types.TOGGLE_BAR,
-    id
+    type: Types.UPDATE_BAR_ID,
+    value
   }
 }
 
@@ -123,13 +123,6 @@ export const removeTrack = id => {
 }
 
 // Track actions
-export const assignTrackName = ({ id, name }) => {
-  return {
-    type: Types.ASSIGN_NAME,
-    track: { id, name }
-  }
-}
-
 export const assignBufferId = ({ id, value }) => {
   return {
     type: Types.ASSIGN_BUFFER_ID,

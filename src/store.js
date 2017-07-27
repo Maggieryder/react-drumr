@@ -13,6 +13,6 @@ export function configureStore( persistedState = loadState() ) {
   return createStore(
     reducers,
     persistedState,
-    composeWithDevTools(applyMiddleware(thunk, customMiddleWare))
+    composeWithDevTools(applyMiddleware(thunk))
   );
 }

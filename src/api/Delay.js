@@ -19,7 +19,7 @@ export default class Delay {
     if ( this.delay.delayTime.value !== 60.0 / tempo * time ) this.updateDelayTime( 60.0 / tempo * time )
     if ( this.feedback.gain.value !== feedback ) this.updateFeedbackGain( feedback )
     if ( this.filter.frequency.value !== frequency ) this.updateFrequency( frequency )
-    if ( this.active !== active ) this.toggleDelay(active)
+    if ( this.active !== active ) this.toggleActive(active)
   }
   init( output ){
     this.output = output;
@@ -48,7 +48,7 @@ export default class Delay {
     this.filter.disconnect(this.delay);
     this.delay.disconnect(this.output);
   }
-  toggleDelay(active){
+  toggleActive(active){
     this.active ? this.disconnect() : this.connect();
     this.active = active
   }

@@ -14,8 +14,8 @@ export default class Reverb {
   }
   updateState(){
     let { reverb } = this.store.getState();
-    let { active } = reverb;
-    if ( this.active !== active ) this.toggleReverb(active)
+    let { active, reverbData, reverbId } = reverb
+    if ( this.active !== active ) this.toggleActive(active)
   }
   init(output){
     this.output = output;
@@ -55,7 +55,7 @@ export default class Reverb {
     this.convolverGain.disconnect(this.convolver);
     this.convolver.disconnect(this.output);
   }
-  toggleReverb(active){
+  toggleActive(active){
     this.active ? this.disconnect() : this.connect();
     this.active = active;
   }

@@ -16,17 +16,12 @@ export const UPDATE_STEP_ID = 'UPDATE_STEP_ID'
 export const UPDATE_BARS = 'UPDATE_BARS'
 export const UPDATE_RESOLTION = 'UPDATE_RESOLTION'
 export const UPDATE_SIGNATURE = 'UPDATE_SIGNATURE'
-export const TOGGLE_BAR ='TOGGLE_BAR'
 export const TOGGLE_PLAY = 'TOGGLE_PLAY'
 // Tracks types
 export const ADD_TRACK = 'ADD_TRACK'
 export const REMOVE_TRACK = 'REMOVE_TRACK'
-export const MUTED_TRACKS = 'MUTED_TRACKS'
-export const SOLOED_TRACKS = 'SOLOED_TRACKS'
 // Track types
-export const ASSIGN_VOICE_DATA = "ASSIGN_VOICE_DATA"
 export const ASSIGN_BUFFER_ID = "ASSIGN_BUFFER_ID"
-export const ASSIGN_NAME = 'ASSIGN_NAME'
 export const ASSIGN_BUFFER = 'ASSIGN_BUFFER'
 export const UPDATE_SEQUENCE = 'UPDATE_SEQUENCE'
 export const UPDATE_VOLUME = 'UPDATE_VOLUME'

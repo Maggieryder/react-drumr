@@ -6,7 +6,6 @@ import {
         UPDATE_BARS,
         UPDATE_RESOLTION,
         UPDATE_SIGNATURE,
-        TOGGLE_BAR,
         TOGGLE_PLAY } from '../actions'
 
 const INITIAL_STATE = {
@@ -43,9 +42,6 @@ export default function(state = INITIAL_STATE, action) {
     case UPDATE_SIGNATURE:
       // console.log('action received', action)
       return {...state, signature: action.value }
-    case TOGGLE_BAR:
-      // console.log('action received for TOGGLE BAR', action.id )
-      return {...state, barId: action.id }
     case TOGGLE_PLAY:
       // console.log('action received for TOGGLE PLAY', !state.isPlaying )
       return {...state, isPlaying: !state.isPlaying }
