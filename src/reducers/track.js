@@ -15,7 +15,6 @@ import sequence from './sequence'
 
 const INITIAL_STATE = {
     id: 0,
-    buffers: [],
     bufferId: 0,
     sequence: [[0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],[0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0]],
     volume: 7,
@@ -40,7 +39,7 @@ export default function(state = INITIAL_STATE, action) {
       if (state.id !== action.track.id) { return state }
       return {...state, bufferId: action.track.value }
     case ASSIGN_BUFFER:
-      // console.log('action received for ASSIGN BUFFER', action.buffer)
+      console.log('action received for ASSIGN BUFFER', action.buffer)
       if (state.id !== action.id) { return state }
       return {...state, buffer: action.buffer }
     case UPDATE_SEQUENCE:

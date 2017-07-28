@@ -18,10 +18,10 @@ const BeatBox = (props, {store}) => {
     <div className="beat-box">
       <Controller drumr={drumr} />
       <Tracks drumr={drumr} />
-      <Reverb drumr={drumr} />
-      <Delay drumr={drumr} />
-      <Compressor drumr={drumr} />
-      <Mixer drumr={drumr} />
+      <Reverb />
+      <Delay />
+      <Compressor />
+      <Mixer />
     </div>
   )
 }

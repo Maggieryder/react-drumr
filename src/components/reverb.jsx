@@ -11,15 +11,15 @@ class Reverb extends Component {
     //
   }
   componentWillReceiveProps(props){
-    let { reverb, drumr } = props
-    let { reverbData, reverbId } = reverb
+    // let { reverb, drumr } = props
+    // let { reverbData, reverbId } = reverb
     // console.log('>>> REVERB componentWillReceiveProps PROPS', reverb)
     // if (reverbId !== this.props.reverb.reverbId)
-    drumr.updateReverbPreset('assets/audio/' + reverbData[reverbId].smpl)
+    // drumr.updateReverbPreset('assets/audio/' + reverbData[reverbId].smpl)
   }
 
   render(){
-    let { toggleReverb, assignReverbId, drumr, reverb } = this.props
+    let { toggleReverb, assignReverbId, reverb } = this.props
     let { active, reverbData, reverbId } = reverb
 
     return (
@@ -35,10 +35,10 @@ class Reverb extends Component {
 }
 
 Reverb.propTypes = {
+  // drumr:          PropTypes.object.isRequired,
   assignReverbId: PropTypes.func.isRequired,
   toggleReverb:   PropTypes.func.isRequired,
-  reverb:         PropTypes.object.isRequired,
-  drumr:          PropTypes.object.isRequired
+  reverb:         PropTypes.object.isRequired
 }
 
 export default Reverb

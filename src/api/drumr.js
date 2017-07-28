@@ -69,28 +69,28 @@ export default class Drumr {
   addTrack(id){
     // console.log('drumr ADD TRACK id '+id)
     let track = new Track(CTX, id, this.store);
-    TRACKS.addTrack(track)
+    // TRACKS.addTrack(track)
     MIXER.addTrack(track)
     SEQUENCER.addTrack(track)
   }
   removeTrackWithId(id){
     console.log('drumr REMOVE TRACK id '+id)
-    TRACKS.removeTrackWithId(id)
+    // TRACKS.removeTrackWithId(id)
     MIXER.removeTrackWithId(id)
     SEQUENCER.removeTrackWithId(id)
   }
   assignSample(id, buffer){
     //console.log('BUFFER for track ' + id +' is', buffer )
     // console.log('TRACKS.tracks.filter(t => t.id===id )', TRACKS.tracks[id] )
-    let t = TRACKS.tracks[id]
+    let t = SEQUENCER.tracks[id]
     t.assignSample(buffer);
   }
   // SEQUENCER FUNCTIONS
-  onNoteTap(id){
-    // console.log('drumr.onNoteTap id', id)
+  onStepTap(id){
+    // console.log('drumr.onStepTap id', id)
     // console.log('SEQUENCER.running()', SEQUENCER.running())
     if (!SEQUENCER.running()){
-      TRACKS.tracks[id].triggerSample(CTX.currentTime);
+      SEQUENCER.tracks[id].triggerSample(CTX.currentTime);
     }
   }
   addTrackSequence(id, sequence){

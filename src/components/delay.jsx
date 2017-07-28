@@ -8,8 +8,7 @@ const Delay = ({
   updateDelayFeedback,
   updateDelayFrequency,
   toggleDelay,
-  delay,
-  drumr
+  delay
 }) => {
 
   let { active, time, feedback, frequency } = delay
@@ -28,7 +27,6 @@ const Delay = ({
 }
 
 Delay.propTypes = {
-  drumr: PropTypes.object.isRequired,
   delay: PropTypes.object.isRequired,
   updateDelayTime: PropTypes.func.isRequired,
   updateDelayFeedback: PropTypes.func.isRequired,

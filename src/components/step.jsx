@@ -5,15 +5,15 @@ const Step = ({ id, trackId, controller, sequence, updateTrackSequence, drumr })
 
   let { isPlaying, stepId, barId, resolution } = controller
 
-  const onNoteTap = () => {
+  const onStepTap = () => {
     updateTrackSequence({id:trackId, barId:barId, seqId:id%resolution })
-    drumr.onNoteTap(trackId)
+    drumr.onStepTap(trackId)
   }
 
   return (
     <li id={id}
       className={sequence[id%resolution] === 1 ? isPlaying && stepId===id ? 'step now' : 'step on' : 'step'}
-      onClick={ () => onNoteTap() } >
+      onClick={ () => onStepTap() } >
       <div className='status'>
         <div></div>
       </div>

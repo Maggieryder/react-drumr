@@ -48,19 +48,19 @@ class Track extends Component {
       break;
       case 'updateVolume':
       updateTrackVolume({id:id, value: value})
-      drumr.updateTrackVolume(id, value/10)
+      // drumr.updateTrackVolume(id, value/10)
       break;
       case 'updatePan':
       updateTrackPan({id:id, value: value})
-      drumr.updateTrackPan(id, value*.2)
+      // drumr.updateTrackPan(id, value/5)
       break;
       case 'updateDelay':
       updateTrackDelaySend({id:id, value: value})
-      drumr.updateDelaySend(id, value/10)
+      // drumr.updateDelaySend(id, value/10)
       break;
       case 'updateReverb':
       updateTrackReverbSend({id:id, value: value})
-      drumr.updateReverbSend(id, value/10)
+      // drumr.updateReverbSend(id, value/10)
       break;
       case 'mute':
       muteTrack(id)
@@ -80,7 +80,7 @@ class Track extends Component {
     let { drumr, kits, track, soloActive } = this.props
 
     let bufferNames = kits.kitData[kits.kitId].voices;
-    // console.log('track',track)
+    console.log('track',track)
     let{ id, bufferId, sequence, volume, pan, clip, mute, solo, reverbSend, delaySend } = track
     // console.log('clip', clip)
     return(

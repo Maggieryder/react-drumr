@@ -6,6 +6,8 @@ export default class Track {
     this.context = ctx;
     this.id = id;
     this.store = store;
+    this.store.subscribe(this.updateState.bind(this));
+    // this.updateState();
     this.sample;
     this.sourceNode;
     this.instrumentName;
@@ -35,6 +37,31 @@ export default class Track {
     this.solo;
     this.lastClipTime;
   }
+
+  updateState(){
+    let { tracks } = this.store.getState();
+    let trackData = tracks[this.id];
+    // console.log('thisTrackData', trackData);
+    let { bufferId,
+      sequence,
+      volume,
+      pan,
+      clip,
+      mute,
+      solo,
+      reverbSend,
+      delaySend } = trackData;
+    // console.log('bufferId', bufferId);
+    // console.log('pan', pan);
+    // console.log('panner', Math.round(this.getPan()*5));
+    if (this.getVolume()*10 !== volume ) this.updateVolume(volume/10);
+    if (Math.round(this.getPan()*5) !== pan ) this.panX(pan/5);
+    if (this.getSendGain(0)*10 !== reverbSend ) this.updateSendGain(0, reverbSend/10);
+    if (this.getSendGain(1)*10 !== delaySend ) this.updateSendGain(1, delaySend/10);
+    // if (this.isMute !== mute ) this.toggleMute();
+    // if (this.isSolo !== solo ) this.toggleSolo();
+  }
+
   init(output, reverbNode, delayNode){
     let self = this;
     this.output = output;
@@ -116,15 +143,24 @@ export default class Track {
     // console.log('Track '+this.id+' send ' + index, 'value '+value )
     this.sendGains[index].gain.value = value;
   }
+  getSendGain(index){
+    return this.sendGains[index].gain.value;
+  }
   updateVolume(value){
     // console.log('Track '+this.id+' volume', value )
     this.outputGain.gain.value = value;
+  }
+  getVolume(){
+    return this.outputGain.gain.value;
   }
   panX(value){
     // console.log('Track '+this.id+' pan', value )
     let xpos = value,
     zpos = 1 - Math.abs(xpos);
     this.panner.setPosition(xpos, 0, zpos);
+  }
+  getPan(){
+    return this.panner.positionX.value
   }
   // updateSequence(sequence){
   //   console.log('updateSequence', sequence)

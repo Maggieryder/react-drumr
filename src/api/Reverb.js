@@ -1,9 +1,12 @@
+const BASE_PATH = 'assets/audio/'
+
 export default class Reverb {
   constructor(ctx){
     this.ctx = ctx;
     this.convolver = ctx.createConvolver();
     this.convolverGain = ctx.createGain();
     this.active = false;
+    this.reverbId = -1;
     this.output;
     this.store;
   }
@@ -14,8 +17,14 @@ export default class Reverb {
   }
   updateState(){
     let { reverb } = this.store.getState();
-    let { active, reverbData, reverbId } = reverb
-    if ( this.active !== active ) this.toggleActive(active)
+    let { active, reverbData, reverbId } = reverb;
+    if ( this.active !== active ) this.toggleActive(active);
+    if ( this.reverbId !== reverbId ) {
+      if ( reverbData.length < 1 ) return;
+      this.reverbId = reverbId;
+      let url = BASE_PATH + reverbData[reverbId].smpl;
+      this.loadImpulse(url);
+    }
   }
   init(output){
     this.output = output;
@@ -32,7 +41,7 @@ export default class Reverb {
     request.responseType = 'arraybuffer';
     request.onload = function() {
       self.ctx.decodeAudioData(request.response, function(buffer) {
-        //console.log('LOAD IMPULSE', buffer);
+        // console.log('IMPULSE LOADED', buffer);
         self.convolver.buffer = buffer;
         self.convolverGain.gain.value = .7;
         // do the connexions

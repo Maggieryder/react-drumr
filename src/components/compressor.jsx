@@ -10,8 +10,7 @@ const Compressor = ({
   updateRatio,
   updateAttack,
   updateRelease,
-  toggleCompressor,
-  drumr
+  toggleCompressor
 }) => {
 
   let { active, threshold, knee, ratio, attack, release } = compressor
@@ -38,8 +37,7 @@ Compressor.propTypes = {
   updateAttack:     PropTypes.func.isRequired,
   updateRelease:    PropTypes.func.isRequired,
   toggleCompressor: PropTypes.func.isRequired,
-  compressor:       PropTypes.object.isRequired,
-  drumr:            PropTypes.object.isRequired
+  compressor:       PropTypes.object.isRequired
 }
 
 export default Compressor

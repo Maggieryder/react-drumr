@@ -21,9 +21,9 @@ class Controller extends Component {
 
   updateKit(value){
     let { drumr, kits, assignKitId, assignBuffers } = this.props
-    let { kitData, kitId, buffers } = kits
+    let { kitData } = kits
     assignKitId(value);
-    drumr.loadBuffers(kits.kitData[value], assignBuffers)
+    drumr.loadBuffers(kitData[value], assignBuffers)
   }
 
   renderBars(bars, id) {
