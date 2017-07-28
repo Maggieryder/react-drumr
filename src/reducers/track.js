@@ -1,7 +1,6 @@
 import { ADD_TRACK,
         ASSIGN_NAME,
         ASSIGN_BUFFER_ID,
-        ASSIGN_BUFFER,
         UPDATE_SEQUENCE,
         UPDATE_VOLUME,
         UPDATE_PAN,
@@ -38,10 +37,6 @@ export default function(state = INITIAL_STATE, action) {
       // console.log('action received for ASSIGN_BUFFER_ID', action.track)
       if (state.id !== action.track.id) { return state }
       return {...state, bufferId: action.track.value }
-    case ASSIGN_BUFFER:
-      console.log('action received for ASSIGN BUFFER', action.buffer)
-      if (state.id !== action.id) { return state }
-      return {...state, buffer: action.buffer }
     case UPDATE_SEQUENCE:
       // console.log('action received', action.track)
       if (state.id !== action.track.id) { return state }

@@ -12,14 +12,14 @@ class Track extends Component {
   componentDidMount(){
     let { drumr, kits, track } = this.props
     let { buffers } = kits
-    drumr.assignSample(track.id, buffers[track.bufferId]);
+    // drumr.assignSample(track.id, buffers[track.bufferId]);
   }
 
   componentWillReceiveProps(nextProps){
     let { drumr, kits, track } = nextProps
     let { buffers } = kits
     // console.log('>>> TRACK componentWillReceiveProps PROPS', track.id, buffers[track.bufferId])
-    if (this.props.kits !== nextProps.kits) drumr.assignSample(track.id, buffers[track.bufferId]);
+    // if (this.props.kits !== nextProps.kits) drumr.assignSample(track.id, buffers[track.bufferId]);
   }
 
   handleInteraction = ( action , id, value ) => {
@@ -44,7 +44,7 @@ class Track extends Component {
       break;
       case 'updateVoice':
       assignBufferId({id:id, value: value})
-      drumr.assignSample(id, kits.buffers[value]);
+      // drumr.assignSample(id, kits.buffers[value]);
       break;
       case 'updateVolume':
       updateTrackVolume({id:id, value: value})
@@ -80,7 +80,7 @@ class Track extends Component {
     let { drumr, kits, track, soloActive } = this.props
 
     let bufferNames = kits.kitData[kits.kitId].voices;
-    console.log('track',track)
+    // console.log('track',track)
     let{ id, bufferId, sequence, volume, pan, clip, mute, solo, reverbSend, delaySend } = track
     // console.log('clip', clip)
     return(

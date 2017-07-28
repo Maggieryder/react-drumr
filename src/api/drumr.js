@@ -79,12 +79,12 @@ export default class Drumr {
     MIXER.removeTrackWithId(id)
     SEQUENCER.removeTrackWithId(id)
   }
-  assignSample(id, buffer){
-    //console.log('BUFFER for track ' + id +' is', buffer )
-    // console.log('TRACKS.tracks.filter(t => t.id===id )', TRACKS.tracks[id] )
-    let t = SEQUENCER.tracks[id]
-    t.assignSample(buffer);
-  }
+  // assignSample(id, buffer){
+  //   //console.log('BUFFER for track ' + id +' is', buffer )
+  //   // console.log('TRACKS.tracks.filter(t => t.id===id )', TRACKS.tracks[id] )
+  //   let t = SEQUENCER.tracks[id]
+  //   t.assignSample(buffer);
+  // }
   // SEQUENCER FUNCTIONS
   onStepTap(id){
     // console.log('drumr.onStepTap id', id)
@@ -101,12 +101,6 @@ export default class Drumr {
     SEQUENCER.updateSequence(id, sequence);
   }
 
-
-  // REVERB FUNCTIONS
-  updateReverbPreset(value){
-    REVERB.loadImpulse(value);
-  }
-
   // TRACK FUNCTIONS
   toggleTrackMute(id){
     MIXER.toggleTrackMute(id);
@@ -114,20 +108,23 @@ export default class Drumr {
   toggleTrackSolo(id){
     MIXER.toggleTrackSolo(id);
   }
-  updateTrackVolume(index, value){
-    MIXER.updateTrackVolume(index, value);
-  }
-  updateTrackPan(index, value){
-    MIXER.updateTrackPan(index, value);
-  }
-  updateDelaySend(index, value){
-    MIXER.updateTrackDelay(index, value);
-  }
-  updateReverbSend(index, value){
-    MIXER.updateTrackReverb(index, value);
-  }
 
 }
+
+// TRACK FUNCTIONS
+
+// updateTrackVolume(index, value){
+//   MIXER.updateTrackVolume(index, value);
+// }
+// updateTrackPan(index, value){
+//   MIXER.updateTrackPan(index, value);
+// }
+// updateDelaySend(index, value){
+//   MIXER.updateTrackDelay(index, value);
+// }
+// updateReverbSend(index, value){
+//   MIXER.updateTrackReverb(index, value);
+// }
 // MIXER FUNCTIONS
 // updateGlobalVolume(value){
 //   MIXER.updateGlobalVolume(value);
@@ -159,6 +156,9 @@ export default class Drumr {
 //   DELAY.updateDelayTime(SEQUENCER.secondsPerBeat()*.5);
 // }
 // REVERB FUNCTIONS
+// updateReverbPreset(value){
+//   REVERB.loadImpulse(value);
+// }
 // toggleReverb(){
 //   REVERB.toggleActive();
 // }

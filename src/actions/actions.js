@@ -130,13 +130,6 @@ export const assignBufferId = ({ id, value }) => {
   }
 }
 
-export const assignTrackBuffer = ({ id, buffer }) => {
-  return {
-    type: Types.ASSIGN_BUFFER,
-    track: { id, buffer }
-  }
-}
-
 export const updateTrackSequence = ({ id, barId, seqId }) => {
   return {
     type: Types.UPDATE_SEQUENCE,

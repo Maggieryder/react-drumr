@@ -7,7 +7,8 @@ export default class Track {
     this.id = id;
     this.store = store;
     this.store.subscribe(this.updateState.bind(this));
-    // this.updateState();
+
+    this.buffer;
     this.sample;
     this.sourceNode;
     this.instrumentName;
@@ -24,6 +25,7 @@ export default class Track {
     this.panner.distanceModel = 'linear';
     this.panner.rolloffFactor = 0;
     this.panner.coneOuterAngle = 0;
+    this.panner.positionX.value = -1; // hack to force first time refresh
     /*this.panner.refDistance = 1;
     this.panner.maxDistance = 10000;
     this.panner.rolloffFactor = 0;
@@ -36,12 +38,15 @@ export default class Track {
     this.mute;
     this.solo;
     this.lastClipTime;
+    // this.updateState();
   }
 
   updateState(){
-    let { tracks } = this.store.getState();
+    let { tracks, kits } = this.store.getState();
     let trackData = tracks[this.id];
-    // console.log('thisTrackData', trackData);
+    let { buffers } = kits;
+    // console.log('buffers', buffers)
+    // console.log('thisTrackData', tracks);
     let { bufferId,
       sequence,
       volume,
@@ -52,12 +57,12 @@ export default class Track {
       reverbSend,
       delaySend } = trackData;
     // console.log('bufferId', bufferId);
-    // console.log('pan', pan);
-    // console.log('panner', Math.round(this.getPan()*5));
-    if (this.getVolume()*10 !== volume ) this.updateVolume(volume/10);
-    if (Math.round(this.getPan()*5) !== pan ) this.panX(pan/5);
-    if (this.getSendGain(0)*10 !== reverbSend ) this.updateSendGain(0, reverbSend/10);
-    if (this.getSendGain(1)*10 !== delaySend ) this.updateSendGain(1, delaySend/10);
+    // console.log('Math.round(this.getPan()[0]*5)', Math.round(this.getPan()[0]*5), this.getPan()[1], pan);
+    if (this.buffer !== buffers[bufferId]) this.assignSample(buffers[bufferId]);
+    if (Math.round(this.getVolume()*10) !== volume ) this.updateVolume(volume/10);
+    if (Math.round(this.getPan()[0]*5) !== pan ) this.updatePan(pan/5);
+    if (Math.round(this.getSendGain(0)*10) !== reverbSend ) this.updateSendGain(0, reverbSend/10);
+    if (Math.round(this.getSendGain(1)*10) !== delaySend ) this.updateSendGain(1, delaySend/10);
     // if (this.isMute !== mute ) this.toggleMute();
     // if (this.isSolo !== solo ) this.toggleSolo();
   }
@@ -70,10 +75,10 @@ export default class Track {
     // connect it all up!
     this.connect();
     // default settings
-    this.panX(0);
-    this.updateVolume(.7);
-    this.updateSendGain(0,0);
-    this.updateSendGain(1,0);
+    // this.panX(0);
+    // this.updateVolume(.7);
+    // this.updateSendGain(0,0);
+    // this.updateSendGain(1,0);
     this.meter.onaudioprocess = function(e) { self.processAudio(e) };
     this.renderMeter();
   }
@@ -121,6 +126,8 @@ export default class Track {
     return this.solo;
   }
   assignSample(buffer){
+    // console.log('ASSIGN SAMPLE')
+    this.buffer = buffer;
     this.sample = new Sample(this.context, buffer, this.panner, this.outputGain,this.sendGains[0],this.sendGains[1]);
   }
   triggerSample(time){
@@ -153,14 +160,14 @@ export default class Track {
   getVolume(){
     return this.outputGain.gain.value;
   }
-  panX(value){
-    // console.log('Track '+this.id+' pan', value )
+  updatePan(value){
+    console.log('Track '+this.id+' pan', value )
     let xpos = value,
     zpos = 1 - Math.abs(xpos);
     this.panner.setPosition(xpos, 0, zpos);
   }
   getPan(){
-    return this.panner.positionX.value
+    return [this.panner.positionX.value, this.panner.positionZ.value]
   }
   // updateSequence(sequence){
   //   console.log('updateSequence', sequence)
