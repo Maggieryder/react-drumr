@@ -26,7 +26,7 @@ export default class Track {
     }
   }
   updatePan(value){
-    console.log('Track '+this.id+' pan', value )
+    // console.log('Track '+this.id+' pan', value )
     let xpos = value,
     zpos = 1 - Math.abs(xpos);
     this.panner.setPosition(xpos, 0, zpos);

@@ -1,5 +1,8 @@
+import Track from './Track'
+
 export default class Mixer {
   constructor(ctx){
+    this.ctx = ctx;
     ctx.listener.setOrientation(0, 0, -1, 0, 1, 0);
     this.destination = ctx.destination;
     // final output
@@ -33,9 +36,8 @@ export default class Mixer {
     this.updateState()
   }
   updateState(){
-    let { mixer, tracks } = this.store.getState();
+    let { mixer } = this.store.getState();
     let { wetMix, wetMute, dryMix, dryMute, masterGain } = mixer;
-    if ( this.tracks !== tracks ) this.tracks = tracks;
     if ( this.finalOutput.gain.value !== masterGain ) this.updateGlobalVolume( masterGain / 10 );
     if ( this.masterDry.gain.value !== dryMix ) this.updateDryVolume( dryMix / 10 );
     if ( this.masterWet.gain.value !== wetMix ) this.updateWetVolume( wetMix / 10 );
@@ -55,43 +57,18 @@ export default class Mixer {
     this.compressor = compressor;
     this.compressor.init(this.finalOutput, this.destination);
   }
-  // global
-  updateGlobalVolume(value){
-    this.finalOutput.gain.value = value;
-  }
-  updateDryVolume(value){
-    this.masterDry.gain.value = value;
-  }
-  updateWetVolume(value){
-    this.masterWet.gain.value =  value;
-  }
-  toggleWetMute(wetMute){
-    this.wetMute ? this.masterWet.connect(this.finalOutput) : this.masterWet.disconnect(this.finalOutput);
-    this.wetMute = wetMute;
-  }
-  toggleDryMute(dryMute){
-    this.dryMute ? this.masterDry.connect(this.finalOutput) : this.masterDry.disconnect(this.finalOutput);
-    this.dryMute = dryMute;
-  }
+
   // tracks
-  addTrack(track){
-    track.init(this.masterDry, this.reverb.gainNode(), this.delay.gainNode());
-    // this.tracks.push(track);
+  setTracks(tracks){
+    console.log('setTracks')
+    tracks.forEach((track) => {
+      track.init(this.masterDry, this.reverb.gainNode(), this.delay.gainNode());
+    })
+    this.tracks = tracks;
   }
-  // updateTrackVolume(index, value){
-  //   this.tracks[index].updateVolume(value);
-  // }
-  // updateTrackPan(index,value){
-  //   this.tracks[index].panX(value);
-  // }
-  // updateTrackReverb(index, value){
-  //   this.tracks[index].updateSendGain(0,value);
-  // }
-  // updateTrackDelay(index, value){
-  //   this.tracks[index].updateSendGain(1,value);
-  // }
   toggleTrackMute(index){
     // this.tracks[index].toggleMute();
+    console.log('toggleMute', index, this.tracks[index].getId())
     let track = { id: this.tracks[index].getId() }
     this.store.dispatch({type:Types.TOGGLE_MUTE, track })
   }
@@ -140,21 +117,23 @@ export default class Mixer {
       if (t.isMute()) self.toggleTrackMute(t.getId());
     });
   }
-  removeTrackWithId(id){
-    this.tracks.filter(t => t.id !== id)
+
+  // global
+  updateGlobalVolume(value){
+    this.finalOutput.gain.value = value;
   }
-  removeTrackAtIndex(index){
-    this.tracks[index].disconnect();
-    this.tracks.splice(index,1);
+  updateDryVolume(value){
+    this.masterDry.gain.value = value;
   }
-  // getTracks(){
-  //   return this.tracks;
-  // }
-  // clearTracks(){
-  //   let i = this.tracks.length;
-  //   while (i--){
-  //     this.tracks[i].disconnect();
-  //     this.tracks.pop();
-  //   }
-  // }
+  updateWetVolume(value){
+    this.masterWet.gain.value =  value;
+  }
+  toggleWetMute(wetMute){
+    this.wetMute ? this.masterWet.connect(this.finalOutput) : this.masterWet.disconnect(this.finalOutput);
+    this.wetMute = wetMute;
+  }
+  toggleDryMute(dryMute){
+    this.dryMute ? this.masterDry.connect(this.finalOutput) : this.masterDry.disconnect(this.finalOutput);
+    this.dryMute = dryMute;
+  }
 }

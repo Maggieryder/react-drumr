@@ -66,7 +66,7 @@ export default class Sequencer {
     // this.store = store;
     let { controller, tracks } = this.store.getState();
     // let { tempo, swing, numBars, barId, stepId, resolution, signature, isPlaying } = controller;
-    // if ( this.tracks !== tracks) this.tracks = tracks;
+    if ( this.sequences.length !== tracks.length ) this.setSequences(tracks);
     // if (this.tempo !== tempo) this.updateParams({'tempo':tempo})
     // if (this.swing !== swing/100) this.updateParams({'swing':swing/100})
     // if (this.isPlaying !== isPlaying) this.updateParams({'isPlaying':isPlaying})
@@ -94,17 +94,21 @@ export default class Sequencer {
       }
     }
   }
-  addTrack(track){
-    this.tracks.push(track);
-    // console.log('SEQ TRACKS',this.tracks)
+  // tracks
+  setTracks(tracks){
+    console.log('setTracks')
+    this.tracks = tracks;
   }
-  removeTrackWithId(id){
-    this.tracks = this.tracks.filter(t => t.id !== id)
-    // console.log('SEQ TRACKS',this.tracks)
-    this.removeTrackSequenceWithId(id);
+  setSequences(tracks){
+    this.clearSequences()
+    console.log('setSequences BEFORE', this.sequences)
+    tracks.forEach((track) => {
+      this.addTrackSequence(track.id, track.sequence);
+    })
+    console.log('setSequences AFTER', this.sequences)
   }
   addTrackSequence(id, sequence){
-    // console.log('SEQUENCER addTrackSequence', id, sequence)
+    console.log('SEQUENCER addTrackSequence', id, sequence)
     this.sequences.push({id, sequence});
     // console.log(this.sequences)
   }
@@ -115,8 +119,9 @@ export default class Sequencer {
   }
   updateSequence(id, sequence){
     // console.log('SEQUENCER updateSequence', id, sequence)
-    // console.log('SEQUENCER this.sequences[id]', this.sequences)
+
     this.sequences[id].sequence = sequence;
+    console.log('SEQUENCER this.sequences[id]', this.sequences[id].sequence)
     // let t = this.sequences.filter(s => s.id == id);
     // console.log(t[0])
     // return t[0].sequence.map((arr, b) => b === barId

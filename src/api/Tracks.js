@@ -21,5 +21,6 @@ export default class Tracks {
       this.tracks[i].disconnect();
       this.tracks.pop();
     }
+    console.log('clearTracks',this.tracks)
   }
 }

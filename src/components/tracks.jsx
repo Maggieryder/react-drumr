@@ -7,7 +7,7 @@ let nextTrackId = 0;
 const Tracks = ({ tracks, addTrack, drumr }) => {
 
   const addNewTrack = (id) => {
-    drumr.addTrack(id)
+    // drumr.addTrack(id)
     addTrack({id:id})
   }
   const soloActive = () => {

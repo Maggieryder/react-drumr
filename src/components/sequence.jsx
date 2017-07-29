@@ -9,7 +9,7 @@ class Sequence extends Component {
   componentDidMount(){
     // console.log('Sequence did Mount')
     let { trackId, sequence, drumr } = this.props
-    drumr.addTrackSequence(trackId, sequence);
+    // drumr.addTrackSequence(trackId, sequence);
   }
   renderBars(){
 

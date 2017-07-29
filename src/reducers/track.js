@@ -38,7 +38,7 @@ export default function(state = INITIAL_STATE, action) {
       if (state.id !== action.track.id) { return state }
       return {...state, bufferId: action.track.value }
     case UPDATE_SEQUENCE:
-      // console.log('action received', action.track)
+      console.log('action received', action.track)
       if (state.id !== action.track.id) { return state }
       //return [...state, sequence(undefined, action)]
       return {...state, sequence: state.sequence.map((arr, b) => b === action.track.barId ? arr.map((value, i) => i === action.track.seqId ? value === 0 ? 1 : 0 : value) : arr )}

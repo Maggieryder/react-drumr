@@ -99,7 +99,6 @@ export default class Track {
     return this.sendGains[index].gain.value;
   }
   connect(){
-    console.log('Track '+this.id+' connect')
     this.sendGains[0].connect(this.reverbNode);
     this.sendGains[1].connect(this.delayNode);
     this.meter.connect();

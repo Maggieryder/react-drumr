@@ -3,7 +3,6 @@ import loader from './loader'
 import controller from './controller'
 import kits from './kits'
 import tracks from './tracks'
-// import track from './track'
 import mixer from './mixer'
 import reverb from './reverb'
 import delay from './delay'
@@ -14,7 +13,6 @@ const rootReducer = combineReducers({
   controller,
   kits,
   tracks,
-  //track,
   mixer,
   reverb,
   delay,

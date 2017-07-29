@@ -7,7 +7,7 @@ import Delay from './Delay'
 import Compressor from './Compressor'
 import Visualizer from './Visualizer'
 
-import { initAudioCtx } from './context'
+import { initAudioCtx } from './AudioContext'
 
 import * as Types from '../actions/types'
 
@@ -25,6 +25,7 @@ export default class Drumr {
   constructor(store){
 
     this.store = store;
+    this.store.subscribe(this.updateState.bind(this))
     SEQUENCER.init(store);
     MIXER.setStore(store);
     MIXER.addDelay(DELAY);
@@ -33,6 +34,39 @@ export default class Drumr {
     DELAY.setStore(store);
     REVERB.setStore(store);
     COMPRESSOR.setStore(store);
+  }
+
+  updateState(){
+    let { tracks } = this.store.getState();
+    if ( tracks && tracks.length !== TRACKS.getTracks().length ) this.updateTracks(tracks);
+  }
+
+  updateTracks(tracks){
+    console.log('updateTracks')
+    TRACKS.clearTracks();
+    tracks.forEach((track) => {
+      let t = new Track(CTX, track.id, this.store);
+      TRACKS.addTrack(t);
+    })
+    MIXER.setTracks(TRACKS.getTracks())
+    SEQUENCER.setTracks(TRACKS.getTracks())
+  }
+  // SEQUENCER FUNCTIONS
+  onStepTap(id){
+    console.log('drumr.onStepTap id', id)
+    let { controller } = this.store.getState();
+    // console.log('SEQUENCER.running()', SEQUENCER.running())
+    if (!controller.isPlaying){
+      TRACKS.tracks[id].triggerSample(CTX.currentTime);
+    }
+  }
+  // addTrackSequence(id, sequence){
+  //   console.log('drumr.initSequence', id, sequence)
+  //   SEQUENCER.addTrackSequence(id, sequence)
+  // }
+  updateSequence(id, sequence){
+    console.log('drumr.updateSequence', id, sequence)
+    SEQUENCER.updateSequence(id, sequence);
   }
 
   loadBuffers(kit, callback){
@@ -65,135 +99,4 @@ export default class Drumr {
     };
     request.send();
   }
-
-  addTrack(id){
-    // console.log('drumr ADD TRACK id '+id)
-    let track = new Track(CTX, id, this.store);
-    // TRACKS.addTrack(track)
-    MIXER.addTrack(track)
-    SEQUENCER.addTrack(track)
-  }
-  removeTrackWithId(id){
-    console.log('drumr REMOVE TRACK id '+id)
-    // TRACKS.removeTrackWithId(id)
-    MIXER.removeTrackWithId(id)
-    SEQUENCER.removeTrackWithId(id)
-  }
-  // assignSample(id, buffer){
-  //   //console.log('BUFFER for track ' + id +' is', buffer )
-  //   // console.log('TRACKS.tracks.filter(t => t.id===id )', TRACKS.tracks[id] )
-  //   let t = SEQUENCER.tracks[id]
-  //   t.assignSample(buffer);
-  // }
-  // SEQUENCER FUNCTIONS
-  onStepTap(id){
-    // console.log('drumr.onStepTap id', id)
-    // console.log('SEQUENCER.running()', SEQUENCER.running())
-    if (!SEQUENCER.running()){
-      SEQUENCER.tracks[id].triggerSample(CTX.currentTime);
-    }
-  }
-  addTrackSequence(id, sequence){
-    //console.log('drumr.initSequence', id, sequence)
-    SEQUENCER.addTrackSequence(id, sequence)
-  }
-  updateSequence(id, sequence){
-    SEQUENCER.updateSequence(id, sequence);
-  }
-
-  // TRACK FUNCTIONS
-  toggleTrackMute(id){
-    MIXER.toggleTrackMute(id);
-  }
-  toggleTrackSolo(id){
-    MIXER.toggleTrackSolo(id);
-  }
-
 }
-
-// TRACK FUNCTIONS
-
-// updateTrackVolume(index, value){
-//   MIXER.updateTrackVolume(index, value);
-// }
-// updateTrackPan(index, value){
-//   MIXER.updateTrackPan(index, value);
-// }
-// updateDelaySend(index, value){
-//   MIXER.updateTrackDelay(index, value);
-// }
-// updateReverbSend(index, value){
-//   MIXER.updateTrackReverb(index, value);
-// }
-// MIXER FUNCTIONS
-// updateGlobalVolume(value){
-//   MIXER.updateGlobalVolume(value);
-// }
-// updateDryVolume(value){
-//   MIXER.updateDryVolume(value);
-// }
-// updateWetVolume(value){
-//   MIXER.updateWetVolume(value);
-// }
-// toggleWetMute(){
-//   MIXER.toggleWetMute();
-// }
-// toggleDryMute(){
-//   MIXER.toggleDryMute();
-// }
-// SEQUENCER FUNCTIONS
-// togglePlay(){
-//   this.store.dispatch({type:Types.TOGGLE_PLAY })
-//   SEQUENCER.togglePlay();
-// }
-// updateSwing(value){
-//   // this.store.dispatch({type:Types.UPDATE_SWING, value: value })
-// 	SEQUENCER.updateParams({swing:value/100});
-// }
-// updateTempo(value){
-//   // this.store.dispatch({type:Types.UPDATE_TEMPO, value: value })
-//   SEQUENCER.updateParams({tempo:value});
-//   DELAY.updateDelayTime(SEQUENCER.secondsPerBeat()*.5);
-// }
-// REVERB FUNCTIONS
-// updateReverbPreset(value){
-//   REVERB.loadImpulse(value);
-// }
-// toggleReverb(){
-//   REVERB.toggleActive();
-// }
-// DELAY FUNCTIONS
-// toggleDelay(){
-//   DELAY.toggleActive();
-// }
-// updateDelayTime(value){
-//   console.log('updateDelayTime', value )
-//   DELAY.updateDelayTime(SEQUENCER.secondsPerBeat()*value);
-// }
-// updateFeedbackGain(value){
-//   console.log('updateFeedbackGain', value )
-//   DELAY.updateFeedbackGain(value/100);
-// }
-// updateFrequency(value){
-//   console.log('updateFrequency', value )
-//   DELAY.updateFrequency(value);
-// }
-// COMPRESSOR FUNCTIONS
-// toggleCompressor(){
-//   COMPRESSOR.toggleActive();
-// }
-// updateThreshold(value){
-//   COMPRESSOR.updateThreshold(value);
-// }
-// updateKnee(value){
-//   COMPRESSOR.updateKnee(value);
-// }
-// updateRatio(value){
-//   COMPRESSOR.updateRatio(value);
-// }
-// updateAttack(value){
-//   COMPRESSOR.updateAttack(value);
-// }
-// updateRelease(value){
-//   COMPRESSOR.updateRelease(value);
-// }
