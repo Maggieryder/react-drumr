@@ -35,7 +35,7 @@ export default class Mixer {
   updateState(){
     let { mixer, tracks } = this.store.getState();
     let { wetMix, wetMute, dryMix, dryMute, masterGain } = mixer;
-    // if ( this.tracks !== tracks ) this.tracks = tracks;
+    if ( this.tracks !== tracks ) this.tracks = tracks;
     if ( this.finalOutput.gain.value !== masterGain ) this.updateGlobalVolume( masterGain / 10 );
     if ( this.masterDry.gain.value !== dryMix ) this.updateDryVolume( dryMix / 10 );
     if ( this.masterWet.gain.value !== wetMix ) this.updateWetVolume( wetMix / 10 );
@@ -76,22 +76,24 @@ export default class Mixer {
   // tracks
   addTrack(track){
     track.init(this.masterDry, this.reverb.gainNode(), this.delay.gainNode());
-    this.tracks.push(track);
+    // this.tracks.push(track);
   }
-  updateTrackVolume(index, value){
-    this.tracks[index].updateVolume(value);
-  }
-  updateTrackPan(index,value){
-    this.tracks[index].panX(value);
-  }
-  updateTrackReverb(index, value){
-    this.tracks[index].updateSendGain(0,value);
-  }
-  updateTrackDelay(index, value){
-    this.tracks[index].updateSendGain(1,value);
-  }
+  // updateTrackVolume(index, value){
+  //   this.tracks[index].updateVolume(value);
+  // }
+  // updateTrackPan(index,value){
+  //   this.tracks[index].panX(value);
+  // }
+  // updateTrackReverb(index, value){
+  //   this.tracks[index].updateSendGain(0,value);
+  // }
+  // updateTrackDelay(index, value){
+  //   this.tracks[index].updateSendGain(1,value);
+  // }
   toggleTrackMute(index){
-    this.tracks[index].toggleMute();
+    // this.tracks[index].toggleMute();
+    let track = { id: this.tracks[index].getId() }
+    this.store.dispatch({type:Types.TOGGLE_MUTE, track })
   }
   toggleTrackSolo(index){
     let self = this,
@@ -145,14 +147,14 @@ export default class Mixer {
     this.tracks[index].disconnect();
     this.tracks.splice(index,1);
   }
-  getTracks(){
-    return this.tracks;
-  }
-  clearTracks(){
-    let i = this.tracks.length;
-    while (i--){
-      this.tracks[i].disconnect();
-      this.tracks.pop();
-    }
-  }
+  // getTracks(){
+  //   return this.tracks;
+  // }
+  // clearTracks(){
+  //   let i = this.tracks.length;
+  //   while (i--){
+  //     this.tracks[i].disconnect();
+  //     this.tracks.pop();
+  //   }
+  // }
 }

@@ -4,7 +4,7 @@ import thunk from 'redux-thunk';
 import reducers from './reducers'
 import { loadState } from './utils'
 
-const customMiddleWare = store => next => action => {
+const log = store => next => action => {
   console.log("Action received:", action);
   next(action);
 }
@@ -13,6 +13,6 @@ export function configureStore( persistedState = loadState() ) {
   return createStore(
     reducers,
     persistedState,
-    composeWithDevTools(applyMiddleware(thunk))
+    composeWithDevTools(applyMiddleware( thunk ))
   );
 }

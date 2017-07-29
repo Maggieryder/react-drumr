@@ -10,19 +10,20 @@ class Track extends Component {
     super(props);
   }
   componentDidMount(){
-    let { drumr, kits, track } = this.props
-    let { buffers } = kits
+    // let { drumr, kits, track } = this.props
+    // let { buffers } = kits
     // drumr.assignSample(track.id, buffers[track.bufferId]);
   }
 
   componentWillReceiveProps(nextProps){
-    let { drumr, kits, track } = nextProps
-    let { buffers } = kits
+    // let { drumr, kits, track } = nextProps
+    // let { buffers } = kits
     // console.log('>>> TRACK componentWillReceiveProps PROPS', track.id, buffers[track.bufferId])
     // if (this.props.kits !== nextProps.kits) drumr.assignSample(track.id, buffers[track.bufferId]);
   }
 
-  handleInteraction = ( action , id, value ) => {
+  render(){
+
     let {
       removeTrack,
       assignBufferId,
@@ -33,51 +34,9 @@ class Track extends Component {
       muteTrack,
       soloTrack,
       kits,
+      track,
+      soloActive,
       drumr } = this.props
-
-    // console.log('handleInteraction: ', action, id, value)
-
-    switch( action ){
-      case 'removeTrack':
-      removeTrack(id)
-      drumr.removeTrackWithId(id);
-      break;
-      case 'updateVoice':
-      assignBufferId({id:id, value: value})
-      // drumr.assignSample(id, kits.buffers[value]);
-      break;
-      case 'updateVolume':
-      updateTrackVolume({id:id, value: value})
-      // drumr.updateTrackVolume(id, value/10)
-      break;
-      case 'updatePan':
-      updateTrackPan({id:id, value: value})
-      // drumr.updateTrackPan(id, value/5)
-      break;
-      case 'updateDelay':
-      updateTrackDelaySend({id:id, value: value})
-      // drumr.updateDelaySend(id, value/10)
-      break;
-      case 'updateReverb':
-      updateTrackReverbSend({id:id, value: value})
-      // drumr.updateReverbSend(id, value/10)
-      break;
-      case 'mute':
-      muteTrack(id)
-      drumr.toggleTrackMute(id)
-      break;
-      case 'solo':
-      soloTrack(id)
-      drumr.toggleTrackSolo(id)
-      break;
-      default:
-      //
-    }
-  }
-
-  render(){
-    let handleInteraction = this.handleInteraction
-    let { drumr, kits, track, soloActive } = this.props
 
     let bufferNames = kits.kitData[kits.kitId].voices;
     // console.log('track',track)
@@ -86,18 +45,18 @@ class Track extends Component {
     return(
       <li className="track" id={id}>
         <div>
-          <a className='removeTrackBtn' href='#' onClick={ () => handleInteraction('removeTrack', id) }>x</a>
+          <a className='removeTrackBtn' href='#' onClick={ () => removeTrack( id ) }>x</a>
         </div>
         <div className="name">
-          <Options cname='voices' options={bufferNames} value={bufferId} onChange={ e => handleInteraction('updateVoice', id, parseInt(e.target.value)) }/>
+          <Options cname='voices' options={bufferNames} value={bufferId} onChange={ e => assignBufferId({ id: id, value: parseInt(e.target.value) }) }/>
         </div>
         <div className="params">
-          <Knob label='gain' min={0} max={10} value={volume} step={1} width={50} onChange={ e => handleInteraction('updateVolume', id, e ) } />
-          <Knob label='pan' min={-5} max={5} value={pan} step={1} width={50} onChange={ e => handleInteraction('updatePan', id, e ) } />
-          <Knob label='delay' min={0} max={10} value={delaySend} step={1} width={50} onChange={ e => handleInteraction('updateDelay', id, e ) } />
-          <Knob label='reverb' min={0} max={10} value={reverbSend} step={1} width={50} onChange={ e => handleInteraction('updateReverb', id, e ) } />
-          <Switch label='mute' cname={(soloActive && !solo) || (mute && !solo) ? 'mute on' : clip ? 'mute clip' : 'mute'} onClick={() => handleInteraction('mute', id ) }/>
-          <Switch label='solo' cname={solo ? 'on' : ''} onClick={() => handleInteraction('solo', id) } />
+          <Knob label='gain' min={0} max={10} value={volume} step={1} width={50} onChange={ e => updateTrackVolume({ id: id, value: e }) } />
+          <Knob label='pan' min={-5} max={5} value={pan} step={1} width={50} onChange={ e => updateTrackPan({ id: id, value: e }) } />
+          <Knob label='delay' min={0} max={10} value={delaySend} step={1} width={50} onChange={ e => updateTrackDelaySend({ id: id, value: e }) } />
+          <Knob label='reverb' min={0} max={10} value={reverbSend} step={1} width={50} onChange={ e => updateTrackReverbSend({id: id, value: e }) } />
+          <Switch label='mute' cname={(soloActive && !solo) || (mute && !solo) ? 'mute on' : clip ? 'mute clip' : 'mute'} onClick={() => muteTrack( id ) }/>
+          <Switch label='solo' cname={solo ? 'on' : ''} onClick={() => soloTrack( id ) } />
         </div>
         <Sequence id={`seq_${id}`} trackId={id} drumr={drumr} sequence={sequence}/>
       </li>
