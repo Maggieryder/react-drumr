@@ -1,4 +1,7 @@
-import { UPDATE_SEQUENCE } from '../actions'
+import { UPDATE_SEQUENCE,
+  UPDATE_BARS,
+  UPDATE_RESOLTION,
+  UPDATE_SIGNATURE } from '../actions'
 
 import sequence from './sequence'
 

@@ -64,10 +64,10 @@ export default class Drumr {
   //   console.log('drumr.initSequence', id, sequence)
   //   SEQUENCER.addTrackSequence(id, sequence)
   // }
-  updateSequence(id, sequence){
-    console.log('drumr.updateSequence', id, sequence)
-    SEQUENCER.updateSequence(id, sequence);
-  }
+  // updateSequence(id, sequence){
+  //   console.log('drumr.updateSequence', id, sequence)
+  //   SEQUENCER.updateSequence(id, sequence);
+  // }
 
   loadBuffers(kit, callback){
     //console.log('LOAD BUFFERS', kit);

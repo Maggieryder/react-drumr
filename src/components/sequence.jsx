@@ -26,7 +26,7 @@ class Sequence extends Component {
   componentWillReceiveProps(props){
     let { trackId, sequence, drumr } = props
     // console.log('>>> Sequence componentWillReceiveProps PROPS', sequence)
-    drumr.updateSequence(trackId, sequence);
+    // drumr.updateSequence(trackId, sequence);
   }
 
   render(){
