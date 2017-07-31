@@ -6,9 +6,6 @@ export default class Sequencer {
   constructor(ctx){
     this.context = ctx;
     this.isPlaying = false;
-    // this.tempo = 120;
-    // this.swing = 0;
-    // this.numBars = 2;
     this.barIndex = 0;
     this.stepIndex = 0;
     this.nextNoteTime = 0.0;
@@ -17,8 +14,6 @@ export default class Sequencer {
     this.timeWorker;
     this.sequences = [];
     this.tracks = [];
-    // this.noteResolution = 16;
-    // this.timeSignature = [4,4];
     this.store;
   }
   nextNote(){
@@ -119,7 +114,6 @@ export default class Sequencer {
   }
   updateSequence(id, sequence){
     // console.log('SEQUENCER updateSequence', id, sequence)
-
     this.sequences[id].sequence = sequence;
     console.log('SEQUENCER this.sequences[id]', this.sequences[id].sequence)
     // let t = this.sequences.filter(s => s.id == id);

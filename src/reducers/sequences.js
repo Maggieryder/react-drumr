@@ -1,12 +1,8 @@
 import { UPDATE_SEQUENCE } from '../actions'
 
-const INITIAL_STATE = {
-  id: 0,
-  sequence:[
-    [ 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0 ],
-    [ 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0 ]
-  ]
-}
+import sequence from './sequence'
+
+const INITIAL_STATE = []
 
 export default function(state = INITIAL_STATE, action) {
   switch(action.type){

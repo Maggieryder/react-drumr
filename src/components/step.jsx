@@ -10,7 +10,7 @@ const Step = ({ id, tracks, trackId, controller, sequence, updateTrackSequence, 
   const onStepTap = () => {
     updateTrackSequence({id:trackId, barId:barId, seqId:id%resolution })
     drumr.onStepTap(trackId)
-    // if (!isPlaying) triggerSample()
+    // if (!isPlaying) triggerSample(trackId)
   }
 
   return (
