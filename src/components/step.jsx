@@ -1,9 +1,11 @@
 import React from 'react'
 import PropTypes  from 'prop-types'
 
-const Step = ({ id, tracks, trackId, controller, sequence, updateTrackSequence, drumr }) => {
+const Step = ({ id, tracks, trackId, controller, sequences, updateTrackSequence, drumr }) => {
 
   let { isPlaying, stepId, barId, resolution } = controller
+
+  let sequence = sequences[trackId]
 
   // console.log('tracks[trackId].sample', trackId, tracks[trackId].sample)
 

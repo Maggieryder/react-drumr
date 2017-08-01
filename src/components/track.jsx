@@ -58,7 +58,7 @@ class Track extends Component {
           <Switch label='mute' cname={(soloActive && !solo) || (mute && !solo) ? 'mute on' : clip ? 'mute clip' : 'mute'} onClick={() => muteTrack( id ) }/>
           <Switch label='solo' cname={solo ? 'on' : ''} onClick={() => soloTrack( id ) } />
         </div>
-        <Sequence id={`seq_${id}`} trackId={id} drumr={drumr} sequence={sequence}/>
+        <Sequence id={`seq_${id}`} trackId={id} drumr={drumr} />
       </li>
     )
   }

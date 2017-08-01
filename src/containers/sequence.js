@@ -1,8 +1,8 @@
 import Sequence from '../components/sequence'
 import { connect } from 'react-redux'
 
-function mapStateToProps({ controller }){
-  return { controller }
+function mapStateToProps({ controller, sequences }){
+  return { controller, sequences }
 }
 
 export default connect(mapStateToProps)(Sequence)
