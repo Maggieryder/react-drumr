@@ -22,6 +22,7 @@ export const ADD_TRACK = 'ADD_TRACK'
 export const REMOVE_TRACK = 'REMOVE_TRACK'
 // Track types
 export const ASSIGN_BUFFER_ID = "ASSIGN_BUFFER_ID"
+export const ADD_SEQUENCE = "ADD_SEQUENCE"
 export const UPDATE_SEQUENCE = 'UPDATE_SEQUENCE'
 export const UPDATE_VOLUME = 'UPDATE_VOLUME'
 export const UPDATE_PAN = 'UPDATE_PAN'
