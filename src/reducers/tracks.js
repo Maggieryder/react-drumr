@@ -25,7 +25,7 @@ export default function(state = INITIAL_STATE, action) {
       //return [ ...state.slice(0, action.index), ...state.slice(action.index + 1)]
       return state.filter(t => t.id !== action.id)
     case ASSIGN_BUFFER_ID:
-    case UPDATE_SEQUENCE:
+    // case UPDATE_SEQUENCE:
     case UPDATE_VOLUME:
     case UPDATE_PAN:
     case UPDATE_REVERB_SEND:

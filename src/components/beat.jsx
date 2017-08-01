@@ -2,7 +2,9 @@ import React from 'react'
 import PropTypes  from 'prop-types'
 import Step from '../containers/step'
 
-const Beat = ({ trackId, step, resolution, sequence, drumr }) => {
+const Beat = ({ trackId, step, resolution, drumr }) => {
+
+  // console.log('trackId', trackId)
 
   const renderSteps = () => {
 
@@ -13,7 +15,6 @@ const Beat = ({ trackId, step, resolution, sequence, drumr }) => {
       steps.push(<Step key={step*numNotes+i}
                   id={step*numNotes+i}
                   trackId={trackId}
-                  sequence={sequence}
                   drumr={drumr}/>)
     }
     return steps

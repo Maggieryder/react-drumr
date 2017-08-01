@@ -1,12 +1,12 @@
 import React from 'react'
 import PropTypes  from 'prop-types'
 
-const Step = ({ id, tracks, trackId, controller, sequences, updateTrackSequence, drumr }) => {
+const Step = ({ id, trackId, controller, sequences, updateTrackSequence, drumr }) => {
 
   let { isPlaying, stepId, barId, resolution } = controller
 
-  let sequence = sequences[trackId]
-
+  let sequence = sequences.byHash[trackId][barId]
+  // console.log('STEP sequence', sequence )
   // console.log('tracks[trackId].sample', trackId, tracks[trackId].sample)
 
   const onStepTap = () => {
@@ -29,7 +29,8 @@ const Step = ({ id, tracks, trackId, controller, sequences, updateTrackSequence,
 Step.propTypes = {
   updateTrackSequence: PropTypes.func.isRequired,
   controller:   PropTypes.object.isRequired,
-  tracks:   PropTypes.array.isRequired,
+  sequences:   PropTypes.object.isRequired,
+  // tracks:   PropTypes.array.isRequired,
   drumr:    PropTypes.object.isRequired
 }
 

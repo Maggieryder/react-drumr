@@ -37,7 +37,7 @@ export default function(state = INITIAL_STATE, action) {
       // console.log('action received for ASSIGN_BUFFER_ID', action.track)
       if (state.id !== action.track.id) { return state }
       return {...state, bufferId: action.track.value }
-    case UPDATE_SEQUENCE:
+    // case UPDATE_SEQUENCE:
       console.log('action received', action.track)
       if (state.id !== action.track.id) { return state }
       //return [...state, sequence(undefined, action)]

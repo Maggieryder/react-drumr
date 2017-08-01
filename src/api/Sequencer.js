@@ -59,10 +59,10 @@ export default class Sequencer {
 
   updateState(){
     // this.store = store;
-    let { controller, tracks, sequences } = this.store.getState();
-    console.log('updateState', sequences);
+    let { controller, sequences } = this.store.getState();
+    // console.log('updateState', sequences);
     // let { tempo, swing, numBars, barId, stepId, resolution, signature, isPlaying } = controller;
-    // if ( this.sequences.length !== tracks.length ) this.setSequences(tracks);
+    if ( this.sequences !== sequences.byHash ) this.sequences = sequences.byHash;
     // if (this.tempo !== tempo) this.updateParams({'tempo':tempo})
     // if (this.swing !== swing/100) this.updateParams({'swing':swing/100})
     // if (this.isPlaying !== isPlaying) this.updateParams({'isPlaying':isPlaying})
@@ -92,11 +92,15 @@ export default class Sequencer {
   }
   // tracks
   setTracks(tracks){
-    console.log('setTracks')
     tracks.forEach((track) => {
       this.addTrackSequence(track.id);
     })
     this.tracks = tracks;
+    console.log('SEQ setTracks', this.tracks )
+  }
+  addTrack(track){
+    this.tracks.push(track);
+    this.addTrackSequence(track.id);
   }
   addTrackSequence(id){
     let { controller } = this.store.getState();
@@ -106,17 +110,19 @@ export default class Sequencer {
     }
     // this.sequences.push({id, sequence});
     let track = {id:id, sequence: bars};
+    // this.store.dispatch({type:Types.CLEAR_SEQUENCES });
     this.store.dispatch({type:Types.ADD_SEQUENCE, track });
   }
   removeTrackSequenceWithId(id){
     // console.log('SEQUENCER removeTrackSequence', id)
-    this.sequences = this.sequences.filter(s => !s.id == id)
+    // this.sequences = this.sequences.filter(s => !s.id == id)
+    this.store.dispatch({type:Types.CLEAR_SEQUENCE, id });
     // console.log(this.sequences)
   }
   updateSequence(id, sequence){
     // console.log('SEQUENCER updateSequence', id, sequence)
     this.sequences[id].sequence = sequence;
-    console.log('SEQUENCER this.sequences[id]', this.sequences[id].sequence)
+    console.log('>>>>>>SEQUENCER this.sequences[id]', this.sequences[id].sequence)
     // let t = this.sequences.filter(s => s.id == id);
     // console.log(t[0])
     // return t[0].sequence.map((arr, b) => b === barId

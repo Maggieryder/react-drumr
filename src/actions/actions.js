@@ -137,6 +137,13 @@ export const addTrackSequence = id => {
   }
 }
 
+export const removeTrackSequence = id => {
+  return {
+    type: Types.CLEAR_SEQUENCE,
+    id
+  }
+}
+
 export const updateTrackSequence = ({ id, barId, seqId }) => {
   return {
     type: Types.UPDATE_SEQUENCE,

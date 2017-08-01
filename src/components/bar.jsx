@@ -3,7 +3,9 @@ import PropTypes  from 'prop-types'
 import Beat from './beat'
 import { connect } from 'react-redux'
 
-const Bar = ({ trackId, sequence, cname, controller, drumr  }) => {
+const Bar = ({ trackId, cname, controller, drumr  }) => {
+
+  // console.log('trackId', trackId)
 
   let { barId, signature, resolution } = controller
 
@@ -17,7 +19,6 @@ const Bar = ({ trackId, sequence, cname, controller, drumr  }) => {
         step={(barId*numBeats)+i}
         trackId={trackId}
         resolution={resolution}
-        sequence={sequence}
         drumr={drumr} />)
     }
     return beats

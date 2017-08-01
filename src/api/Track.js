@@ -23,20 +23,19 @@ export default class Track {
     this.sourceNode;
     this.sample;
     this.buffer;
-    this.sequence = [];
     this.mute = false;
     this.solo = false;;
   }
 
   updateState(){
     let { tracks, kits, controller } = this.store.getState();
+    // let trackData = tracks.filter(t => t.id === this.id);
     let trackData = tracks[this.id];
     let { buffers } = kits;
     // console.log('buffers', buffers)
     // console.log('thisTrackData', tracks);
     if (trackData){
       let { bufferId,
-        // sequence,
         volume,
         mute,
         solo,
@@ -44,7 +43,6 @@ export default class Track {
         delaySend } = trackData;
       // console.log('bufferId', bufferId);
       if (this.buffer !== buffers[bufferId]) this.assignSample(buffers[bufferId]);
-      // if (this.sequence !== sequence) this.updateSequence(sequence);
       if (Math.round(this.getVolume()*10) !== volume ) this.updateVolume(volume/10);
       if (Math.round(this.getSendGain(0)*10) !== reverbSend ) this.updateSendGain(0, reverbSend/10);
       if (Math.round(this.getSendGain(1)*10) !== delaySend ) this.updateSendGain(1, delaySend/10);
@@ -65,9 +63,6 @@ export default class Track {
   getId(){
     return this.id;
   }
-  // updateSequence(sequence){
-  //   this.sequence = sequence;
-  // }
   assignSample(buffer){
     this.buffer = buffer;
     this.sample = new Sample(this.context, buffer, this.panner.node(), this.outputGain,this.sendGains[0],this.sendGains[1]);

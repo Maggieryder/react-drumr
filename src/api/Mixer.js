@@ -60,11 +60,15 @@ export default class Mixer {
 
   // tracks
   setTracks(tracks){
-    console.log('setTracks')
     tracks.forEach((track) => {
       track.init(this.masterDry, this.reverb.gainNode(), this.delay.gainNode());
     })
     this.tracks = tracks;
+    console.log('MIXER setTracks', this.tracks)
+  }
+  addTrack(track){
+    track.init(this.masterDry, this.reverb.gainNode(), this.delay.gainNode());
+    this.tracks.push(track);
   }
   toggleTrackMute(index){
     // this.tracks[index].toggleMute();

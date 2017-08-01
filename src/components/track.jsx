@@ -40,7 +40,7 @@ class Track extends Component {
 
     let bufferNames = kits.kitData[kits.kitId].voices;
     // console.log('track',track)
-    let{ id, bufferId, sequence, volume, pan, clip, mute, solo, reverbSend, delaySend } = track
+    let{ id, bufferId, volume, pan, clip, mute, solo, reverbSend, delaySend } = track
     // console.log('clip', clip)
     return(
       <li className="track" id={id}>
