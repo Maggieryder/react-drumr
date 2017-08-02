@@ -15,7 +15,7 @@ const INITIAL_STATE = {
 export default function(state = INITIAL_STATE, action) {
   switch(action.type){
     case ADD_SEQUENCE:
-      console.log('ADD SEQ REDUCER', action.track.sequence)
+      console.log('REDUCER ADD SEQ', action.track)
       // return [...state, sequence(undefined, action)]
       return {
         byId: [ ...state.byId, action.track.id],
@@ -25,25 +25,34 @@ export default function(state = INITIAL_STATE, action) {
         }
       }
     case CLEAR_SEQUENCE:
-      delete state.byHash[action.id] // delete the hash associated with the action.id
+      delete state.byHash[action.track.id] // delete the hash associated with the action.id
 
       return {
-        byId: state.byId.filter(item => item.id !== action.id),
+        byId: state.byId.filter(item => item !== action.id),
         byHash: state.byHash
       }
     // case UPDATE_BARS:
     case UPDATE_SEQUENCE:
-    let seqs = state.byHash
-    console.log('UPDATE SEQ REDUCER', seqs[action.track.id])
+    // let sequence = state.byHash[action.track.id]
+    // let newSeq = sequence.map((arr, b) => {
+    //   // console.log('arr[b]', b)
+    //   if (b === action.track.barId ) {
+    //     arr.map((value, i) => {
+    //       // console.log('i === action.track.seqId', i === action.track.seqId)
+    //       if (i === action.track.seqId) {
+    //         value = value === 0 ? 1 : 0
+    //         // console.log('value',value)
+    //       }
+    //       // console.log('arr',arr)
+    //     })
+    //   }
+    // })
+    console.log('REDUCER UPDATE HASH', action.track.sequence)
+    
       // return state.map(s => sequence(s, action))
-      return {...state, ...state.byHash, [action.track.id]:
-        seqs[action.track.id].map((arr, b) => b === action.track.barId
-        ? arr.map((value, i) => i === action.track.seqId
-          ? value === 0
-            ? 1 : 0
-          : value )
-        : arr )
-      }
+      console.log({...state, ...state.byHash, [action.track.id]: action.track.sequence })
+      return {...state, ...state.byHash, [action.track.id]: action.track.sequence }
+
     default:
       return state
   }

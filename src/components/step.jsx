@@ -5,12 +5,15 @@ const Step = ({ id, trackId, controller, sequences, updateTrackSequence, drumr }
 
   let { isPlaying, stepId, barId, resolution } = controller
 
-  let sequence = sequences.byHash[trackId][barId]
+  let sequence = sequences.byHash[trackId]
   // console.log('STEP sequence', sequence )
   // console.log('tracks[trackId].sample', trackId, tracks[trackId].sample)
 
   const onStepTap = () => {
-    updateTrackSequence({id:trackId, barId:barId, seqId:id%resolution })
+    let newSeq = sequence.map((arr, b) => b === barId ? arr.map((value, i) => i === stepId ? value === 0 ? 1 : 0 : value) : arr )
+    console.log('STEP NEW sequence', newSeq )
+    // updateTrackSequence({id:trackId, barId:barId, seqId:id%resolution })
+    updateTrackSequence({id:trackId, barId:barId, sequence: newSeq })
     drumr.onStepTap(trackId)
     // if (!isPlaying) triggerSample(trackId)
   }

@@ -14,11 +14,11 @@ class Sequence extends Component {
   renderBars(){
 
     let { trackId, sequences, controller, drumr } = this.props
-    console.log('SEQ JSX sequences', sequences.byHash)
-    console.log('trackId', trackId)
+    console.log('JSX sequences', sequences.byHash)
+    // console.log('trackId', trackId)
     let { numBars, barId } = controller
     let sequence = sequences.byHash[trackId]
-    console.log('>>>>>>>> SEQ sequence', sequence)
+    // console.log('>>>>>>>> JSX sequence', sequence)
     // let bars = []
     // for (let i=0;i<numBars;i++){
     //   // console.log('>>> bar ID', i===barId)

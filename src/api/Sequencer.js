@@ -62,7 +62,11 @@ export default class Sequencer {
     let { controller, sequences } = this.store.getState();
     // console.log('updateState', sequences);
     // let { tempo, swing, numBars, barId, stepId, resolution, signature, isPlaying } = controller;
-    if ( this.sequences !== sequences.byHash ) this.sequences = sequences.byHash;
+    if ( this.sequences !== sequences.byHash ) {
+      this.sequences = sequences.byHash;
+      console.log('########### this.sequences !== sequences.byHash', sequences.byHash);
+    }
+
     // if (this.tempo !== tempo) this.updateParams({'tempo':tempo})
     // if (this.swing !== swing/100) this.updateParams({'swing':swing/100})
     // if (this.isPlaying !== isPlaying) this.updateParams({'isPlaying':isPlaying})
@@ -96,7 +100,7 @@ export default class Sequencer {
       this.addTrackSequence(track.id);
     })
     this.tracks = tracks;
-    console.log('SEQ setTracks', this.tracks )
+    // console.log('SEQ setTracks', this.tracks )
   }
   addTrack(track){
     this.tracks.push(track);

@@ -144,10 +144,10 @@ export const removeTrackSequence = id => {
   }
 }
 
-export const updateTrackSequence = ({ id, barId, seqId }) => {
+export const updateTrackSequence = ({ id, barId, sequence }) => {
   return {
     type: Types.UPDATE_SEQUENCE,
-    track: { id, barId, seqId }
+    track: { id, barId, sequence }
   }
 }
 

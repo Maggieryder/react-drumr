@@ -3,9 +3,9 @@ export default class Tracks {
     this.tracks = [];
   }
   addTrack(track){
-    console.log('@@@@@@@ addTrack',track)
+    // console.log('@@@@@@@ addTrack',track)
     this.tracks.push(track);
-    console.log('@@@@@@@ tracks',this.tracks)
+    // console.log('@@@@@@@ tracks',this.tracks)
   }
   getTracks(){
     return this.tracks;
