@@ -10,8 +10,8 @@ const Step = ({ id, trackId, controller, sequences, updateTrackSequence, drumr }
   // console.log('tracks[trackId].sample', trackId, tracks[trackId].sample)
 
   const onStepTap = () => {
-    let newSeq = sequence.map((arr, b) => b === barId ? arr.map((value, i) => i === stepId ? value === 0 ? 1 : 0 : value) : arr )
-    console.log('STEP NEW sequence', newSeq )
+    let newSeq = sequence.map((arr, b) => b === barId ? arr.map((value, i) => i === id%resolution ? value === 0 ? 1 : 0 : value) : arr )
+    // console.log('STEP NEW sequence', barId, newSeq )
     // updateTrackSequence({id:trackId, barId:barId, seqId:id%resolution })
     updateTrackSequence({id:trackId, barId:barId, sequence: newSeq })
     drumr.onStepTap(trackId)
@@ -20,7 +20,7 @@ const Step = ({ id, trackId, controller, sequences, updateTrackSequence, drumr }
 
   return (
     <li id={id}
-      className={sequence[id%resolution] === 1 ? isPlaying && stepId===id ? 'step now' : 'step on' : 'step'}
+      className={sequence[barId][id%resolution] === 1 ? isPlaying && stepId===id ? 'step now' : 'step on' : 'step'}
       onClick={ () => onStepTap() } >
       <div className='status'>
         <div></div>

@@ -2,7 +2,7 @@ import React from 'react'
 import PropTypes  from 'prop-types'
 import Track from '../containers/track'
 
-let nextTrackId = 24;
+let nextTrackId = 0;
 
 const Tracks = ({ tracks, addTrack, drumr }) => {
 

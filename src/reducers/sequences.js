@@ -31,7 +31,6 @@ export default function(state = INITIAL_STATE, action) {
         byId: state.byId.filter(item => item !== action.id),
         byHash: state.byHash
       }
-    // case UPDATE_BARS:
     case UPDATE_SEQUENCE:
     // let sequence = state.byHash[action.track.id]
     // let newSeq = sequence.map((arr, b) => {
@@ -47,12 +46,15 @@ export default function(state = INITIAL_STATE, action) {
     //     })
     //   }
     // })
-    console.log('REDUCER UPDATE HASH', action.track.sequence)
-    
+      // console.log('REDUCER UPDATE HASH', action.track.sequence)
       // return state.map(s => sequence(s, action))
-      console.log({...state, ...state.byHash, [action.track.id]: action.track.sequence })
-      return {...state, ...state.byHash, [action.track.id]: action.track.sequence }
-
+      return {
+        ...state,
+        byHash: {
+          ...state.byHash,
+          [action.track.id]: action.track.sequence
+        }
+      }
     default:
       return state
   }

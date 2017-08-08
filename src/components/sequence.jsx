@@ -14,7 +14,7 @@ class Sequence extends Component {
   renderBars(){
 
     let { trackId, sequences, controller, drumr } = this.props
-    console.log('JSX sequences', sequences.byHash)
+    // console.log('JSX sequences', sequences)
     // console.log('trackId', trackId)
     let { numBars, barId } = controller
     let sequence = sequences.byHash[trackId]
