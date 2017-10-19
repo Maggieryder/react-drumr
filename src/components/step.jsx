@@ -13,7 +13,7 @@ const Step = ({ id, trackId, controller, sequences, updateTrackSequence, drumr }
     let newSeq = sequence.map((arr, b) => b === barId ? arr.map((value, i) => i === id%resolution ? value === 0 ? 1 : 0 : value) : arr )
     // console.log('STEP NEW sequence', barId, newSeq )
     // updateTrackSequence({id:trackId, barId:barId, seqId:id%resolution })
-    updateTrackSequence({id:trackId, barId:barId, sequence: newSeq })
+    updateTrackSequence({id:trackId, sequence: newSeq })
     drumr.onStepTap(trackId)
     // if (!isPlaying) triggerSample(trackId)
   }

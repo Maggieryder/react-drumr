@@ -48,10 +48,10 @@ export default class Drumr {
       let t = new Track(CTX, track.id, this.store);
       TRACKS.addTrack(t);
       // MIXER.addTrack(t)
-      // SEQUENCER.addTrack(t);
+      SEQUENCER.addTrack(t);
     })
     MIXER.setTracks(TRACKS.getTracks())
-    SEQUENCER.setTracks(TRACKS.getTracks())
+    // SEQUENCER.setTracks(TRACKS.getTracks())
   }
   // SEQUENCER FUNCTIONS
   onStepTap(id){

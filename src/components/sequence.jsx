@@ -45,9 +45,9 @@ class Sequence extends Component {
 }
 
 Sequence.propTypes = {
-  controller:   PropTypes.object.isRequired,
-  sequences: PropTypes.object.isRequired,
-  drumr:    PropTypes.object.isRequired
+  controller:  PropTypes.object.isRequired,
+  sequences:   PropTypes.object.isRequired,
+  drumr:       PropTypes.object.isRequired
 }
 
 export default Sequence
