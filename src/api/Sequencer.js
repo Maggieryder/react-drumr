@@ -37,14 +37,31 @@ export default class Sequencer {
   scheduleNote(step, time){
     let { controller } = this.store.getState();
     let { resolution, barId } = controller;
-    // console.log(step)
-    for (let i=0;i<this.sequences.length; i++){
-      let bars = this.sequences[i].sequence
+    let myObj = this.sequences;
+    // console.log(myObj)
+    // for (let i=0;i<this.sequences.length; i++){
+    //   let bars = this.sequences[i].sequence
+    //   console.log(bars)
+    //   for (let j=0;j<bars.length;j++){
+    //     console.log(j, barId)
+    //     if (j===barId && bars[j][step]===1){
+    //       console.log('schedule note this.tracks[i]', this.tracks[i])
+    //       this.tracks[i].triggerSample(time);
+    //     }
+    //   }
+    // }
+    let i = 0;
+    for (let id in myObj){
+      let bars = myObj[id];
+      console.log(bars)
       for (let j=0;j<bars.length;j++){
+        // console.log(j, barId)
         if (j===barId && bars[j][step]===1){
-          this.tracks[i].triggerSample(time);
+          // console.log('schedule note this.tracks[id]', this.tracks[id])
+          this.tracks[id].triggerSample(time);
         }
       }
+      i++;
     }
     this.store.dispatch({type:Types.UPDATE_STEP_ID, value: (barId*resolution) + step})
   }
@@ -62,7 +79,7 @@ export default class Sequencer {
     let { controller, sequences } = this.store.getState();
     // console.log('updateState', sequences);
     // let { tempo, swing, numBars, barId, stepId, resolution, signature, isPlaying } = controller;
-    if ( this.sequences !== sequences.byHash ) {
+    if ( this.sequences !== sequences.byHash) {
       this.sequences = sequences.byHash;
       console.log('########### this.sequences !== sequences.byHash', sequences.byHash);
     }
@@ -100,7 +117,7 @@ export default class Sequencer {
       this.addTrackSequence(track.id);
     })
     this.tracks = tracks;
-    // console.log('SEQ setTracks', this.tracks )
+    console.log('SEQ setTracks', this.tracks )
   }
   addTrack(track){
     this.tracks.push(track);
