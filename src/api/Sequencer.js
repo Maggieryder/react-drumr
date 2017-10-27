@@ -77,11 +77,11 @@ export default class Sequencer {
   updateState(){
     // this.store = store;
     let { controller, sequences } = this.store.getState();
-    // console.log('updateState', sequences);
+    console.log('updateState', sequences);
     // let { tempo, swing, numBars, barId, stepId, resolution, signature, isPlaying } = controller;
     if ( this.sequences !== sequences.byHash) {
       this.sequences = sequences.byHash;
-      console.log('########### this.sequences !== sequences.byHash', sequences.byHash);
+      console.log('########### this.sequences !== sequences.byId', sequences.byId);
     }
 
     // if (this.tempo !== tempo) this.updateParams({'tempo':tempo})

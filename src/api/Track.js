@@ -35,6 +35,7 @@ export default class Track {
     // console.log('buffers', buffers)
     // console.log('thisTrackData', tracks);
     if (trackData){
+      console.log('thisTrackData', trackData);
       let { bufferId,
         volume,
         mute,

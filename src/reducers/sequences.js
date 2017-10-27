@@ -18,7 +18,8 @@ export default function(state = INITIAL_STATE, action) {
       console.log('REDUCER ADD SEQ', action.track)
       // return [...state, sequence(undefined, action)]
       return {
-        byId: [ ...state.byId, action.track.id],
+        // byId: [ ...state.byId, action.track.id],
+        byId: [...new Set([ ...state.byId, action.track.id])],
         byHash: {
           ...state.byHash,
           [action.track.id]: action.track.sequence

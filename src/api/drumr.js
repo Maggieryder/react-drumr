@@ -43,7 +43,7 @@ export default class Drumr {
 
   updateTracks(tracks){
     console.log('updateTracks')
-    TRACKS.clearTracks();
+    // TRACKS.clearTracks();
     tracks.forEach((track) => {
       let t = new Track(CTX, track.id, this.store);
       TRACKS.addTrack(t);
